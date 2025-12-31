@@ -103,12 +103,9 @@ export function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-border">
-        <div className="container-wide px-5 md:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="container-wide px-5 md:px-8 py-6 flex justify-center">
+          <p className="text-sm text-muted-foreground text-center">
             © {new Date().getFullYear()} Mx Solution. All rights reserved.
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Crafted with passion in India
           </p>
         </div>
       </div>
