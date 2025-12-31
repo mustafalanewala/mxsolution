@@ -11,8 +11,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "MxNoor - Creative Digital Agency",
-  description: "Professional web design and development solutions",
+  title: "Mx Solution",
+  description:
+    "Mx Solution multiplies ideas into scalable digital systems, delivering maximum performance, clarity, and long-term business results through technology.",
 };
 
 export default function RootLayout({
