@@ -1,7 +1,6 @@
 "use client";
 
 import { AnimatedSection, AnimatedText } from "@/components/AnimatedSection";
-import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { Button } from "@/components/ui/button";
 import { Instagram, Linkedin, Github, ArrowUpRight } from "lucide-react";
 
@@ -109,11 +108,11 @@ export function AboutSection() {
               </blockquote>
             </AnimatedText>
 
-            {/* Animated Stats Counter */}
+            {/* Animated Stats Counter
             <div className="grid grid-cols-2 gap-8 mb-8">
               <AnimatedCounter end={50} suffix="+" label="Projects Delivered" />
               <AnimatedCounter end={30} suffix="+" label="Happy Clients" />
-            </div>
+            </div> */}
 
             <AnimatedText delay={0.5}>
               <Button variant="outline" size="lg" asChild>
