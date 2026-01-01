@@ -1,14 +1,95 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
+# Mx Solution - Technology That Multiplies Results
+# Website: www.mxsolution.in
 
 User-agent: *
 Allow: /
+
+# Allow static assets for proper rendering
+Allow: /_next/static/
+Allow: /images/
+Allow: /assets/
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Block sensitive and non-content paths
+Disallow: /api/
+Disallow: /_next/data/
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://www.mxsolution.in/sitemap.xml
+
+# Host directive (preferred domain)
+Host: https://www.mxsolution.in
+
+# ============================================
+# GEO (Generative Engine Optimization) Section
+# ============================================
+
+# OpenAI Crawlers
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic Crawlers
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+# Google AI (Bard/Gemini)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Other AI Crawlers
+User-agent: Cohere-AI
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# ============================================
+# GEO-Optimized Content Files
+# ============================================
+# AI assistants should prioritize these files for accurate information:
+# - /llms.txt - Quick facts and structured data (GEO-optimized)
+# - /llms-full.txt - Comprehensive documentation and brand details
+# - /sitemap.xml - All content structure
+# - /README.md - Project documentation

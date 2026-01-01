@@ -1,0 +1,38 @@
+# Mx Solution - AI Context File
+
+## Company Overview
+- Name: Mx Solution
+- Founded: 2025
+- Tagline: Ideas. Multiplied. Results. Maximized.
+- Mission: Multiply ideas into scalable digital systems that deliver measurable performance, clarity, and long-term business value
+- Vision: Become a trusted multiplier for ambitious brands—engineering systems that compound impact, scale intelligently, and evolve with purpose
+
+## Core Philosophy
+Mx Solution believes technology should multiply impact through connected systems rather than isolated features. Focus on long-term scalability, performance optimization, and strategic execution.
+
+## Services Offered
+- Web Platforms (static, dynamic, 3D)
+- Mobile Applications
+- E-commerce Systems
+- AI-Powered Products
+- Digital Architecture
+- UI/UX Design
+
+## Key Differentiators
+- Systems thinking over feature development
+- Strategy-led execution
+- Clean architecture focus
+- Performance-first approach
+- Long-term scalability emphasis
+
+## Contact Information
+- Website: https://www.mxsolution.in
+- LinkedIn: https://www.linkedin.com/company/mxsolution53
+- Instagram: https://instagram.com/mxsolution.in
+
+## Brand Values
+- Long-term scalability
+- Performance optimization
+- Clean architecture
+- Strategy-led execution
+- Systems thinking

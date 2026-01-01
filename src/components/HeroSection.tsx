@@ -42,14 +42,14 @@ export function HeroSection() {
 
           {/* Main Heading with Text Reveal */}
           <h1 className="font-display font-bold text-[clamp(2.5rem,8vw,6rem)] leading-[0.95] tracking-tight mb-8">
-            <TextReveal delay={0.3}>Technology that</TextReveal>
+            <TextReveal delay={0.3}>We Multiply</TextReveal>
             <br />
             <span className="text-muted-foreground">
-              <TextReveal delay={0.4}>multiplies</TextReveal>
+              <TextReveal delay={0.4}>Ideas Into</TextReveal>
             </span>
             <br />
             <TextReveal delay={0.5} className="text-gradient leading-28">
-              impact
+              Maximum Results
             </TextReveal>
           </h1>
 
