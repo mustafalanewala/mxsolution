@@ -3,6 +3,8 @@
 import { AnimatedSection, AnimatedText } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Instagram, Linkedin, Github, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export function AboutSection() {
   return (
@@ -12,48 +14,45 @@ export function AboutSection() {
           {/* Left - Founder */}
           <AnimatedSection>
             <div className="relative">
-              {/* Image Placeholder */}
+              {/* Founder Image */}
               <div className="aspect-4/5 md:aspect-square rounded-3xl bg-card border border-border overflow-hidden relative group">
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-background/80" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 rounded-full bg-secondary border border-border flex items-center justify-center mx-auto mb-4">
-                      <span className="font-display font-bold text-3xl text-foreground">
-                        ML
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <Image
+                  src="/founder&ceo.png"
+                  alt="Mustafa Lanewala - Founder & CEO"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/80" />
 
                 {/* Hover Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
                   <div className="flex items-center gap-3">
                     <Button variant="pill" size="icon" asChild>
-                      <a
+                      <Link
                         href="https://instagram.com/mustafa.lanewala"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         <Instagram className="w-4 h-4" />
-                      </a>
+                      </Link>
                     </Button>
                     <Button variant="pill" size="icon" asChild>
-                      <a
-                        href="https://linkedin.com/in/mustafa-lanewala-m2004"
+                      <Link
+                        href="https://linkedin.com/in/mustafa-lanewala"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         <Linkedin className="w-4 h-4" />
-                      </a>
+                      </Link>
                     </Button>
                     <Button variant="pill" size="icon" asChild>
-                      <a
+                      <Link
                         href="https://github.com/mustafalanewala"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         <Github className="w-4 h-4" />
-                      </a>
+                      </Link>
                     </Button>
                   </div>
                 </div>

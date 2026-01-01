@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, ArrowUpRight, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
 
 export function ContactSection() {
   const { toast } = useToast();
@@ -54,23 +55,7 @@ export function ContactSection() {
 
             {/* Contact Info */}
             <AnimatedSection delay={0.3} className="space-y-6">
-              <a
-                href="mailto:info@mxnoorsolutions.in"
-                className="flex items-center gap-4 group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-card border border-border flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors duration-300">
-                  <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary-foreground transition-colors duration-300" />
-                </div>
-                <div>
-                  <div className="text-sm text-muted-foreground">Email</div>
-                  <div className="text-foreground group-hover:text-primary transition-colors duration-300">
-                    info@mxnoorsolutions.in
-                  </div>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
-
-              <a
+              <Link
                 href="tel:+919157302004"
                 className="flex items-center gap-4 group"
               >
@@ -80,11 +65,11 @@ export function ContactSection() {
                 <div>
                   <div className="text-sm text-muted-foreground">Phone</div>
                   <div className="text-foreground group-hover:text-primary transition-colors duration-300">
-                    +91 9157302004
+                    +91 91573 02004
                   </div>
                 </div>
                 <ArrowUpRight className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
+              </Link>
 
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-card border border-border flex items-center justify-center">
@@ -92,7 +77,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground">Location</div>
-                  <div className="text-foreground">Dahod, Gujarat, India</div>
+                  <div className="text-foreground">Dohad, Gujarat, India</div>
                 </div>
               </div>
             </AnimatedSection>
