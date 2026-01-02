@@ -19,7 +19,7 @@ const allProjects = [
     title: "Valor Jets",
     category: "Web Development",
     year: "2024",
-    image: "/assets/projects/valor-jets.png",
+    image: "/projects/valor-jets.png",
     description:
       "Private aviation booking platform with premium luxury design and seamless flight reservations.",
   },
@@ -27,7 +27,7 @@ const allProjects = [
     title: "Aether Construction",
     category: "Web Development",
     year: "2024",
-    image: "/assets/projects/aether-construction.png",
+    image: "/projects/aether-construction.png",
     description:
       "Modern construction company website with 3D visualization and project showcases.",
   },
@@ -35,7 +35,7 @@ const allProjects = [
     title: "Fuoco Pizzeria",
     category: "Web Development",
     year: "2024",
-    image: "/assets/projects/fuoco-pizzeria.png",
+    image: "/projects/fuoco-pizzeria.png",
     description:
       "Elegant restaurant website with menu showcase and reservation system.",
   },
@@ -43,7 +43,7 @@ const allProjects = [
     title: "Aura Skins",
     category: "E-commerce",
     year: "2024",
-    image: "/assets/projects/aura-skins.png",
+    image: "/projects/aura-skins.png",
     description:
       "Premium skincare brand e-commerce with minimalist aesthetic and product discovery.",
   },
@@ -51,7 +51,7 @@ const allProjects = [
     title: "Mubarak Collection",
     category: "E-commerce",
     year: "2024",
-    image: "/assets/projects/mubarak-collection.webp",
+    image: "/projects/mubarak-collection.webp",
     description:
       "Premium Dawoodi Bohra Topis crafted with tradition since 2011.",
   },
@@ -59,7 +59,7 @@ const allProjects = [
     title: "Gujarat Food Products",
     category: "Web Development",
     year: "2024",
-    image: "/assets/projects/gujarat-food.webp",
+    image: "/projects/gujarat-food.webp",
     description:
       "Authentic Makai Poha manufacturer - naturally grown, perfectly processed.",
   },
@@ -67,7 +67,7 @@ const allProjects = [
     title: "SK Attire Hub",
     category: "E-commerce",
     year: "2024",
-    image: "/assets/projects/sk-attire.webp",
+    image: "/projects/sk-attire.webp",
     description:
       "Modern fashion e-commerce platform - step up your style game.",
   },

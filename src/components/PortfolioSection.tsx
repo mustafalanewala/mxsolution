@@ -16,25 +16,25 @@ const projects = [
     title: "Valor Jets",
     category: "Web Development",
     year: "2024",
-    image: "/assets/projects/valor-jets.png",
+    image: "/projects/valor-jets.png",
   },
   {
     title: "Aether Construction",
     category: "Web Development",
     year: "2024",
-    image: "/assets/projects/aether-construction.png",
+    image: "/projects/aether-construction.png",
   },
   {
     title: "Fuoco Pizzeria",
     category: "Web Development",
     year: "2024",
-    image: "/assets/projects/fuoco-pizzeria.png",
+    image: "/projects/fuoco-pizzeria.png",
   },
   {
     title: "Aura Skins",
     category: "E-commerce",
     year: "2024",
-    image: "/assets/projects/aura-skins.png",
+    image: "/projects/aura-skins.png",
   },
 ];
 
