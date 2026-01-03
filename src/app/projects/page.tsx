@@ -18,42 +18,47 @@ const allProjects = [
   {
     title: "Valor Jets",
     category: "Web Development",
-    year: "2024",
-    image: "/projects/valor-jets.png",
+    year: "2025",
+    image: "/projects/valor.png",
     description:
       "Private aviation booking platform with premium luxury design and seamless flight reservations.",
+    link: "https://valor-jets.vercel.app",
   },
   {
-    title: "Aether Construction",
+    title: "Aetherial Reality",
     category: "Web Development",
-    year: "2024",
-    image: "/projects/aether-construction.png",
+    year: "2025",
+    image: "/projects/aether.png",
     description:
       "Modern construction company website with 3D visualization and project showcases.",
+    link: "https://aetherial-reality.vercel.app",
   },
   {
-    title: "Fuoco Pizzeria",
+    title: "Tropic UK",
     category: "Web Development",
     year: "2024",
-    image: "/projects/fuoco-pizzeria.png",
+    image: "/projects/tropic.png",
     description:
-      "Elegant restaurant website with menu showcase and reservation system.",
+      "Tropical fashion and lifestyle brand website with modern design and product showcases.",
+    link: "https://tropic-uk.vercel.app",
   },
   {
-    title: "Aura Skins",
-    category: "E-commerce",
-    year: "2024",
-    image: "/projects/aura-skins.png",
+    title: "Guidance Tamil Nadu",
+    category: "Web Development",
+    year: "2025",
+    image: "/projects/guidance.png",
     description:
-      "Premium skincare brand e-commerce with minimalist aesthetic and product discovery.",
+      "Educational guidance platform for Tamil Nadu students and parents.",
+    link: "https://guidancetamilnadu.vercel.app",
   },
   {
     title: "Mubarak Collection",
     category: "E-commerce",
-    year: "2024",
+    year: "2025",
     image: "/projects/mubarak-collection.webp",
     description:
       "Premium Dawoodi Bohra Topis crafted with tradition since 2011.",
+    link: "https://www.mubarakcollection.in",
   },
   {
     title: "Gujarat Food Products",
@@ -62,6 +67,7 @@ const allProjects = [
     image: "/projects/gujarat-food.webp",
     description:
       "Authentic Makai Poha manufacturer - naturally grown, perfectly processed.",
+    link: "https://www.gujaratfoodproducts.in",
   },
   {
     title: "SK Attire Hub",
@@ -70,6 +76,7 @@ const allProjects = [
     image: "/projects/sk-attire.webp",
     description:
       "Modern fashion e-commerce platform - step up your style game.",
+    link: "https://skattirehub.in",
   },
 ];
 
@@ -113,45 +120,47 @@ export default function Projects() {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {allProjects.map((project) => (
               <StaggerItem key={project.title}>
-                <motion.div
-                  whileHover={{ y: -8 }}
-                  transition={{ duration: 0.3 }}
-                  className="group cursor-pointer"
-                >
-                  {/* Image Area - 16:8 aspect ratio for full website view */}
-                  <div className="aspect-16/8 rounded-2xl border border-border mb-6 relative overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      style={{ objectFit: "cover", objectPosition: "top" }}
-                      className="transition-transform duration-500 group-hover:scale-105"
-                    />
+                <Link href={project.link} target="_blank" className="block">
+                  <motion.div
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.3 }}
+                    className="group cursor-pointer"
+                  >
+                    {/* Image Area - 16:8 aspect ratio for full website view */}
+                    <div className="aspect-16/8 rounded-2xl border border-border mb-6 relative overflow-hidden">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        style={{ objectFit: "cover", objectPosition: "top" }}
+                        className="transition-transform duration-500 group-hover:scale-105"
+                      />
 
-                    {/* Hover Arrow */}
-                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-300">
-                      <ArrowUpRight className="w-5 h-5 text-background" />
+                      {/* Hover Arrow */}
+                      <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-300">
+                        <ArrowUpRight className="w-5 h-5 text-background" />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Info */}
-                  <div className="space-y-2">
-                    <div className="flex items-start justify-between gap-4">
-                      <h3 className="font-display font-semibold text-xl group-hover:text-primary transition-colors duration-300">
-                        {project.title}
-                      </h3>
-                      <span className="text-sm text-muted-foreground font-mono shrink-0">
-                        {project.year}
-                      </span>
+                    {/* Info */}
+                    <div className="space-y-2">
+                      <div className="flex items-start justify-between gap-4">
+                        <h3 className="font-display font-semibold text-xl group-hover:text-primary transition-colors duration-300">
+                          {project.title}
+                        </h3>
+                        <span className="text-sm text-muted-foreground font-mono shrink-0">
+                          {project.year}
+                        </span>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {project.category}
+                      </p>
+                      <p className="text-sm text-muted-foreground/70 line-clamp-2">
+                        {project.description}
+                      </p>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      {project.category}
-                    </p>
-                    <p className="text-sm text-muted-foreground/70 line-clamp-2">
-                      {project.description}
-                    </p>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </Link>
               </StaggerItem>
             ))}
           </StaggerContainer>
