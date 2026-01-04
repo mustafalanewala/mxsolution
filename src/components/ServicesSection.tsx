@@ -23,8 +23,7 @@ const services = [
     description:
       "Custom websites built with modern technologies. Fast, responsive, and conversion-focused.",
     number: "01",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+    image: "/services/webdevelopment.png",
   },
   {
     icon: ShoppingCart,
@@ -32,8 +31,7 @@ const services = [
     description:
       "Online stores that sell. Complete with inventory, payments, and analytics.",
     number: "02",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
+    image: "/services/ecommerce.png",
   },
   {
     icon: Smartphone,
@@ -41,8 +39,7 @@ const services = [
     description:
       "Native and cross-platform apps that users love and businesses rely on.",
     number: "03",
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop",
+    image: "/services/appdevelopment.png",
   },
   {
     icon: Palette,
@@ -50,8 +47,7 @@ const services = [
     description:
       "Visual identities that stand out. Logos, UI/UX, and marketing materials.",
     number: "04",
-    image:
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
+    image: "/services/design-branding.png",
   },
   {
     icon: Brain,
@@ -59,8 +55,7 @@ const services = [
     description:
       "Smart automation and AI-powered features to scale your operations.",
     number: "05",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop",
+    image: "/services/aiautomation.png",
   },
 ];
 
@@ -174,7 +169,7 @@ export function ServicesSection() {
               >
                 {/* Liquid blob effect */}
                 <motion.div
-                  className="absolute inset-0 bg-primary/20"
+                  className="absolute inset-0 bg-primary/15"
                   animate={{
                     scale: [1, 1.2, 1],
                     borderRadius: [
