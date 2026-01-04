@@ -15,7 +15,11 @@ export const metadata: Metadata = {
   description:
     "Mx Solution multiplies ideas into scalable digital systems, delivering maximum performance, clarity, and long-term business results through technology.",
   other: {
-    "content-language": "en-US",
+    "content-language": "en-IN",
+    "geo.region": "IN",
+    "geo.placename": "Gujarat, India",
+    "geo.position": "22.3094;72.1362",
+    ICBM: "22.3094, 72.1362",
     "al:web:url": "https://www.mxsolution.in",
     "apple-mobile-web-app-title": "Mx Solution",
     "application-name": "Mx Solution",
@@ -31,6 +35,9 @@ export const metadata: Metadata = {
     "msapplication-config": "/favicons/browserconfig.xml",
   },
   keywords: [
+    "mx",
+    "mxsolution",
+    "mxsolutions",
     "digital systems studio",
     "scalable web platforms",
     "mobile app development",
@@ -214,16 +221,31 @@ const softwareSchema = {
   },
 };
 
-const breadcrumbSchema = {
+const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: "https://www.mxsolution.in",
-    },
+  "@type": "LocalBusiness",
+  name: "Mx Solution",
+  url: "https://www.mxsolution.in",
+  description:
+    "Mx Solution transforms ideas into high-performance digital systems. We blend strategy, design, and full-stack engineering to build scalable web, mobile, e-commerce, and AI solutions that multiply impact, optimize growth, and deliver real business results.",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "Gujarat",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "22.3094",
+    longitude: "72.1362",
+  },
+  areaServed: "Gujarat, India",
+  serviceType: [
+    "Web Development",
+    "Mobile App Development",
+    "E-commerce Development",
+    "AI Integration",
+    "UI/UX Design",
+    "Digital Strategy",
   ],
 };
 
@@ -265,7 +287,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(breadcrumbSchema),
+            __html: JSON.stringify(localBusinessSchema),
           }}
         />
         <script
