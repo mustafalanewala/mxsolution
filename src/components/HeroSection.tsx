@@ -48,7 +48,7 @@ export function HeroSection() {
               <TextReveal delay={0.4}>Ideas Into</TextReveal>
             </span>
             <br />
-            <TextReveal delay={0.5} className="text-gradient leading-28">
+            <TextReveal delay={0.5} className="text-gradient">
               Maximum Results
             </TextReveal>
           </h1>
