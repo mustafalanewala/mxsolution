@@ -16,26 +16,32 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 
 export default function Home() {
   return (
-    <SmoothScroll>
-      <main className="min-h-screen bg-background overflow-x-hidden">
-        {/* Scroll Progress */}
-        <ScrollProgress />
+    <>
+      {/* SEO Meta Description for Google */}
+      <head>
+        <meta name="description" content="Mx Solution multiplies ideas into scalable digital systems, delivering maximum performance, clarity, and long-term business results through technology." />
+      </head>
+      <SmoothScroll>
+        <main className="min-h-screen bg-background overflow-x-hidden">
+          {/* Scroll Progress */}
+          <ScrollProgress />
 
-        {/* Animated Noise Overlay */}
-        <div className="noise-overlay" />
+          {/* Animated Noise Overlay */}
+          <div className="noise-overlay" />
 
-        <Navbar />
-        <HeroSection />
-        <MarqueeSection />
-        <PortfolioSection />
-        <ServicesSection />
-        <AboutSection />
-        <ProcessSection />
-        <TestimonialsSection />
-        <FAQSection />
-        <ContactSection />
-        <Footer />
-      </main>
-    </SmoothScroll>
+          <Navbar />
+          <HeroSection />
+          <MarqueeSection />
+          <PortfolioSection />
+          <ServicesSection />
+          <AboutSection />
+          <ProcessSection />
+          <TestimonialsSection />
+          <FAQSection />
+          <ContactSection />
+          <Footer />
+        </main>
+      </SmoothScroll>
+    </>
   );
 }
