@@ -34,14 +34,11 @@ export const metadata: Metadata = {
     "llms-txt": "https://www.mxsolution.in/llms.txt",
     "llms-full": "https://www.mxsolution.in/llms-full.txt",
     "msapplication-config": "/favicons/browserconfig.xml",
-    "google-site-verification": "cho4mR2gXwMqTai3zKCa0VYleMWURbjrdtWGQ7arvoM",
   },
   keywords: [
     "mx",
     "mxsolution",
     "mxsolutions",
-    "mx solution",
-    "mx solutions", 
     "digital systems studio",
     "scalable web platforms",
     "mobile app development",
@@ -276,6 +273,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta
+          name="google-site-verification"
+          content="cho4mR2gXwMqTai3zKCa0VYleMWURbjrdtWGQ7arvoM"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -306,8 +307,8 @@ export default function RootLayout({
           {children}
           <Toaster />
           <Sonner />
+          <Analytics />
         </TooltipProvider>
-        <Analytics />
       </body>
     </html>
   );
