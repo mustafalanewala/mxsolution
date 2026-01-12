@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,11 +34,14 @@ export const metadata: Metadata = {
     "llms-txt": "https://www.mxsolution.in/llms.txt",
     "llms-full": "https://www.mxsolution.in/llms-full.txt",
     "msapplication-config": "/favicons/browserconfig.xml",
+    "google-site-verification": "cho4mR2gXwMqTai3zKCa0VYleMWURbjrdtWGQ7arvoM",
   },
   keywords: [
     "mx",
     "mxsolution",
     "mxsolutions",
+    "mx solution",
+    "mx solutions", 
     "digital systems studio",
     "scalable web platforms",
     "mobile app development",
@@ -303,6 +307,7 @@ export default function RootLayout({
           <Toaster />
           <Sonner />
         </TooltipProvider>
+        <Analytics />
       </body>
     </html>
   );
