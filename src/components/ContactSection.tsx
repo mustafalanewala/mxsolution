@@ -5,7 +5,14 @@ import { AnimatedSection, AnimatedText } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, ArrowUpRight, Send } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  ArrowUpRight,
+  Send,
+  MessageCircle,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 
@@ -14,16 +21,17 @@ export function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
   });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Message sent!",
-      description: "We'll get back to you within 24 hours.",
+      title: "Something went wrong",
+      description: "Call or WhatsApp us at: +91 91573 02004",
+      variant: "destructive",
     });
-    setFormData({ name: "", email: "", message: "" });
+    setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
   return (
@@ -71,6 +79,24 @@ export function ContactSection() {
                 <ArrowUpRight className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
 
+              <Link
+                href="https://wa.me/919157302004?text=Hi%20Mx%20Solution%2C%20I%20want%20to%20discuss%20a%20project"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-card border border-border flex items-center justify-center group-hover:bg-[#25D366] group-hover:border-[#25D366] transition-colors duration-300">
+                  <MessageCircle className="w-5 h-5 text-muted-foreground group-hover:text-white transition-colors duration-300" />
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground">WhatsApp</div>
+                  <div className="text-foreground group-hover:text-[#25D366] transition-colors duration-300">
+                    Chat with us instantly
+                  </div>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </Link>
+
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-card border border-border flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-muted-foreground" />
@@ -87,23 +113,39 @@ export function ContactSection() {
           <AnimatedSection delay={0.2}>
             <div className="bg-card border border-border rounded-3xl p-8 md:p-10">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="text-sm text-muted-foreground mb-2 block">
-                    Name
-                  </label>
-                  <Input
-                    placeholder="John Doe"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    required
-                    className="bg-background border-border h-12 rounded-xl focus:border-primary"
-                  />
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="text-sm text-muted-foreground mb-2 block">
+                      Name <span className="text-primary">*</span>
+                    </label>
+                    <Input
+                      placeholder="John Doe"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                      required
+                      className="bg-background border-border h-12 rounded-xl focus:border-primary"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-muted-foreground mb-2 block">
+                      Phone Number
+                    </label>
+                    <Input
+                      type="tel"
+                      placeholder="+91 98765 43210"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
+                      className="bg-background border-border h-12 rounded-xl focus:border-primary"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="text-sm text-muted-foreground mb-2 block">
-                    Email
+                    Email <span className="text-primary">*</span>
                   </label>
                   <Input
                     type="email"
@@ -118,7 +160,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <label className="text-sm text-muted-foreground mb-2 block">
-                    Message
+                    Message <span className="text-primary">*</span>
                   </label>
                   <Textarea
                     placeholder="Tell us about your project..."
@@ -140,6 +182,24 @@ export function ContactSection() {
                   Send Message
                   <Send className="w-4 h-4" />
                 </Button>
+                <p className="text-center text-sm text-muted-foreground">
+                  Or reach us directly via{" "}
+                  <Link
+                    href="https://wa.me/919157302004?text=Hi%20Mx%20Solution%2C%20I%20want%20to%20discuss%20a%20project"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#25D366] hover:underline font-medium"
+                  >
+                    WhatsApp
+                  </Link>{" "}
+                  or{" "}
+                  <Link
+                    href="tel:+919157302004"
+                    className="text-primary hover:underline font-medium"
+                  >
+                    +91 91573 02004
+                  </Link>
+                </p>
               </form>
             </div>
           </AnimatedSection>

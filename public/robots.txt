@@ -1,4 +1,5 @@
 # Mx Solution - Technology That Multiplies Results
+# Contact: +91 91573 02004
 # Website: www.mxsolution.in
 
 User-agent: *
@@ -21,6 +22,12 @@ Disallow: /_next/data/
 Disallow: /admin/
 Disallow: /private/
 
+# Block technical/AI files from appearing in Google search results
+Disallow: /llms.txt
+Disallow: /llms-full.txt
+Disallow: /manifest.json
+Disallow: /favicons/
+
 # Sitemap location
 Sitemap: https://www.mxsolution.in/sitemap.xml
 
@@ -29,6 +36,7 @@ Host: https://www.mxsolution.in
 
 # ============================================
 # GEO (Generative Engine Optimization) Section
+# Allow AI crawlers to access all content
 # ============================================
 
 # OpenAI Crawlers
@@ -84,12 +92,3 @@ Allow: /
 
 User-agent: CCBot
 Allow: /
-
-# ============================================
-# GEO-Optimized Content Files
-# ============================================
-# AI assistants should prioritize these files for accurate information:
-# - /llms.txt - Quick facts and structured data (GEO-optimized)
-# - /llms-full.txt - Comprehensive documentation and brand details
-# - /sitemap.xml - All content structure
-# - /README.md - Project documentation

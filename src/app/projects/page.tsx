@@ -49,7 +49,7 @@ const allProjects = [
     image: "/projects/guidance.png",
     description:
       "Educational guidance platform for Tamil Nadu students and parents.",
-    link: "https://guidancetamilnadu.vercel.app",
+    link: "https://guidancetamilnadu.timesmed.in",
   },
   {
     title: "Mubarak Collection",

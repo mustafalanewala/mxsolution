@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.mxsolution.in/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,39 +15,9 @@
   <!-- Projects Page -->
   <url>
     <loc>https://www.mxsolution.in/projects</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- LLM Context Files for AI Optimization -->
-  <url>
-    <loc>https://www.mxsolution.in/llms.txt</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mxsolution.in/llms-full.txt</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <!-- Technical Files -->
-  <url>
-    <loc>https://www.mxsolution.in/manifest.json</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
-  </url>
-
-  <url>
-    <loc>https://www.mxsolution.in/robots.txt</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
   </url>
 
 </urlset>
