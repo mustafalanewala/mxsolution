@@ -38,8 +38,8 @@ const projects = [
     category: "Web Development",
     year: "2025",
     image: "/projects/guidance.png",
-    link: "https://guidancetamilnadu.vercel.app",
-  },
+    link: "https://guidancetamilnadu.timesmed.in",
+  }
 ];
 
 export function PortfolioSection() {

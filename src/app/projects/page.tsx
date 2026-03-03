@@ -33,14 +33,12 @@ const allProjects = [
       "Modern construction company website with 3D visualization and project showcases.",
     link: "https://aetherial-reality.vercel.app",
   },
-  {
-    title: "Tropic UK",
-    category: "Web Development",
-    year: "2024",
-    image: "/projects/tropic.png",
-    description:
-      "Tropical fashion and lifestyle brand website with modern design and product showcases.",
-    link: "https://tropic-uk.vercel.app",
+      {
+    title: "Arenvі",
+    category: "Architecture & Design",
+    year: "2026",
+    image: "/projects/arenvi.png",
+    link: "https://arenvi.vercel.app",
   },
   {
     title: "Guidance Tamil Nadu",
@@ -77,6 +75,15 @@ const allProjects = [
     description:
       "Modern fashion e-commerce platform - step up your style game.",
     link: "https://skattirehub.in",
+  },
+  {
+    title: "Tropic UK",
+    category: "Web Development",
+    year: "2024",
+    image: "/projects/tropic.png",
+    description:
+      "Tropical fashion and lifestyle brand website with modern design and product showcases.",
+    link: "https://tropic-uk.vercel.app",
   },
 ];
 
