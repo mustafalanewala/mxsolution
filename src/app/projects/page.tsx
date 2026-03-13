@@ -33,21 +33,13 @@ const allProjects = [
       "Modern construction company website with 3D visualization and project showcases.",
     link: "https://aetherial-reality.vercel.app",
   },
-      {
-    title: "Arenvі",
-    category: "Architecture & Design",
-    year: "2026",
-    image: "/projects/arenvi.png",
-    link: "https://arenvi.vercel.app",
-  },
   {
     title: "Guidance Tamil Nadu",
     category: "Web Development",
     year: "2025",
     image: "/projects/guidance.png",
-    description:
-      "Educational guidance platform for Tamil Nadu students and parents.",
-    link: "https://guidancetamilnadu.timesmed.in",
+    description: "Official investment portal for Guidance Tamil Nadu.",
+    link: "https://investingintamilnadu.com",
   },
   {
     title: "Mubarak Collection",
