@@ -78,6 +78,7 @@ export function PortfolioSection() {
                       src={project.image}
                       alt={project.title}
                       fill
+                      loading="lazy"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
 

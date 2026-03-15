@@ -22,6 +22,7 @@ export function ThemeToggle() {
         }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="absolute"
+        suppressHydrationWarning
       >
         <Moon className="w-4 h-4 text-foreground" />
       </motion.div>
@@ -34,6 +35,7 @@ export function ThemeToggle() {
         }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="absolute"
+        suppressHydrationWarning
       >
         <Sun className="w-4 h-4 text-foreground" />
       </motion.div>

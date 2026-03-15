@@ -20,6 +20,7 @@ export function AboutSection() {
                   src="/founder&ceo.png"
                   alt="Mustafa Lanewala - Founder & CEO"
                   fill
+                  priority
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/80" />
