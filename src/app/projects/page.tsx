@@ -81,11 +81,11 @@ const allProjects = [
 
 export default function Projects() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar />
 
       <main className="pt-32 pb-20">
-        <div className="container-wide">
+        <div className="container-wide px-5 md:px-8">
           {/* Header */}
           <AnimatedSection className="mb-16 md:mb-24">
             <Link

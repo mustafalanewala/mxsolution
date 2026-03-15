@@ -60,7 +60,7 @@ export function ProcessSection() {
             <StaggerItem key={step.number}>
               <div className="p-8 rounded-2xl border border-border bg-background h-full">
                 <div className="flex items-center gap-4 mb-6">
-                  <span className="text-4xl md:text-5xl font-display font-bold text-primary/20">
+                  <span className="text-4xl md:text-5xl font-display font-bold text-primary/60">
                     {step.number}
                   </span>
                 </div>
@@ -80,7 +80,7 @@ export function ProcessSection() {
               <StaggerItem key={step.number}>
                 <div className="p-8 rounded-2xl border border-border bg-background h-full flex-1 max-w-sm">
                   <div className="flex items-center gap-4 mb-6">
-                    <span className="text-4xl md:text-5xl font-display font-bold text-primary/20">
+                    <span className="text-4xl md:text-5xl font-display font-bold text-primary/60">
                       {step.number}
                     </span>
                   </div>
