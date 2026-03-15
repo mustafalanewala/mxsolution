@@ -12,26 +12,36 @@ import {
   ArrowUpRight,
   Send,
   MessageCircle,
+  Loader2,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 
 export function ContactSection() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
   });
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate form submission delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     toast({
       title: "Something went wrong",
       description: "Call or WhatsApp us at: +91 91573 02004",
       variant: "destructive",
     });
+
     setFormData({ name: "", email: "", phone: "", message: "" });
+    setIsSubmitting(false);
   };
 
   return (
@@ -178,9 +188,19 @@ export function ContactSection() {
                   size="xl"
                   type="submit"
                   className="w-full"
+                  disabled={isSubmitting}
                 >
-                  Send Message
-                  <Send className="w-4 h-4" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="w-4 h-4" />
+                    </>
+                  )}
                 </Button>
                 <p className="text-center text-sm text-muted-foreground">
                   Or reach us directly via{" "}

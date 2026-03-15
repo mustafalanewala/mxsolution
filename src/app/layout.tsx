@@ -6,6 +6,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Analytics } from "@vercel/analytics/next";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -98,7 +99,8 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicons/favicon.ico" },
+      { url: "/favicons/favicon.ico", sizes: "any" },
+      { url: "/favicons/favicon.ico", sizes: "16x16", type: "image/x-icon" },
       {
         url: "/favicons/android-icon-192x192.png",
         sizes: "192x192",
@@ -450,7 +452,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} antialiased`}>
         <TooltipProvider>
-          {children}
+          <ErrorBoundary>{children}</ErrorBoundary>
           <WhatsAppButton />
           <Toaster />
           <Sonner />
