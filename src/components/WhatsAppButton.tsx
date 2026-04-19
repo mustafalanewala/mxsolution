@@ -13,15 +13,10 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
-      className="fixed bottom-6 right-6 z-50 group flex items-center gap-3"
+      className="fixed bottom-6 right-6 z-50"
     >
-      {/* Tooltip label */}
-      <span className="hidden sm:block bg-foreground text-background text-sm font-medium px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-lg">
-        Chat on WhatsApp
-      </span>
-
       {/* WhatsApp bubble */}
-      <div className="relative w-14 h-14 rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/40 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+      <div className="relative w-14 h-14 rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/40 flex items-center justify-center hover:scale-110 transition-transform duration-300">
         {/* Ping animation */}
         <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-30" />
 

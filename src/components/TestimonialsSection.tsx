@@ -1,98 +1,142 @@
 "use client";
 
-import {
-  AnimatedSection,
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/AnimatedSection";
-import { Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { AnimatedSection } from "@/components/AnimatedSection";
 
 const testimonials = [
   {
     name: "Taher Mahudawala",
     role: "Gujarat Food Products",
     quote:
-      "They delivered exactly what we had in mind, on budget, and super clean. Highly impressed!",
-    rating: 5,
+      "They delivered exactly what we envisioned, stayed within budget, and kept every detail clean and professional. We are genuinely impressed with the final result.",
   },
   {
     name: "Sagar Kahar",
     role: "Sk Attire Hub",
     quote:
-      "Got everything up and running within a month—products, payments, everything! Would definitely recommend!",
-    rating: 5,
+      "Within a month, everything was live, from product listings to payments. They designed a Gen Z-friendly ecommerce UI that customers connected with instantly. Seamless process, and I definitely recommend them.",
+  },
+  {
+    name: "Bipin Daniel",
+    role: "Guidance (Government of Tamil Nadu)",
+    quote:
+      "Guidance was a large and complex Government project, and the team managed it with clear planning, strong execution, and consistent communication from start to finish.",
   },
   {
     name: "Vishal Sahetai",
     role: "Vishaka Fashion",
     quote:
-      "They really boosted our online presence. The team was professional and very responsive.",
-    rating: 5,
+      "They helped us significantly improve our online presence. The team was professional, responsive, and reliable throughout the project.",
+  },
+  {
+    name: "Zenab Limdi",
+    role: "Mubarak Collection",
+    quote:
+      "I was looking for a website for Mubarak Collection, and they reached us at the right time. They delivered top-quality work, guided us throughout the process, and helped us in many ways. The UI was beautiful and very user-friendly.",
   },
 ];
 
+function TestimonialCard({
+  testimonial,
+}: {
+  testimonial: (typeof testimonials)[number];
+}) {
+  return (
+    <article className="w-[82vw] sm:w-95 md:w-107.5 lg:w-120 shrink-0 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 shadow-[0_20px_80px_rgba(0,0,0,0.28)]">
+      <p className="text-foreground text-lg md:text-xl leading-relaxed mb-8">
+        "{testimonial.quote}"
+      </p>
+
+      <div className="flex items-center gap-4">
+        <div className="w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
+          <span className="font-display font-semibold text-sm">
+            {testimonial.name
+              .split(" ")
+              .map((n) => n[0])
+              .join("")}
+          </span>
+        </div>
+        <div>
+          <div className="font-medium text-foreground">{testimonial.name}</div>
+          <div className="text-sm text-neutral-400">{testimonial.role}</div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function MarqueeRow({
+  items,
+  reverse = false,
+}: {
+  items: typeof testimonials;
+  reverse?: boolean;
+}) {
+  const duplicated = [...items, ...items, ...items];
+
+  return (
+    <div className="relative overflow-hidden">
+      <motion.div
+        className="flex w-max items-stretch gap-5 md:gap-6 py-2 will-change-transform"
+        animate={{ x: reverse ? ["-33.333%", "0%"] : ["0%", "-33.333%"] }}
+        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+      >
+        {duplicated.map((testimonial, index) => (
+          <TestimonialCard
+            key={`${testimonial.name}-${index}`}
+            testimonial={testimonial}
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="section-padding">
-      <div className="container-wide">
+    <section id="testimonials" className="pt-24 pb-20 md:pt-40 md:pb-28 bg-black text-white overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
         {/* Header */}
-        <AnimatedSection className="mb-16 md:mb-24 text-center">
-          <span className="text-sm text-primary font-mono uppercase tracking-wider mb-4 block">
-            Testimonials
-          </span>
-          <h2 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl leading-tight">
-            Words from our{" "}
-            <span className="text-muted-foreground">clients</span>
+        <div className="mb-12 md:mb-16 text-center max-w-4xl mx-auto">
+          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter leading-none text-white">
+            <motion.span
+              initial={{ opacity: 0, y: "100%" }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+              className="overflow-hidden block"
+            >
+              Words From Our
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: "100%" }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
+              className="overflow-hidden block"
+            >
+              Clients
+            </motion.span>
           </h2>
-        </AnimatedSection>
+        </div>
 
-        {/* Testimonials Grid */}
-        <StaggerContainer className="grid md:grid-cols-3 gap-6 md:gap-8">
-          {testimonials.map((testimonial, index) => (
-            <StaggerItem key={testimonial.name}>
-              <div
-                className={`p-8 rounded-2xl border border-border bg-card h-full flex flex-col ${
-                  index === 1 ? "md:-translate-y-8" : ""
-                }`}
-              >
-                {/* Rating */}
-                <div className="flex items-center gap-1 mb-6">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-4 h-4 fill-primary text-primary"
-                    />
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <p className="text-foreground text-lg leading-relaxed mb-8 flex-1">
-                  "{testimonial.quote}"
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-secondary border border-border flex items-center justify-center">
-                    <span className="font-display font-semibold text-sm">
-                      {testimonial.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </span>
-                  </div>
-                  <div>
-                    <div className="font-medium text-foreground">
-                      {testimonial.name}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {testimonial.role}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        {/* Testimonials Marquee */}
+        <div className="space-y-5 md:space-y-6">
+          <AnimatedSection delay={0.1}>
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 md:w-32 bg-linear-to-r from-black to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 md:w-32 bg-linear-to-l from-black to-transparent" />
+              <MarqueeRow items={testimonials} />
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.2}>
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 md:w-32 bg-linear-to-r from-black to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 md:w-32 bg-linear-to-l from-black to-transparent" />
+              <MarqueeRow items={[...testimonials].reverse()} reverse />
+            </div>
+          </AnimatedSection>
+        </div>
       </div>
     </section>
   );

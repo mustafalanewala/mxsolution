@@ -41,7 +41,7 @@ export default function Home() {
     <SmoothScroll>
       <main
         id="main-content"
-        className="min-h-screen bg-background overflow-x-hidden"
+        className="min-h-screen bg-black text-white overflow-x-hidden"
       >
         {/* Scroll Progress */}
         <ScrollProgress />

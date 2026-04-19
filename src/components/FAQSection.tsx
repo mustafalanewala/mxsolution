@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import {
   Accordion,
@@ -38,43 +39,56 @@ const faqs = [
 
 export function FAQSection() {
   return (
-    <section className="section-padding bg-card">
-      <div className="container-wide">
+    <section id="faq" className="pt-16 pb-24 md:pt-24 md:pb-40 bg-black text-white overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Left - Header */}
-          <AnimatedSection>
-            <span className="text-sm text-primary font-mono uppercase tracking-wider mb-4 block">
-              FAQ
-            </span>
-            <h2 className="font-display font-bold text-4xl md:text-5xl leading-tight mb-6">
-              Questions?
-              <br />
-              <span className="text-muted-foreground">We've got answers</span>
+          <div>
+            <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter leading-none mb-6 text-white">
+              <motion.span
+                initial={{ opacity: 0, y: "100%" }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+                className="overflow-hidden block"
+              >
+                Questions?
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: "100%" }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
+                className="overflow-hidden block"
+              >
+                We've Got Answers
+              </motion.span>
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Can't find what you're looking for? Reach out to us directly.
-            </p>
-          </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <p className="text-neutral-400 text-lg">
+                Can't find what you're looking for? Reach out to us directly.
+              </p>
+            </AnimatedSection>
+          </div>
 
           {/* Right - Accordion */}
-          <AnimatedSection delay={0.2}>
-            <Accordion type="single" collapsible className="space-y-4">
-              {faqs.map((faq, index) => (
+          <Accordion type="single" collapsible className="space-y-4">
+            {faqs.map((faq, index) => (
+              <AnimatedSection key={index} delay={index * 0.1}>
                 <AccordionItem
-                  key={index}
                   value={`item-${index}`}
-                  className="border border-border rounded-xl px-6 data-[state=open]:bg-background"
+                  className="border border-white/10 rounded-xl px-6 data-[state=open]:bg-white/5"
                 >
                   <AccordionTrigger className="text-left font-display font-medium text-base md:text-lg hover:no-underline py-6">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-6 leading-relaxed">
+                  <AccordionContent className="text-neutral-400 pb-6 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
-              ))}
-            </Accordion>
-          </AnimatedSection>
+              </AnimatedSection>
+            ))}
+          </Accordion>
         </div>
       </div>
     </section>
