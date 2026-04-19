@@ -42,14 +42,14 @@ function TestimonialCard({
   testimonial: (typeof testimonials)[number];
 }) {
   return (
-    <article className="w-[82vw] sm:w-95 md:w-107.5 lg:w-120 shrink-0 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 shadow-[0_20px_80px_rgba(0,0,0,0.28)]">
-      <p className="text-foreground text-lg md:text-xl leading-relaxed mb-8">
+    <article className="w-[66vw] sm:w-90 md:w-107.5 lg:w-120 shrink-0 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 sm:p-5 md:p-8 shadow-[0_20px_80px_rgba(0,0,0,0.28)]">
+      <p className="text-foreground text-sm sm:text-base md:text-xl leading-relaxed mb-5 sm:mb-7">
         "{testimonial.quote}"
       </p>
 
-      <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
-          <span className="font-display font-semibold text-sm">
+      <div className="flex items-center gap-2.5 sm:gap-4">
+        <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
+          <span className="font-display font-semibold text-[11px] sm:text-sm">
             {testimonial.name
               .split(" ")
               .map((n) => n[0])
@@ -57,8 +57,8 @@ function TestimonialCard({
           </span>
         </div>
         <div>
-          <div className="font-medium text-foreground">{testimonial.name}</div>
-          <div className="text-sm text-neutral-400">{testimonial.role}</div>
+          <div className="font-medium text-xs sm:text-sm text-foreground">{testimonial.name}</div>
+          <div className="text-[11px] sm:text-xs text-neutral-400">{testimonial.role}</div>
         </div>
       </div>
     </article>
