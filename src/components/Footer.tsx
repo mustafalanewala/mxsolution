@@ -63,7 +63,7 @@ export function Footer() {
       {/* Top Meta Strip */}
       <div className="border-b border-white/10">
         <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
-          <div className="flex flex-wrap items-center justify-between gap-4 py-5 text-[10px] font-mono tracking-[0.3em] uppercase text-white/40">
+          <div className="flex flex-wrap items-center justify-between gap-4 py-3 text-[10px] font-mono tracking-[0.3em] uppercase text-white/40">
             <div className="flex items-center gap-2">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
@@ -79,7 +79,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl pt-16 md:pt-24 pb-16 md:pb-20">
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl pt-10 md:pt-12 pb-10 md:pb-12">
         {/* Grid */}
         <div className="grid grid-cols-2 md:grid-cols-12 gap-y-12 gap-x-8 md:gap-10">
           {/* Brand */}
@@ -163,43 +163,9 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Oversized wordmark — SVG scales to full width without clipping */}
-      <div aria-hidden className="container mx-auto px-4 md:px-8 max-w-screen-2xl select-none pointer-events-none">
-        <svg
-          viewBox="0 0 1340 150"
-          preserveAspectRatio="xMidYMid meet"
-          className="w-full h-auto block"
-        >
-          <defs>
-            <linearGradient id="mxFooterFade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(255,255,255,0.08)" />
-              <stop offset="60%" stopColor="rgba(255,255,255,0.02)" />
-              <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-            </linearGradient>
-          </defs>
-          <text
-            x="670"
-            y="140"
-            textAnchor="middle"
-            fill="url(#mxFooterFade)"
-            textLength="1340"
-            lengthAdjust="spacingAndGlyphs"
-            className="font-display"
-            style={{
-              fontSize: "200px",
-              fontWeight: 900,
-              letterSpacing: "-8px",
-              textTransform: "uppercase",
-            }}
-          >
-            MX SOLUTION
-          </text>
-        </svg>
-      </div>
-
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl py-6 flex items-center justify-center text-[11px] font-mono tracking-wider text-white/40">
+        <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl py-4 flex items-center justify-center text-[11px] font-mono tracking-wider text-white/40">
           <p>© {year} Mx Solution — All rights reserved.</p>
         </div>
       </div>
