@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const allProjects = [
@@ -69,7 +70,7 @@ const allProjects = [
 
 export default function Projects() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar />
 
       <main>
@@ -78,13 +79,13 @@ export default function Projects() {
           <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
             <Link
               href="/#portfolio"
-              className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors mb-12 text-sm font-mono uppercase tracking-wider"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm font-mono uppercase tracking-wider"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
             </Link>
 
-            <h1 className="font-display font-black text-[clamp(2.6rem,12vw,4.75rem)] md:text-8xl lg:text-[9vw] leading-[0.92] tracking-tight md:tracking-tighter uppercase">
+            <h1 className="font-display font-black text-[clamp(2.6rem,12vw,4.75rem)] md:text-8xl lg:text-[9vw] leading-[0.92] tracking-tight uppercase [font-stretch:118%]">
               <motion.span
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -97,22 +98,25 @@ export default function Projects() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-                className="block text-neutral-500 italic"
+                className="block text-muted-foreground"
               >
-                & Playgrounds
+                &amp;{" "}
+                <span className="headline-accent text-[1.05em]">
+                  playgrounds
+                </span>
               </motion.span>
             </h1>
 
             <div className="mt-16 md:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-8">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.3 }}
                 className="lg:col-start-7 lg:col-span-6"
               >
-                <p className="text-xl md:text-2xl font-light leading-snug text-neutral-300">
+                <p className="text-xl md:text-2xl font-light leading-snug text-muted-foreground">
                   A collection of digital systems we've crafted across web, commerce, and brand.{" "}
-                  <span className="text-white font-medium">
+                  <span className="text-foreground font-medium">
                     Each one built as a foundation, not a feature.
                   </span>
                 </p>
@@ -169,7 +173,7 @@ function ProjectRow({
     <motion.div
       ref={ref}
       style={{ opacity: isMobile ? mobileOpacity : opacity }}
-      className="border-t border-white/10 py-10 md:py-16 lg:py-20"
+      className="border-t border-border py-10 md:py-16 lg:py-20"
     >
       <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
         
@@ -199,23 +203,21 @@ function ProjectRow({
             style={{ y: isMobile ? mobileTextY : textY }}
             className="lg:col-span-5 flex flex-col gap-6 relative z-10 will-change-transform"
           >
-            <span className="text-xs md:text-sm font-mono uppercase tracking-widest text-neutral-400">
+            <span className="text-xs md:text-sm font-mono uppercase tracking-widest text-muted-foreground">
               {project.category}
             </span>
-            <h3 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-[4.5vw] leading-[0.95] tracking-tight uppercase">
+            <h3 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-[4.5vw] leading-[0.95] tracking-tight uppercase [font-stretch:118%]">
               {project.title}
             </h3>
-            <p className="text-base md:text-lg text-neutral-400 leading-relaxed max-w-md">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-md">
               {project.description}
             </p>
-            <Link
-              href={project.link}
-              target="_blank"
-              className="group/link inline-flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-neutral-400 hover:text-white transition-colors w-fit"
-            >
-              View Live
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-            </Link>
+            <Button variant="outline" className="w-fit" asChild>
+              <Link href={project.link} target="_blank">
+                View live
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </Button>
           </motion.div>
         </div>
       </div>

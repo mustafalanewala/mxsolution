@@ -1,38 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { SectionHeading, Accent } from "@/components/SectionHeading";
 
 const testimonials = [
   {
     name: "Taher Mahudawala",
     role: "Gujarat Food Products",
     quote:
-      "They delivered exactly what we envisioned, stayed within budget, and kept every detail clean and professional. We are genuinely impressed with the final result.",
+      "They delivered exactly what we envisioned, stayed within budget, and kept every detail clean and professional.",
   },
   {
     name: "Sagar Kahar",
-    role: "Sk Attire Hub",
+    role: "SK Attire Hub",
     quote:
-      "Within a month, everything was live, from product listings to payments. They designed a Gen Z-friendly ecommerce UI that customers connected with instantly. Seamless process, and I definitely recommend them.",
+      "Within a month everything was live — listings to payments. An e-commerce UI customers connected with instantly.",
   },
   {
     name: "Bipin Daniel",
-    role: "Guidance (Government of Tamil Nadu)",
+    role: "Guidance (Govt. of Tamil Nadu)",
     quote:
-      "Guidance was a large and complex Government project, and the team managed it with clear planning, strong execution, and consistent communication from start to finish.",
+      "A large, complex government project managed with clear planning, strong execution, and consistent communication.",
   },
   {
     name: "Vishal Sahetai",
     role: "Vishaka Fashion",
     quote:
-      "They helped us significantly improve our online presence. The team was professional, responsive, and reliable throughout the project.",
+      "They helped us significantly improve our online presence. Professional, responsive, and reliable throughout.",
   },
   {
     name: "Zenab Limdi",
     role: "Mubarak Collection",
     quote:
-      "I was looking for a website for Mubarak Collection, and they reached us at the right time. They delivered top-quality work, guided us throughout the process, and helped us in many ways. The UI was beautiful and very user-friendly.",
+      "Top-quality work, guidance through the whole process, and a UI that is beautiful and very user-friendly.",
   },
 ];
 
@@ -42,101 +43,102 @@ function TestimonialCard({
   testimonial: (typeof testimonials)[number];
 }) {
   return (
-    <article className="w-[66vw] sm:w-90 md:w-107.5 lg:w-120 shrink-0 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 sm:p-5 md:p-8 shadow-[0_20px_80px_rgba(0,0,0,0.28)]">
-      <p className="text-foreground text-sm sm:text-base md:text-xl leading-relaxed mb-5 sm:mb-7">
-        "{testimonial.quote}"
+    // Spacing lives on the card (not flex gap) so each half of the doubled
+    // track is exactly 50% wide — otherwise the loop visibly jumps.
+    <article className="mr-4 md:mr-6 w-[78vw] max-w-[22rem] sm:max-w-none sm:w-96 md:w-112 shrink-0 border border-border bg-card p-5 sm:p-6 md:p-8 flex flex-col justify-between gap-5 md:gap-6 transition-colors duration-500 hover:bg-foreground hover:text-background group/card">
+      <p className="font-serif italic text-base sm:text-lg md:text-2xl leading-snug">
+        &ldquo;{testimonial.quote}&rdquo;
       </p>
-
-      <div className="flex items-center gap-2.5 sm:gap-4">
-        <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
-          <span className="font-display font-semibold text-[11px] sm:text-sm">
-            {testimonial.name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")}
-          </span>
-        </div>
+      <div className="flex items-center justify-between gap-4">
         <div>
-          <div className="font-medium text-xs sm:text-sm text-foreground">{testimonial.name}</div>
-          <div className="text-[11px] sm:text-xs text-neutral-400">{testimonial.role}</div>
+          <div className="font-display font-bold uppercase tracking-tight text-sm [font-stretch:118%]">
+            {testimonial.name}
+          </div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground group-hover/card:text-background/60 transition-colors duration-500 mt-1">
+            {testimonial.role}
+          </div>
         </div>
+        <span className="text-2xl font-light text-muted-foreground/50 group-hover/card:text-background/50 transition-colors duration-500">
+          ×
+        </span>
       </div>
     </article>
   );
 }
 
-function MarqueeRow({
-  items,
-  reverse = false,
-}: {
-  items: typeof testimonials;
-  reverse?: boolean;
-}) {
-  const duplicated = [...items, ...items, ...items];
-
+function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
+  const doubled = [...testimonials, ...testimonials];
   return (
-    <div className="relative overflow-hidden">
-      <motion.div
-        className="flex w-max items-stretch gap-5 md:gap-6 py-2 will-change-transform"
-        animate={{ x: reverse ? ["-33.333%", "0%"] : ["0%", "-33.333%"] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+    <div className="group relative overflow-hidden">
+      {/* marquee-track: paused by the section's IntersectionObserver when
+          off-screen so the layers don't animate for the whole session */}
+      <div
+        className={`marquee-track flex w-max items-stretch py-1 will-change-transform transform-gpu group-hover:[animation-play-state:paused] motion-reduce:[animation:none] ${
+          reverse
+            ? "animate-[marquee-reverse_45s_linear_infinite]"
+            : "animate-[marquee_45s_linear_infinite]"
+        }`}
       >
-        {duplicated.map((testimonial, index) => (
+        {doubled.map((testimonial, index) => (
           <TestimonialCard
             key={`${testimonial.name}-${index}`}
             testimonial={testimonial}
           />
         ))}
-      </motion.div>
+      </div>
+      {/* Edge fades */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 sm:w-16 md:w-32 bg-linear-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 sm:w-16 md:w-32 bg-linear-to-l from-background to-transparent" />
     </div>
   );
 }
 
 export function TestimonialsSection() {
-  return (
-    <section id="testimonials" className="pt-24 pb-20 md:pt-40 md:pb-28 bg-black text-white overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
-        {/* Header */}
-        <div className="mb-12 md:mb-16 text-center max-w-4xl mx-auto">
-          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter leading-none text-white">
-            <motion.span
-              initial={{ opacity: 0, y: "100%" }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-              className="overflow-hidden block"
-            >
-              Words From Our
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: "100%" }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
-              className="overflow-hidden block"
-            >
-              Clients
-            </motion.span>
-          </h2>
-        </div>
+  const sectionRef = useRef<HTMLElement>(null);
 
-        {/* Testimonials Marquee */}
-        <div className="space-y-5 md:space-y-6">
-          <AnimatedSection delay={0.1}>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 md:w-32 bg-linear-to-r from-black to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 md:w-32 bg-linear-to-l from-black to-transparent" />
-              <MarqueeRow items={testimonials} />
-            </div>
-          </AnimatedSection>
-          <AnimatedSection delay={0.2}>
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 md:w-32 bg-linear-to-r from-black to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 md:w-32 bg-linear-to-l from-black to-transparent" />
-              <MarqueeRow items={[...testimonials].reverse()} reverse />
-            </div>
-          </AnimatedSection>
-        </div>
+  // Run the marquees only while the section is on screen
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const tracks = section.querySelectorAll<HTMLElement>(".marquee-track");
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries[entries.length - 1].isIntersecting;
+        tracks.forEach((t) => {
+          t.style.animationPlayState = visible ? "running" : "paused";
+        });
+      },
+      { threshold: 0 },
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      id="testimonials"
+      className="section bg-background text-foreground overflow-hidden"
+    >
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl mb-12 md:mb-16">
+        <SectionHeading
+          eyebrow="Client words"
+          className="md:text-center"
+          lines={[
+            <>
+              Taken at their <Accent>word</Accent>
+            </>,
+          ]}
+        />
+      </div>
+
+      <div className="space-y-5 md:space-y-6">
+        <AnimatedSection delay={0.1}>
+          <MarqueeRow />
+        </AnimatedSection>
+        <AnimatedSection delay={0.2}>
+          <MarqueeRow reverse />
+        </AnimatedSection>
       </div>
     </section>
   );

@@ -1,91 +1,55 @@
 "use client";
 
-import {
-  motion,
-  useMotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-  useVelocity,
-  useAnimationFrame,
-} from "framer-motion";
-import { useRef } from "react";
-import { wrap } from "framer-motion";
-
-const marqueeItems = [
+const items = [
   "Custom Software",
-  "•",
   "CRM Systems",
-  "•",
   "ERP Solutions",
-  "•",
   "Web Development",
-  "•",
   "E-commerce",
-  "•",
   "AI Agents",
-  "•",
   "Mobile Apps",
-  "•",
   "UI / UX & Brand",
-  "•",
 ];
 
-function VelocityRow({
-  baseVelocity = 2,
-}: {
-  baseVelocity?: number;
-}) {
-  const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 50,
-    stiffness: 400,
-  });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-    clamp: false,
-  });
-
-  const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
-  const directionFactor = useRef<number>(1);
-
-  useAnimationFrame((_t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
-    if (velocityFactor.get() < 0) directionFactor.current = -1;
-    else if (velocityFactor.get() > 0) directionFactor.current = 1;
-
-    moveBy += directionFactor.current * moveBy * velocityFactor.get();
-    baseX.set(baseX.get() + moveBy);
-  });
-
+function Track({ reverse = false }: { reverse?: boolean }) {
+  // Two identical copies inside one track; the keyframe shifts by exactly
+  // one copy (-50%), so the loop is seamless. Pure CSS transform = GPU.
+  const sequence = [...items, ...items];
   return (
-    <div className="overflow-hidden whitespace-nowrap flex flex-nowrap">
-      <motion.div
-        style={{ x }}
-        className="flex flex-nowrap items-center gap-8 whitespace-nowrap"
+    <div className="group flex overflow-hidden">
+      <div
+        className={`flex w-max shrink-0 items-center will-change-transform group-hover:[animation-play-state:paused] ${
+          reverse
+            ? "animate-[marquee-reverse_38s_linear_infinite]"
+            : "animate-[marquee_38s_linear_infinite]"
+        }`}
       >
-        {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map(
-          (item, index) => (
+        {sequence.map((item, i) => (
+          <span key={i} className="flex items-center">
             <span
-              key={index}
-              className={`text-3xl md:text-5xl lg:text-6xl font-display font-semibold whitespace-nowrap ${
-                item === "•" ? "text-primary" : "text-foreground/80"
+              className={`px-5 md:px-8 font-display font-black uppercase tracking-tight text-[clamp(1.9rem,4.4vw,4rem)] [font-stretch:118%] ${
+                i % 2 === 0 ? "text-foreground" : "text-outline"
               }`}
             >
               {item}
             </span>
-          ),
-        )}
-      </motion.div>
+            <span className="text-2xl md:text-4xl font-light text-muted-foreground/40">
+              ×
+            </span>
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
 
 export function MarqueeSection() {
   return (
-    <section className="py-14 md:py-20 border-y border-border/50 overflow-hidden">
-      <VelocityRow baseVelocity={1.2} />
+    <section className="relative border-y border-border bg-background text-foreground overflow-hidden py-8 md:py-12">
+      <Track />
+      {/* Edge fades */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-40 bg-linear-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-40 bg-linear-to-l from-background to-transparent" />
     </section>
   );
 }

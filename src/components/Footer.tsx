@@ -59,17 +59,17 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-black text-white overflow-hidden border-t border-white/10">
+    <footer className="relative bg-background text-foreground overflow-hidden border-t border-border">
       {/* Top Meta Strip */}
-      <div className="border-b border-white/10">
+      <div className="border-b border-border">
         <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
-          <div className="flex flex-wrap items-center justify-between gap-4 py-3 text-[10px] font-mono tracking-[0.3em] uppercase text-white/40">
+          <div className="flex flex-wrap items-center justify-between gap-4 py-3 text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground">
             <div className="flex items-center gap-2">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 animate-ping" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
               </span>
-              <span>Available for projects — 2026</span>
+              <span>Available for projects — {year}</span>
             </div>
             <div className="flex items-center gap-6">
               <span>Dohad · IND</span>
@@ -85,11 +85,11 @@ export function Footer() {
           {/* Brand */}
           <AnimatedSection className="col-span-2 md:col-span-6">
             <div className="mb-6">
-              <span className="font-display font-semibold text-lg text-white">
-                Mx Solution
+              <span className="font-sans font-semibold text-[17px] tracking-[-0.01em] text-foreground">
+                M<span className="text-primary">x</span> Solution
               </span>
             </div>
-            <p className="text-neutral-400 max-w-sm leading-relaxed text-sm md:text-base mb-8">
+            <p className="text-muted-foreground max-w-sm leading-relaxed text-sm md:text-base mb-8">
               Technology that multiplies impact. We help brands transform ideas
               into scalable digital systems designed for maximum performance.
             </p>
@@ -105,11 +105,11 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative text-sm text-white/70 hover:text-white transition-colors"
+                    className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <span className="relative">
                       {social.label}
-                      <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-white transition-all duration-200 group-hover:w-full" />
+                      <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-foreground transition-all duration-300 group-hover:w-full" />
                     </span>
                   </Link>
                 </motion.div>
@@ -119,7 +119,7 @@ export function Footer() {
 
           {/* Sitemap */}
           <AnimatedSection delay={0.1} className="col-span-1 md:col-span-3">
-            <h4 className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/30 mb-6">
+            <h4 className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary mb-6">
               Sitemap
             </h4>
             <ul className="space-y-3">
@@ -127,11 +127,11 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="group inline-block text-sm text-white/70 hover:text-white transition-colors"
+                    className="group inline-block text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <span className="relative">
                       {link.label}
-                      <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-white transition-all duration-200 group-hover:w-full" />
+                      <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-foreground transition-all duration-300 group-hover:w-full" />
                     </span>
                   </Link>
                 </li>
@@ -141,7 +141,7 @@ export function Footer() {
 
           {/* Services */}
           <AnimatedSection delay={0.2} className="col-span-1 md:col-span-3">
-            <h4 className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/30 mb-6">
+            <h4 className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary mb-6">
               Services
             </h4>
             <ul className="space-y-3">
@@ -149,11 +149,11 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="group inline-block text-sm text-white/70 hover:text-white transition-colors"
+                    className="group inline-block text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <span className="relative">
                       {link.label}
-                      <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-white transition-all duration-200 group-hover:w-full" />
+                      <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-foreground transition-all duration-300 group-hover:w-full" />
                     </span>
                   </Link>
                 </li>
@@ -164,9 +164,9 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl py-4 flex items-center justify-center text-[11px] font-mono tracking-wider text-white/40">
-          <p>© {year} Mx Solution — All rights reserved.</p>
+      <div className="border-t border-border">
+        <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl py-4 flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground text-center">
+          <p>© {year} Mx Solution — All rights reserved</p>
         </div>
       </div>
     </footer>

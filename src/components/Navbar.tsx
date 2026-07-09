@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navLinks = [
   { label: "Work", href: "/projects" },
@@ -50,41 +51,41 @@ export function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed z-50 left-0 right-0 mx-auto transition-all duration-500 w-[92%] md:max-w-3xl rounded-full ${
+        className={`fixed z-[70] left-0 right-0 mx-auto transition-all duration-500 w-[92%] md:max-w-3xl rounded-full ${
           isScrolled
-            ? "top-4 bg-background/80 backdrop-blur-xl border border-border/50 py-2"
-            : "top-6 bg-background/60 backdrop-blur-lg border border-border/30 py-3"
+            ? "top-4 bg-background/90 backdrop-blur-md border border-border/60 py-2 shadow-[var(--shadow-soft)]"
+            : "top-6 bg-background/70 backdrop-blur-md border border-border/30 py-3"
         }`}
       >
         <div className="flex items-center justify-between px-5">
-          {/* Logo */}
+          {/* Wordmark — the X is the brand mark */}
           <Link
             href="/"
             onClick={handleLogoClick}
-            className="flex items-center gap-2 group shrink-0"
+            className="shrink-0 font-sans font-semibold text-[17px] tracking-[-0.01em] text-foreground"
           >
-            <span className="font-display font-semibold text-lg text-foreground">
-              Mx Solution
-            </span>
+            M<span className="text-primary">x</span> Solution
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Desktop Navigation — mono label language */}
+          <div className="hidden md:flex items-center gap-0.5">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-300 text-sm font-medium whitespace-nowrap"
+                className="group relative px-3 py-2 font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors duration-300 whitespace-nowrap"
               >
                 {link.label}
+                <span className="absolute left-3 right-3 -bottom-0.5 h-px bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]" />
               </Link>
             ))}
           </div>
 
           {/* CTA & Theme Toggle */}
           <div className="hidden md:flex items-center gap-2 shrink-0">
+            <ThemeToggle />
             <Button
-              variant="glow"
+              variant="default"
               size="sm"
               className="rounded-full h-9 px-5"
               asChild
@@ -93,14 +94,15 @@ export function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button — same spot toggles open/close */}
           <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <button
               className="text-foreground p-2 hover:bg-secondary rounded-full transition-colors"
-              onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Open menu"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              <Menu size={20} />
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
@@ -120,33 +122,11 @@ export function Navbar() {
             <div className="noise-overlay" />
 
             {/* Subtle gradient accent */}
-            <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-foreground/5 via-transparent to-transparent" />
 
-            {/* Header row */}
-            <div className="relative flex items-center justify-between px-6 pt-7 shrink-0">
-              <Link
-                href="/"
-                className="font-display font-semibold text-lg text-foreground"
-                onClick={() => {
-                  handleLogoClick();
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                Mx Solution
-              </Link>
-              <div className="flex items-center gap-2">
-                <button
-                  className="text-foreground p-2 hover:bg-secondary rounded-full transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  aria-label="Close menu"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-            </div>
-
-            {/* Nav links — large, numbered */}
-            <div className="relative flex-1 flex flex-col justify-center px-8 gap-0">
+            {/* Nav links — large, numbered (real navbar stays on top) */}
+            <div className="relative flex-1 flex flex-col justify-center px-8 gap-0 pt-24">
+              <p className="eyebrow mb-6">Menu</p>
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.label}
@@ -161,16 +141,16 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="group flex items-baseline gap-4 py-5 border-b border-border/40 last:border-0"
+                    className="group flex items-baseline gap-4 py-4 border-b border-border/60 last:border-0"
                   >
-                    <span className="text-xs text-primary font-mono w-6 shrink-0 translate-y-[-0.15rem] bg-primary/10 rounded px-1 py-0.5">
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-primary w-6 shrink-0">
                       0{i + 1}
                     </span>
-                    <span className="font-display font-bold text-[3rem] leading-none text-foreground group-hover:text-primary transition-colors duration-300">
+                    <span className="font-display font-black uppercase tracking-tight text-[2.4rem] leading-none [font-stretch:118%] text-foreground group-hover:text-muted-foreground transition-colors duration-300">
                       {link.label}
                     </span>
-                    <span className="ml-auto text-muted-foreground/0 group-hover:text-muted-foreground transition-colors duration-300 text-sm font-mono translate-y-1">
-                      →
+                    <span className="ml-auto text-lg font-light text-muted-foreground/40 rotate-45 group-hover:rotate-0 group-hover:text-primary transition-all duration-300">
+                      ×
                     </span>
                   </Link>
                 </motion.div>
@@ -189,7 +169,7 @@ export function Navbar() {
               className="relative px-8 pb-10 flex items-center justify-between gap-4"
             >
               <Button
-                variant="glow"
+                variant="default"
                 size="lg"
                 className="rounded-full px-8"
                 asChild

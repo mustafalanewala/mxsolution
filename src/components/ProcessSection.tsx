@@ -1,188 +1,199 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { SectionHeading, Accent } from "@/components/SectionHeading";
 
 const steps = [
   {
     number: "01",
     title: "Discovery",
-    description: "We analyze your ecosystem, users, and market gaps to define the exact problem we are solving before writing a single line of code.",
+    description:
+      "We analyze your ecosystem, users, and market gaps to define the exact problem before writing a single line of code.",
   },
   {
     number: "02",
     title: "Strategy",
-    description: "Mapping the blueprint. We deliver a roadmap with clear milestones, technical architecture, and a focused product direction.",
+    description:
+      "Mapping the blueprint — a roadmap with clear milestones, technical architecture, and a focused product direction.",
   },
   {
     number: "03",
     title: "Design",
-    description: "Crafting the visual language. Pixel-perfect, high-fidelity prototypes that balance aesthetic dominance with flawless user experience.",
+    description:
+      "Crafting the visual language. High-fidelity prototypes that balance aesthetics with flawless user experience.",
   },
   {
     number: "04",
     title: "Development",
-    description: "Building the engine. Clean, scalable, and modular code built on modern web infrastructure for maximum performance.",
+    description:
+      "Building the engine. Clean, scalable, modular code on modern infrastructure for maximum performance.",
   },
   {
     number: "05",
     title: "Launch",
-    description: "Deploy, monitor, and scale. We ensure a flawless transition to production and provide ongoing evolution for your product.",
+    description:
+      "Deploy, monitor, and scale. A flawless transition to production with ongoing evolution for your product.",
   },
 ];
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export function ProcessSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [active, setActive] = useState(0);
 
   return (
-    <section 
-      id="process" 
-      className="bg-black text-white h-dvh lg:h-screen min-h-150 border-y border-white/20 selection:bg-white selection:text-black flex flex-col"
+    <section
+      id="process"
+      className="section bg-background text-foreground border-b border-border"
     >
-      
-      {/* Responsive Typographic Header */}
-      <div className="flex-none px-6 py-6 lg:px-8 lg:py-8 border-b border-white/20 flex justify-between items-end gap-4">
-        <h2 className="font-display font-black text-4xl lg:text-6xl uppercase tracking-tighter leading-none">
-          <motion.span
-            initial={{ opacity: 0, y: "100%" }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-            className="overflow-hidden inline md:block"
-          >
-            The{" "}
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: "100%" }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
-            className="overflow-hidden inline md:block"
-          >
-            Blueprint
-          </motion.span>
-        </h2>
-        <p className="text-neutral-400 max-w-37.5 lg:max-w-sm text-right text-xs lg:text-lg uppercase tracking-widest font-mono">
-          Phase breakdown <br className="hidden md:block" /> & Methodology
-        </p>
-      </div>
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
+        <div className="mb-14 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+          <SectionHeading
+            eyebrow="How we work"
+            lines={[
+              <>
+                The <Accent>blueprint</Accent>
+              </>,
+            ]}
+          />
+          <p className="max-w-sm text-sm md:text-base leading-relaxed text-muted-foreground md:pb-2 md:text-right">
+            Five phases. No surprises — every step is visible, reviewed, and
+            shipped with you in the loop.
+          </p>
+        </div>
 
-      {/* The Flex Grid Container - Stacks vertically on mobile, horizontally on desktop */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
-        {steps.map((step, index) => {
-          const isActive = activeIndex === index;
-
-          return (
-            <motion.div
-              key={step.number}
-              onMouseEnter={() => setActiveIndex(index)}
-              onClick={() => setActiveIndex(index)}
-              animate={{ flexGrow: isActive ? 5 : 1 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="relative border-b lg:border-b-0 lg:border-r border-white/20 last:border-b-0 lg:last:border-r-0 h-full flex-[1_1_0%] flex flex-col cursor-pointer group bg-black overflow-hidden"
-            >
-              
-              {/* ==========================================
-                  MOBILE & TABLET UI (Hidden on Desktop)
-                  ========================================== */}
-              <div className="flex lg:hidden flex-col justify-center h-full w-full px-6 py-4">
-                <div className="flex justify-between items-center w-full">
-                  <span className={`font-mono text-lg transition-colors duration-300 ${isActive ? 'text-white' : 'text-neutral-600'}`}>
-                    {step.number}
-                  </span>
-                  <span className={`font-display font-bold uppercase text-2xl tracking-tight transition-colors duration-300 ${isActive ? 'text-white group-hover:text-primary' : 'text-neutral-600 group-hover:text-primary'}`}>
-                    {step.title}
-                  </span>
-                </div>
-                <motion.div
-                  initial={false}
-                  animate={{
-                    opacity: isActive ? 1 : 0,
-                    height: isActive ? "auto" : 0,
-                    marginTop: isActive ? 16 : 0
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <p className="text-neutral-400 text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </motion.div>
-              </div>
-
-
-              {/* ==========================================
-                  DESKTOP UI (Hidden on Mobile)
-                  ========================================== */}
-              <div className="hidden lg:flex flex-col h-full w-full">
-                
-                {/* Top Section: Number */}
-                <div className="p-8 shrink-0">
-                  <span className={`font-mono text-3xl transition-colors duration-500 ${isActive ? "text-white" : "text-neutral-600 group-hover:text-neutral-400"}`}>
-                    {step.number}
-                  </span>
-                </div>
-
-                {/* Middle Section: Revealed Description */}
-                <motion.div
-                  initial={false}
-                  animate={{
-                    opacity: isActive ? 1 : 0,
-                    y: isActive ? 0 : 20,
-                  }}
-                  transition={{ duration: 0.3, delay: isActive ? 0.2 : 0 }}
-                  className="px-8 max-w-md shrink-0 absolute top-32 left-0"
-                  style={{ pointerEvents: isActive ? "auto" : "none" }}
-                >
-                  <div className="w-12 h-px bg-white mb-6" />
-                  <p className="text-xl lg:text-2xl text-neutral-300 leading-relaxed">
-                    {step.description}
-                  </p>
-                </motion.div>
-
-                {/* Bottom Section: Typography Container */}
-                <div className="relative flex-1 flex items-end p-8">
-                  
-                  {/* INACTIVE STATE: Vertical Text */}
-                  <motion.div
-                    initial={false}
-                    animate={{ opacity: isActive ? 0 : 1 }}
-                    transition={{ 
-                      // 0s duration (INSTANT) when becoming active. Smooth fade when becoming inactive.
-                      duration: isActive ? 0 : 0.4, 
-                      delay: isActive ? 0 : 0.3 
-                    }}
-                    className="absolute bottom-8 left-0 w-full flex justify-center pointer-events-none"
+        {/* ── Desktop: expanding columns, active one inverts ── */}
+        <div className="hidden lg:flex border border-border h-[26rem] overflow-hidden">
+          {steps.map((step, index) => {
+            const isActive = active === index;
+            return (
+              <motion.button
+                type="button"
+                key={step.number}
+                onMouseEnter={() => setActive(index)}
+                onFocus={() => setActive(index)}
+                animate={{ flexGrow: isActive ? 4 : 1 }}
+                transition={{ duration: 0.55, ease }}
+                className={`relative border-r border-border last:border-r-0 flex-[1_1_0%] min-w-0 flex flex-col justify-between text-left p-7 cursor-pointer transition-colors duration-500 ${
+                  isActive
+                    ? "bg-foreground text-background"
+                    : "bg-background text-foreground"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span
+                    className={`font-mono text-sm tracking-[0.2em] transition-colors duration-500 ${
+                      isActive ? "text-background/60" : "text-muted-foreground"
+                    }`}
                   >
-                    <span 
-                      className="font-display font-bold uppercase tracking-widest text-3xl text-neutral-600 group-hover:text-primary transition-colors duration-300"
-                      style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+                    {step.number}
+                  </span>
+                  <span
+                    className={`text-xl font-light transition-all duration-500 ${
+                      isActive ? "rotate-0" : "rotate-45 opacity-40"
+                    }`}
+                  >
+                    ×
+                  </span>
+                </div>
+
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.p
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.4, ease, delay: 0.15 }}
+                      className="text-background/75 max-w-sm leading-relaxed text-base"
                     >
+                      {step.description}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+
+                <div className="relative h-14 overflow-visible">
+                  {/* Vertical label when collapsed */}
+                  <motion.span
+                    animate={{ opacity: isActive ? 0 : 1 }}
+                    transition={{ duration: 0.25 }}
+                    className="absolute bottom-0 left-1 font-display font-bold uppercase tracking-widest text-2xl text-muted-foreground/70 whitespace-nowrap origin-bottom-left -rotate-90 translate-x-4 pointer-events-none [font-stretch:118%]"
+                  >
+                    {step.title}
+                  </motion.span>
+                  {/* Horizontal title when active */}
+                  <motion.span
+                    animate={{
+                      opacity: isActive ? 1 : 0,
+                      x: isActive ? 0 : 24,
+                    }}
+                    transition={{ duration: 0.45, ease, delay: isActive ? 0.1 : 0 }}
+                    className="absolute bottom-0 left-0 font-display font-black uppercase tracking-tight leading-none text-[clamp(2.2rem,3.4vw,3.6rem)] whitespace-nowrap pointer-events-none [font-stretch:118%]"
+                  >
+                    {step.title}
+                  </motion.span>
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+
+        {/* ── Mobile: vertical phase list ── */}
+        <div className="lg:hidden border-t border-border">
+          {steps.map((step, index) => {
+            const isActive = active === index;
+            return (
+              <button
+                type="button"
+                key={step.number}
+                onClick={() => setActive(index)}
+                className={`w-full text-left border-b border-border transition-colors duration-400 ${
+                  isActive ? "bg-foreground text-background" : ""
+                }`}
+                aria-expanded={isActive}
+              >
+                <div className="flex items-center justify-between px-5 py-5">
+                  <span className="flex items-baseline gap-4">
+                    <span
+                      className={`font-mono text-xs tracking-[0.2em] ${
+                        isActive
+                          ? "text-background/60"
+                          : "text-muted-foreground/60"
+                      }`}
+                    >
+                      {step.number}
+                    </span>
+                    <span className="font-display font-black uppercase tracking-tight text-2xl [font-stretch:118%]">
                       {step.title}
                     </span>
-                  </motion.div>
-
-                  {/* ACTIVE STATE: Massive Horizontal Text */}
-                  <motion.h3
-                    initial={false}
-                    animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : 20 }}
-                    transition={{ 
-                      // Smooth slide when becoming active. 0s duration (INSTANT) when hiding.
-                      duration: isActive ? 0.4 : 0, 
-                      ease: "easeOut",
-                      delay: isActive ? 0.2 : 0 
-                    }}
-                    className="font-display font-black uppercase tracking-tighter whitespace-nowrap absolute bottom-8 left-8 text-[clamp(2.75rem,4vw,5rem)] text-white group-hover:text-primary transition-colors duration-300 leading-none pointer-events-none"
+                  </span>
+                  <span
+                    className={`text-xl font-light transition-transform duration-300 ${
+                      isActive ? "rotate-0" : "rotate-45 opacity-40"
+                    }`}
                   >
-                    {step.title}
-                  </motion.h3>
-
+                    ×
+                  </span>
                 </div>
-              </div>
-              
-            </motion.div>
-          );
-        })}
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-5 pb-6 text-sm leading-relaxed text-background/75">
+                        {step.description}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

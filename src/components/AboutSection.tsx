@@ -4,12 +4,10 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Instagram, Linkedin, Github, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-// Optional: Keep your custom components if they wrap framer-motion, 
-// but for this specific layout, we use raw framer-motion for tight scroll control.
-import { AnimatedSection } from "@/components/AnimatedSection"; 
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { SectionHeading, Accent } from "@/components/SectionHeading";
 
 export function AboutSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,34 +23,25 @@ export function AboutSection() {
   return (
     <section 
       id="about" 
-      className="relative py-24 md:py-40 bg-black text-white overflow-hidden selection:bg-white selection:text-black"
+      className="relative section bg-background text-foreground overflow-hidden"
       ref={containerRef}
     >
       <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
         
         {/* Massive Section Header */}
-        <div className="mb-16 md:mb-32">          
-          <h2 className="font-display font-black text-[12vw] leading-[0.85] tracking-tighter uppercase">
-            <motion.div 
-              initial={{ opacity: 0, y: "100%" }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-              className="overflow-hidden block"
-            >
-              The Multiplier
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: "100%" }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
-              className="overflow-hidden block text-neutral-500 italic"
-            >
-              Mindset
-            </motion.div>
-          </h2>
-        </div>
+        <SectionHeading
+          eyebrow="About the studio"
+          size="text-[10.8vw] whitespace-nowrap tracking-[-0.03em]"
+          lines={[
+            <>The multiplier</>,
+            <>
+              <span className="text-muted-foreground">
+                <Accent>mindset</Accent>
+              </span>
+            </>,
+          ]}
+          className="mb-14 md:mb-20"
+        />
 
         {/* Editorial Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
@@ -60,38 +49,29 @@ export function AboutSection() {
           {/* Left - Scrolling Content */}
           <div className="lg:col-span-5 lg:col-start-1 order-2 lg:order-1 flex flex-col gap-12 pt-8">
             <AnimatedSection>
-              <p className="text-xl md:text-3xl font-light leading-snug text-neutral-300">
+              <p className="text-xl md:text-3xl font-light leading-snug text-muted-foreground">
                 Mx Solution was built on a simple belief: technology should do
-                more than work — <span className="text-white font-medium">it should multiply impact.</span> We help brands
+                more than work — <span className="text-foreground font-medium">it should multiply impact.</span> We help brands
                 transform ideas into scalable digital systems designed for
                 maximum performance and real business results.
               </p>
             </AnimatedSection>
 
             <AnimatedSection>
-              <p className="text-xl md:text-3xl font-light leading-snug text-neutral-300">
+              <p className="text-xl md:text-3xl font-light leading-snug text-muted-foreground">
                 We blend strategic thinking with full-stack execution across
                 web, mobile, e-commerce, and AI —{" "}
-                <span className="text-white font-medium">
+                <span className="text-foreground font-medium">
                   every product treated as a system, not a feature.
                 </span>
               </p>
             </AnimatedSection>
 
             <AnimatedSection>
-              <blockquote className="py-4">
-                <p className="text-white text-xl md:text-2xl font-display font-light leading-snug">
-                  We don&apos;t just deliver projects — we create foundations for
-                  long-term success.
-                </p>
-              </blockquote>
-            </AnimatedSection>
-
-            <AnimatedSection>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="rounded-full px-8 py-6 text-lg border-white/20 hover:bg-white hover:text-black transition-all duration-300"
+                className="px-8 py-6 text-lg"
                 asChild
               >
                 <a href="#contact" className="flex items-center gap-2">
@@ -103,7 +83,7 @@ export function AboutSection() {
           </div>
 
           {/* Right - Sticky Image (Editorial Portrait) */}
-          <div className="lg:col-span-6 lg:col-start-7 order-1 lg:order-2 lg:sticky lg:top-32">
+          <div className="lg:col-span-6 lg:col-start-7 order-1 lg:order-2 lg:sticky lg:top-32 lg:-mt-24">
             <div className="relative w-full aspect-[3/4] md:aspect-[4/5] rounded-none overflow-hidden group">
               
               {/* Parallax Image */}

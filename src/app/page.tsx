@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-import { MarqueeSection } from "@/components/MarqueeSection";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 // Dynamically import heavy components for better performance
@@ -41,7 +40,7 @@ export default function Home() {
     <SmoothScroll>
       <main
         id="main-content"
-        className="min-h-screen bg-black text-white overflow-x-hidden"
+        className="min-h-screen bg-background text-foreground overflow-x-clip"
       >
         {/* Scroll Progress */}
         <ScrollProgress />
@@ -51,7 +50,6 @@ export default function Home() {
 
         <Navbar />
         <HeroSection />
-        <MarqueeSection />
         <PortfolioSection />
         <ServicesSection />
         <AboutSection />

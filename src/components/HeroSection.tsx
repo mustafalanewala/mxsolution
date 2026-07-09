@@ -1,244 +1,302 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Terminal } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-const codeLines = [
-  { type: "comment", text: "// @/app/system/[slug]/page.tsx — Edge Node" },
-  { type: "keyword", text: "import { cache, Suspense } from 'react';" },
-  { type: "keyword", text: "import type { Metadata } from 'next';" },
-  { type: "keyword", text: "import { db } from '@/lib/infrastructure/db';" },
-  { type: "empty", text: "" },
-  { type: "keyword", text: "interface SystemNodeProps {" },
-  { type: "variable", text: "  params: { slug: string };" },
-  {
-    type: "variable",
-    text: "  searchParams: Record<string, string | string[]>;",
-  },
-  { type: "keyword", text: "}" },
-  { type: "empty", text: "" },
-  { type: "comment", text: "// Force Edge caching for maximum throughput" },
-  { type: "keyword", text: "export const revalidate = 3600;" },
-  { type: "keyword", text: "export const runtime = 'edge';" },
-  { type: "empty", text: "" },
-  {
-    type: "keyword",
-    text: "const fetchTelemetry = cache(async (nodeId: string) => {",
-  },
-  { type: "variable", text: "  const t0 = performance.now();" },
-  {
-    type: "variable",
-    text: "  const metrics = await db.telemetry.findUnique({",
-  },
-  { type: "variable", text: "    where: { nodeId }," },
-  {
-    type: "variable",
-    text: "    include: { activeConnections: true, load: true }",
-  },
-  { type: "variable", text: "  });" },
-  {
-    type: "function",
-    text: "  Logger.info(`Fetch latency: ${performance.now() - t0}ms`);",
-  },
-  { type: "keyword", text: "  return metrics;" },
-  { type: "keyword", text: "});" },
-  { type: "empty", text: "" },
-  {
-    type: "keyword",
-    text: "export default async function SystemDashboard({ params }: SystemNodeProps) {",
-  },
-  {
-    type: "variable",
-    text: "  const telemetryState = await fetchTelemetry(params.slug);",
-  },
-  { type: "empty", text: "" },
-  {
-    type: "keyword",
-    text: "  if (!telemetryState?.active) throw new Error('ERR_NODE_OFFLINE');",
-  },
-  { type: "empty", text: "" },
-  { type: "keyword", text: "  return (" },
-  {
-    type: "variable",
-    text: '    <main className="relative flex min-h-screen w-full flex-col">',
-  },
-  { type: "function", text: "      <Suspense fallback={<SystemSkeleton />}>" },
-  {
-    type: "function",
-    text: "        <DataStreamer state={telemetryState} optimize={true} />",
-  },
-  { type: "function", text: "      </Suspense>" },
-  { type: "variable", text: "    </main>" },
-  { type: "keyword", text: "  );" },
-  { type: "keyword", text: "}" },
-];
-
-export function HeroSection() {
-  const ref = useRef<HTMLElement>(null);
-  const [isDesktop, setIsDesktop] = useState(true);
+/**
+ * FluidInk — real-time WebGL fluid simulation behind the hero.
+ * White ink on black in dark mode; blue ink on paper in light mode.
+ */
+function FluidInk() {
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleResize = () => setIsDesktop(window.innerWidth >= 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const container = containerRef.current;
+    if (!container) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let sim: {
+      stop: () => void;
+      start: () => void;
+      setConfig: (c: object) => void;
+    } | null = null;
+    let disposed = false;
+    let observer: MutationObserver | null = null;
+    let io: IntersectionObserver | null = null;
+    let stopped = false;
+
+    // Dye must stay bright (additive rendering); light mode feeds gold,
+    // which the CSS invert flips into the brand blue.
+    const paletteFor = (dark: boolean) =>
+      dark
+        ? ["#ffffff", "#d9d9d9", "#a6a6a6"]
+        : ["#c59a25", "#d9b34c", "#b9861e"];
+
+    import("webgl-fluid-enhanced").then(({ default: WebGLFluidEnhanced }) => {
+      if (disposed || !containerRef.current) return;
+
+      const boot = (splats: number) => {
+        if (disposed || !containerRef.current) return;
+        const simulation = new WebGLFluidEnhanced(containerRef.current);
+        sim = simulation;
+
+        const isDark = document.documentElement.classList.contains("dark");
+        simulation.setConfig({
+          transparent: true,
+          hover: true,
+          colorful: false,
+          colorPalette: paletteFor(isDark),
+          bloom: true,
+          bloomIntensity: 0.4,
+          bloomThreshold: 0.5,
+          sunrays: false,
+          simResolution: 128,
+          dyeResolution: 512,
+          densityDissipation: 2.2,
+          velocityDissipation: 1.6,
+          curl: 26,
+          splatRadius: 0.22,
+          splatForce: 5200,
+          pressureIterations: 18,
+          shading: true,
+          brightness: 0.55,
+        });
+        simulation.start();
+
+        if (splats > 0) {
+          setTimeout(() => {
+            if (sim === simulation && !disposed)
+              simulation.multipleSplats(splats);
+          }, 500);
+        }
+      };
+
+      boot(4);
+
+      // Rebuild only when the dark class actually flips — Lenis mutates
+      // <html> classes on every scroll and must not reset the sim.
+      let wasDark = document.documentElement.classList.contains("dark");
+      observer = new MutationObserver(() => {
+        const isDark = document.documentElement.classList.contains("dark");
+        if (isDark === wasDark) return;
+        wasDark = isDark;
+
+        sim?.stop();
+        if (containerRef.current) containerRef.current.innerHTML = "";
+        stopped = false;
+        boot(2);
+        io?.unobserve(container);
+        io?.observe(container);
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+
+      // Hard-stop the sim off-screen (its "pause" still renders every frame).
+      // start() reuses the same WebGL context. Act on the LAST entry — fast
+      // scrolls batch several into one callback.
+      io = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[entries.length - 1];
+          const shouldStop = !entry.isIntersecting;
+          if (shouldStop !== stopped) {
+            stopped = shouldStop;
+            if (stopped) sim?.stop();
+            else sim?.start();
+          }
+        },
+        { threshold: 0 },
+      );
+      io.observe(container);
+    });
+
+    return () => {
+      disposed = true;
+      observer?.disconnect();
+      io?.disconnect();
+      sim?.stop();
+      if (container) container.innerHTML = "";
+    };
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  return (
+    // h-svh keeps the canvas size stable on mobile scroll; the library
+    // mutates its own container, so it gets an inner div.
+    <div
+      className="absolute inset-x-0 top-0 h-svh z-0 overflow-hidden invert dark:invert-0"
+      aria-hidden
+    >
+      <div
+        ref={containerRef}
+        className="w-full h-full [&_canvas]:w-full [&_canvas]:h-full"
+      />
+    </div>
+  );
+}
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const mockupY = useTransform(scrollYProgress, [0, 1], ["0%", "-28%"]);
+const lineReveal = {
+  initial: { y: "115%" },
+  animate: { y: 0 },
+};
 
+export function HeroSection() {
   const lineTransition = { duration: 1, ease: [0.16, 1, 0.3, 1] as const };
 
   return (
-    <section
-      ref={ref}
-      className="relative min-h-screen flex flex-col pt-24 md:pt-32 overflow-hidden bg-black text-white selection:bg-primary selection:text-black"
-    >
-      <motion.div
-        style={{ y: bgY, scale: bgScale }}
-        className="absolute inset-0 z-0 will-change-transform"
-        aria-hidden
-      >
-        <div className="gradient-mesh opacity-70">
-          <span />
-        </div>
-      </motion.div>
+    <section className="relative min-h-svh flex flex-col overflow-hidden bg-background text-foreground">
+      <FluidInk />
 
-      <div className="relative z-10 container mx-auto px-4 md:px-12 max-w-screen-2xl flex-1 flex flex-col items-center justify-center text-center pb-8 md:pb-12">
-        <div className="max-w-6xl flex flex-col items-center">
-          <h1 className="font-display font-black text-[clamp(2.15rem,7.4vw,6.1rem)] leading-[0.85] tracking-[-0.04em] uppercase w-full flex flex-col items-center">
-            <span className="overflow-hidden block w-full pb-2">
+      {/* ── Mobile composition: eyebrow top, edge-to-edge type, grounded CTAs ── */}
+      <div className="relative z-10 flex-1 flex flex-col md:hidden container mx-auto px-4 pt-24 pb-8 pointer-events-none">
+        {/* Giant stacked type — fills the width, one word per breath */}
+        <h1 className="my-auto font-display font-black uppercase leading-[0.92] tracking-[-0.02em] text-[16.5vw] [font-stretch:118%]">
+          <span className="block overflow-hidden">
+            <motion.span
+              {...lineReveal}
+              transition={{ ...lineTransition, delay: 0.15 }}
+              className="block"
+            >
+              We
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden">
+            <motion.span
+              {...lineReveal}
+              transition={{ ...lineTransition, delay: 0.25 }}
+              className="block"
+            >
+              multiply
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden py-1">
+            <motion.span
+              {...lineReveal}
+              transition={{ ...lineTransition, delay: 0.35 }}
+              className="block"
+            >
+              <span className="headline-accent text-[1.06em]">ideas</span>{" "}
+              <span className="text-muted-foreground text-[0.55em] tracking-normal">
+                into
+              </span>
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden pb-1">
+            <motion.span
+              {...lineReveal}
+              transition={{ ...lineTransition, delay: 0.45 }}
+              className="block text-outline"
+            >
+              results
+            </motion.span>
+          </span>
+        </h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...lineTransition, delay: 0.6 }}
+          className="max-w-[19rem] text-[15px] text-muted-foreground leading-relaxed mb-6"
+        >
+          Strategy, design, and full-stack engineering for web, mobile,
+          commerce, and AI.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...lineTransition, delay: 0.75 }}
+          className="flex flex-col gap-3 pointer-events-auto"
+        >
+          <Button size="lg" className="w-full justify-center" asChild>
+            <a href="#contact">
+              Start a project
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className="w-full justify-center"
+            asChild
+          >
+            <a href="#portfolio">
+              See the work
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </Button>
+        </motion.div>
+      </div>
+
+      {/* ── Desktop composition: intro top-right, type bottom-left, CTAs on baseline.
+             Only CTAs catch the pointer so ink can be stirred through the type ── */}
+      <div className="relative z-10 flex-1 hidden md:flex flex-col container mx-auto px-8 max-w-screen-2xl pt-32 pb-10 pointer-events-none">
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...lineTransition, delay: 0.55 }}
+          className="self-end max-w-xs text-sm lg:text-base text-muted-foreground leading-relaxed text-right"
+        >
+          Strategy, design, and full-stack engineering for web, mobile,
+          commerce, and AI — every product built as a system, not a feature.
+        </motion.p>
+
+        <div className="mt-auto flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-12">
+          <h1 className="font-display font-black uppercase leading-[0.9] tracking-[-0.02em] text-[clamp(2.4rem,9vw,8.2rem)] [font-stretch:118%]">
+            <span className="block overflow-hidden pb-1">
               <motion.span
-                initial={{ y: "110%", rotate: 2 }}
-                animate={{ y: 0, rotate: 0 }}
-                transition={{ ...lineTransition, delay: 0.1 }}
-                className="block md:whitespace-nowrap origin-bottom-left"
+                {...lineReveal}
+                transition={{ ...lineTransition, delay: 0.15 }}
+                className="block"
               >
-                We Multiply Ideas
+                We multiply
               </motion.span>
             </span>
-            <span className="overflow-hidden block w-full pb-2">
+            <span className="block overflow-hidden pb-1">
               <motion.span
-                initial={{ y: "110%", rotate: 2 }}
-                animate={{ y: 0, rotate: 0 }}
-                transition={{ ...lineTransition, delay: 0.2 }}
-                className="block whitespace-nowrap origin-bottom-left text-muted-foreground"
+                {...lineReveal}
+                transition={{ ...lineTransition, delay: 0.27 }}
+                className="block"
               >
-                Into Maximum
+                <span className="headline-accent pr-[0.06em] text-[1.05em]">
+                  ideas
+                </span>{" "}
+                <span className="text-muted-foreground">into</span>
               </motion.span>
             </span>
-            <span className="overflow-hidden block w-full pb-2">
+            <span className="block overflow-hidden pb-2">
               <motion.span
-                initial={{ y: "110%", rotate: 2 }}
-                animate={{ y: 0, rotate: 0 }}
-                transition={{ ...lineTransition, delay: 0.3 }}
-                className="block text-gradient whitespace-nowrap origin-bottom-left"
+                {...lineReveal}
+                transition={{ ...lineTransition, delay: 0.39 }}
+                className="block"
               >
-                Results
+                results
               </motion.span>
             </span>
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 text-base md:text-2xl text-muted-foreground max-w-2xl leading-snug mx-auto font-light"
-          >
-            Transforming ideas into scalable digital systems designed for
-            absolute performance and real business impact.
-          </motion.p>
-
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="mt-8 flex flex-row flex-wrap items-center justify-center gap-3 md:gap-6 w-full"
+            transition={{ ...lineTransition, delay: 0.8 }}
+            className="flex flex-wrap items-center gap-4 shrink-0 lg:pb-3 pointer-events-auto"
           >
-            <Button
-              variant="glow"
-              className="w-auto shrink-0 px-5 py-5 md:px-10 md:py-6 text-sm md:text-lg rounded-full"
-              asChild
-            >
+            <Button size="lg" className="px-8" asChild>
               <a href="#contact">
-                Start a Project
-                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                Start a project
+                <ArrowRight className="w-4 h-4" />
               </a>
             </Button>
-            <Button
-              variant="outline"
-              className="w-auto shrink-0 px-5 py-5 md:px-10 md:py-6 text-sm md:text-lg border-primary text-white hover:bg-primary/10 hover:border-primary rounded-full"
-              asChild
-            >
-              <a href="#portfolio">View Work</a>
+            <Button variant="outline" size="lg" className="px-8" asChild>
+              <a href="#portfolio">
+                See the work
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
             </Button>
           </motion.div>
         </div>
-      </div>
-
-      <div className="relative z-20 w-full h-[30vh] sm:h-[35vh] md:h-[45vh] mt-auto flex justify-center perspective-1000">
-        <motion.div
-          style={isDesktop ? { y: mockupY } : {}}
-          initial={{ y: "20%", opacity: 0, rotateX: 10 }}
-          animate={{ y: "0%", opacity: 1, rotateX: 0 }}
-          transition={{ duration: 1.2, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-          // FIXED: Hard math width calculation prevents the absolute element from stretching edge-to-edge
-          className="absolute top-0 w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] max-w-5xl mx-auto left-0 right-0"
-        >
-          <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-t-[3rem] -z-10 opacity-60" />
-
-          <div className="relative w-full aspect-[14/10] sm:aspect-[16/10] md:aspect-[16/9] bg-[#050505] rounded-t-2xl md:rounded-t-[2.5rem] border-t border-x border-white/10 shadow-[0_-20px_80px_-20px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col ring-1 ring-white/5">
-            <div className="w-full h-10 md:h-12 bg-white/[0.03] border-b border-white/5 flex items-center px-4 md:px-6 relative backdrop-blur-md z-10">
-              <div className="flex gap-2">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-zinc-700" />
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-zinc-700" />
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-zinc-700" />
-              </div>
-              <div className="absolute left-1/2 -translate-x-1/2 flex items-center text-[10px] md:text-xs text-zinc-500 font-mono">
-                <Terminal className="w-3 h-3 mr-2" /> system-core.tsx
-              </div>
-            </div>
-
-            <div className="flex-1 px-4 md:px-8 pt-4 md:pt-8 pb-20 font-mono text-[9px] sm:text-[11px] md:text-[14px] leading-relaxed overflow-hidden relative bg-[linear-gradient(180deg,rgba(255,255,255,0.01)_0%,rgba(255,255,255,0)_100%)]">
-              <motion.div
-                animate={{ y: ["0%", "-50%"] }}
-                transition={{ ease: "linear", duration: 25, repeat: Infinity }}
-                className="flex flex-col gap-[3px]"
-              >
-                {[...codeLines, ...codeLines].map((line, idx) => (
-                  <div key={idx} className="flex whitespace-nowrap">
-                    <span className="text-zinc-700 w-6 md:w-10 select-none text-right pr-3 md:pr-4 shrink-0 font-medium">
-                      {(idx % codeLines.length) + 1}
-                    </span>
-                    <span
-                      className={`${
-                        line.type === "comment" ? "text-zinc-500 italic" : ""
-                      } ${
-                        line.type === "keyword"
-                          ? "text-primary font-semibold"
-                          : ""
-                      } ${line.type === "variable" ? "text-zinc-300" : ""} ${
-                        line.type === "function" ? "text-white" : ""
-                      }`}
-                    >
-                      {line.text}
-                    </span>
-                  </div>
-                ))}
-              </motion.div>
-
-              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent pointer-events-none" />
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

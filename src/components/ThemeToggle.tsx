@@ -9,7 +9,7 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={(e) => toggleTheme(e.clientX, e.clientY)}
       className="relative w-10 h-10 rounded-full bg-secondary/50 hover:bg-secondary border border-border/50 flex items-center justify-center transition-colors"
       aria-label="Toggle theme"
     >
