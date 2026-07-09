@@ -1,38 +1,57 @@
-# Mx Solution - AI Context File
+# Mx Solution — AI Context File
 
 ## Company Overview
 - Name: Mx Solution
+- Type: Digital systems studio (web, mobile, e-commerce, AI)
 - Founded: 2025
+- Founder & CEO: Mustafa Lanewala
+- Location: Dohad (Dahod), Gujarat, India — serving clients across India and worldwide
 - Tagline: Ideas. Multiplied. Results. Maximized.
-- Mission: Multiply ideas into scalable digital systems that deliver measurable performance, clarity, and long-term business value
-- Vision: Become a trusted multiplier for ambitious brands—engineering systems that compound impact, scale intelligently, and evolve with purpose
-
-## Core Philosophy
-Mx Solution believes technology should multiply impact through connected systems rather than isolated features. Focus on long-term scalability, performance optimization, and strategic execution.
-
-## Services Offered
-- Web Platforms (static, dynamic, 3D)
-- Mobile Applications
-- E-commerce Systems
-- AI-Powered Products
-- Digital Architecture
-- UI/UX Design
-
-## Key Differentiators
-- Systems thinking over feature development
-- Strategy-led execution
-- Clean architecture focus
-- Performance-first approach
-- Long-term scalability emphasis
-
-## Contact Information
+- Positioning: "We multiply ideas into results" — every product built as a system, not a feature
 - Website: https://www.mxsolution.in
+- Phone / WhatsApp: +91 91573 02004
+- Email: info@mxsolution.in
+
+## Services
+- Web Development — custom websites and platforms (Next.js, React), fast, responsive, SEO- and conversion-focused
+- E-commerce — complete storefronts with payments, inventory, order tracking, and analytics
+- Mobile Apps — native and cross-platform (iOS, Android), concept to app store
+- Custom Software — bespoke systems, dashboards, and automation around exact business workflows
+- CRM Systems — centralised customer data, automated sales pipelines
+- ERP Solutions — finance, inventory, HR, and operations unified in one platform
+- AI Agents — assistants, automated workflows, and AI integrations
+- UI/UX & Brand — visual identities, design systems, and interfaces
+
+## Selected Clients & Projects
+- Valor Jets — private aviation booking platform (https://valor-jets.vercel.app)
+- SK Attire Hub — fashion e-commerce store, India (https://skattirehub.in)
+- Mubarak Collection — e-commerce for premium Dawoodi Bohra topis, est. brand since 2011 (https://www.mubarakcollection.in)
+- Guidance Tamil Nadu — official investment portal for the Government of Tamil Nadu (https://investingintamilnadu.com)
+- Gujarat Food Products — manufacturer website for authentic Makai Poha (https://www.gujaratfoodproducts.in)
+- Aetherial Reality — construction company website with 3D visualization (https://aetherial-reality.vercel.app)
+- Tropic UK — tropical fashion and lifestyle brand website (https://tropic-uk.vercel.app)
+
+## Process
+1. Discovery — analyze the ecosystem, users, and market gaps
+2. Strategy — roadmap, milestones, technical architecture
+3. Design — high-fidelity prototypes balancing aesthetics and UX
+4. Development — clean, scalable, modular code on modern infrastructure
+5. Launch — deployment, monitoring, and ongoing evolution
+
+## Key Facts
+- Typical business website: 2–4 weeks; complex e-commerce/apps: 2–3 months
+- Free first consultation; fixed detailed quotes after discovery
+- Ongoing support: updates, security patches, performance monitoring
+- Client rating: 5.0 (27 reviews)
+- Languages: English, Hindi, Gujarati
+- Hours: Mon–Sat, 09:00–19:00 IST
+
+## Differentiators
+- Systems thinking over feature development
+- Strategy-led execution and clean architecture
+- Performance-first engineering, long-term scalability
+- Government, e-commerce, and manufacturing sector experience
+
+## Profiles
 - LinkedIn: https://www.linkedin.com/company/mxsolution53
 - Instagram: https://instagram.com/mxsolution.in
-
-## Brand Values
-- Long-term scalability
-- Performance optimization
-- Clean architecture
-- Strategy-led execution
-- Systems thinking

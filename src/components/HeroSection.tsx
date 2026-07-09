@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import type WebGLFluidEnhanced from "webgl-fluid-enhanced";
 
 /**
  * FluidInk — real-time WebGL fluid simulation behind the hero.
@@ -17,11 +18,7 @@ function FluidInk() {
     if (!container) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    let sim: {
-      stop: () => void;
-      start: () => void;
-      setConfig: (c: object) => void;
-    } | null = null;
+    let sim: WebGLFluidEnhanced | null = null;
     let disposed = false;
     let observer: MutationObserver | null = null;
     let io: IntersectionObserver | null = null;
@@ -149,10 +146,19 @@ export function HeroSection() {
     <section className="relative min-h-svh flex flex-col overflow-hidden bg-background text-foreground">
       <FluidInk />
 
+      {/* Single real heading — the responsive visual versions below are
+          presentational, so crawlers/readers see exactly one h1 */}
+      <h1 className="sr-only">
+        We multiply ideas into results — Mx Solution, digital systems studio
+      </h1>
+
       {/* ── Mobile composition: eyebrow top, edge-to-edge type, grounded CTAs ── */}
       <div className="relative z-10 flex-1 flex flex-col md:hidden container mx-auto px-4 pt-24 pb-8 pointer-events-none">
         {/* Giant stacked type — fills the width, one word per breath */}
-        <h1 className="my-auto font-display font-black uppercase leading-[0.92] tracking-[-0.02em] text-[16.5vw] [font-stretch:118%]">
+        <div
+          aria-hidden
+          className="my-auto font-display font-black uppercase leading-[0.92] tracking-[-0.02em] text-[16.5vw] [font-stretch:118%]"
+        >
           <span className="block overflow-hidden">
             <motion.span
               {...lineReveal}
@@ -192,7 +198,7 @@ export function HeroSection() {
               results
             </motion.span>
           </span>
-        </h1>
+        </div>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -244,7 +250,10 @@ export function HeroSection() {
         </motion.p>
 
         <div className="mt-auto flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-12">
-          <h1 className="font-display font-black uppercase leading-[0.9] tracking-[-0.02em] text-[clamp(2.4rem,9vw,8.2rem)] [font-stretch:118%]">
+          <div
+            aria-hidden
+            className="font-display font-black uppercase leading-[0.9] tracking-[-0.02em] text-[clamp(2.4rem,9vw,8.2rem)] [font-stretch:118%]"
+          >
             <span className="block overflow-hidden pb-1">
               <motion.span
                 {...lineReveal}
@@ -275,7 +284,7 @@ export function HeroSection() {
                 results
               </motion.span>
             </span>
-          </h1>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}

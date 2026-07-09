@@ -15,21 +15,13 @@ export const metadata: Metadata = {
     siteName: "Mx Solution",
     locale: "en_IN",
     type: "website",
-    images: [
-      {
-        url: "https://www.mxsolution.in/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Mx Solution Portfolio - Web Design & Development Projects",
-      },
-    ],
+    // og image inherited from app/opengraph-image.tsx
   },
   twitter: {
     card: "summary_large_image",
     title: "Our Projects & Portfolio | Mx Solution",
     description:
       "Real websites, e-commerce stores & mobile apps built by Mx Solution for clients across India.",
-    images: ["https://www.mxsolution.in/og-image.png"],
   },
 };
 

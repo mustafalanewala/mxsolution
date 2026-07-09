@@ -157,14 +157,7 @@ export const metadata: Metadata = {
     siteName: "Mx Solution",
     locale: "en_IN",
     type: "website",
-    images: [
-      {
-        url: "https://www.mxsolution.in/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Mx Solution - Technology That Multiplies Results",
-      },
-    ],
+    // og image comes from app/opengraph-image.tsx (file convention)
   },
   twitter: {
     card: "summary_large_image",
@@ -172,7 +165,6 @@ export const metadata: Metadata = {
     description:
       "We build high-performance websites, e-commerce stores & mobile apps for businesses across India. Get a free consultation — +91 91573 02004.",
     creator: "@mxsolution",
-    images: ["https://www.mxsolution.in/og-image.png"],
   },
   robots: {
     index: true,
@@ -199,7 +191,7 @@ const organizationSchema = {
     width: 192,
     height: 192,
   },
-  image: "https://www.mxsolution.in/og-image.png",
+  image: "https://www.mxsolution.in/opengraph-image",
   description:
     "Mx Solution transforms ideas into high-performance digital systems. We blend strategy, design, and full-stack engineering to build scalable web, mobile, e-commerce, and AI solutions that multiply impact, optimize growth, and deliver real business results.",
   slogan: "Ideas. Multiplied. Results. Maximized.",
@@ -303,7 +295,7 @@ const localBusinessSchema = {
   "@id": "https://www.mxsolution.in/#business",
   name: "Mx Solution",
   url: "https://www.mxsolution.in",
-  image: "https://www.mxsolution.in/og-image.png",
+  image: "https://www.mxsolution.in/opengraph-image",
   description:
     "Mx Solution transforms ideas into high-performance digital systems. We blend strategy, design, and full-stack engineering to build scalable web, mobile, e-commerce, and AI solutions that multiply impact, optimize growth, and deliver real business results.",
   address: {
@@ -383,48 +375,49 @@ const websiteSchema = {
   },
 };
 
+// Kept in sync with the on-page FAQ in src/components/FAQSection.tsx
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
     {
       "@type": "Question",
-      name: "What services does Mx Solution offer?",
+      name: "What services do you offer?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Mx Solution offers web development, e-commerce platforms, mobile app development, UI/UX design, branding, and AI integration services. Every project is custom-built to match your business needs.",
+        text: "Web development, e-commerce platforms, mobile apps, UI/UX design, branding, and AI integration. Every project is tailored to your business — nothing off the shelf.",
       },
     },
     {
       "@type": "Question",
-      name: "How much does a website cost in India?",
+      name: "How long does a typical project take?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Website pricing depends on scope and features. A professional business website starts from affordable rates. Contact us at +91 91573 02004 for a free custom quote tailored to your requirements.",
+        text: "A business website typically takes 2–4 weeks. Complex e-commerce platforms or apps run 2–3 months. You get a detailed timeline after the discovery call.",
       },
     },
     {
       "@type": "Question",
-      name: "How long does it take to build a website?",
+      name: "What is your pricing structure?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A typical business website takes 2–4 weeks. More complex e-commerce platforms or mobile apps may take 6–12 weeks. We provide a detailed timeline after the free discovery call.",
+        text: "Pricing follows scope. After the discovery phase you receive a detailed, fixed quote — no surprises mid-project. The first consultation is free.",
       },
     },
     {
       "@type": "Question",
-      name: "Do you provide website maintenance and support?",
+      name: "Do you provide ongoing support?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. We offer ongoing support and maintenance packages including regular updates, security patches, performance monitoring, and 24/7 technical assistance.",
+        text: "Yes — support and maintenance packages cover updates, security patches, performance monitoring, and technical assistance around the clock.",
       },
     },
     {
       "@type": "Question",
-      name: "Can Mx Solution build an e-commerce website?",
+      name: "Can you work with existing designs or systems?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Absolutely. We build fully custom e-commerce platforms with product management, payment integration, order tracking, and inventory systems tailored for Indian and international markets.",
+        text: "Absolutely. We work within existing brand guidelines and systems, and we also redesign and improve existing platforms without breaking what works.",
       },
     },
   ],
