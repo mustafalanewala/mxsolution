@@ -3,34 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeading, Accent } from "@/components/SectionHeading";
-
-const faqs = [
-  {
-    question: "What services do you offer?",
-    answer:
-      "Web development, e-commerce platforms, mobile apps, UI/UX design, branding, and AI integration. Every project is tailored to your business — nothing off the shelf.",
-  },
-  {
-    question: "How long does a typical project take?",
-    answer:
-      "A business website typically takes 2–4 weeks. Complex e-commerce platforms or apps run 2–3 months. You get a detailed timeline after the discovery call.",
-  },
-  {
-    question: "What is your pricing structure?",
-    answer:
-      "Pricing follows scope. After the discovery phase you receive a detailed, fixed quote — no surprises mid-project. The first consultation is free.",
-  },
-  {
-    question: "Do you provide ongoing support?",
-    answer:
-      "Yes — support and maintenance packages cover updates, security patches, performance monitoring, and technical assistance around the clock.",
-  },
-  {
-    question: "Can you work with existing designs or systems?",
-    answer:
-      "Absolutely. We work within existing brand guidelines and systems, and we also redesign and improve existing platforms without breaking what works.",
-  },
-];
+import { faqs } from "@/lib/content";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -52,7 +25,7 @@ export function FAQSection() {
                 </>,
               ]}
             />
-            <p className="mt-6 text-muted-foreground leading-relaxed max-w-xs">
+            <p className="mt-6 text-body text-muted-foreground max-w-xs">
               Can&apos;t find what you&apos;re looking for?{" "}
               <a
                 href="#contact"
@@ -76,11 +49,11 @@ export function FAQSection() {
                     className="group w-full flex items-center justify-between gap-6 py-6 md:py-7 text-left cursor-pointer"
                   >
                     <span className="flex items-baseline gap-5 md:gap-8 min-w-0">
-                      <span className="font-mono text-[11px] tracking-[0.25em] text-muted-foreground/60 shrink-0">
+                      <span className="font-mono text-label text-muted-foreground/60 shrink-0">
                         0{index + 1}
                       </span>
                       <span
-                        className={`font-display font-bold uppercase tracking-tight text-lg md:text-2xl [font-stretch:118%] transition-colors duration-300 ${
+                        className={`font-display font-bold uppercase text-display-sm [font-stretch:118%] transition-colors duration-300 ${
                           isOpen
                             ? "text-foreground"
                             : "text-foreground/70 group-hover:text-foreground"
@@ -106,7 +79,7 @@ export function FAQSection() {
                         transition={{ duration: 0.4, ease }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-7 pl-9 md:pl-14 max-w-2xl text-muted-foreground leading-relaxed">
+                        <p className="pb-7 pl-9 md:pl-14 max-w-[65ch] text-body text-muted-foreground">
                           {faq.answer}
                         </p>
                       </motion.div>

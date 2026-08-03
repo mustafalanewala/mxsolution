@@ -3,20 +3,29 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type WebGLFluidEnhanced from "webgl-fluid-enhanced";
 
 /**
  * FluidInk — real-time WebGL fluid simulation behind the hero.
  * White ink on black in dark mode; blue ink on paper in light mode.
+ * Pointer devices only; touch gets <HeroBackdrop>.
  */
 function FluidInk() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [supported, setSupported] = useState(false);
 
   useEffect(() => {
+    setSupported(
+      window.matchMedia("(pointer: fine) and (hover: hover)").matches &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!supported) return;
     const container = containerRef.current;
     if (!container) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let sim: WebGLFluidEnhanced | null = null;
     let disposed = false;
@@ -117,7 +126,9 @@ function FluidInk() {
       sim?.stop();
       if (container) container.innerHTML = "";
     };
-  }, []);
+  }, [supported]);
+
+  if (!supported) return null;
 
   return (
     // h-svh keeps the canvas size stable on mobile scroll; the library
@@ -134,6 +145,16 @@ function FluidInk() {
   );
 }
 
+// Static wash under the hero — painted once, never animated.
+function HeroBackdrop() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-x-0 top-0 h-svh z-0 [background:radial-gradient(65%_45%_at_50%_12%,hsl(var(--primary)/0.16),transparent_72%),radial-gradient(50%_40%_at_88%_82%,hsl(var(--foreground)/0.07),transparent_72%)]"
+    />
+  );
+}
+
 const lineReveal = {
   initial: { y: "115%" },
   animate: { y: 0 },
@@ -144,6 +165,7 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-svh flex flex-col overflow-hidden bg-background text-foreground">
+      <HeroBackdrop />
       <FluidInk />
 
       {/* Single real heading — the responsive visual versions below are
@@ -157,7 +179,7 @@ export function HeroSection() {
         {/* Giant stacked type — fills the width, one word per breath */}
         <div
           aria-hidden
-          className="my-auto font-display font-black uppercase leading-[0.92] tracking-[-0.02em] text-[16.5vw] [font-stretch:118%]"
+          className="my-auto font-display font-black uppercase text-hero-stack [font-stretch:118%]"
         >
           <span className="block overflow-hidden">
             <motion.span
@@ -204,7 +226,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...lineTransition, delay: 0.6 }}
-          className="max-w-[19rem] text-[15px] text-muted-foreground leading-relaxed mb-6"
+          className="max-w-[22rem] text-body text-muted-foreground mb-6"
         >
           Strategy, design, and full-stack engineering for web, mobile,
           commerce, and AI.
@@ -243,7 +265,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...lineTransition, delay: 0.55 }}
-          className="self-end max-w-xs text-sm lg:text-base text-muted-foreground leading-relaxed text-right"
+          className="self-end max-w-sm text-body text-muted-foreground text-right"
         >
           Strategy, design, and full-stack engineering for web, mobile,
           commerce, and AI — every product built as a system, not a feature.
@@ -252,7 +274,7 @@ export function HeroSection() {
         <div className="mt-auto flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-12">
           <div
             aria-hidden
-            className="font-display font-black uppercase leading-[0.9] tracking-[-0.02em] text-[clamp(2.4rem,9vw,8.2rem)] [font-stretch:118%]"
+            className="font-display font-black uppercase text-hero [font-stretch:118%]"
           >
             <span className="block overflow-hidden pb-1">
               <motion.span

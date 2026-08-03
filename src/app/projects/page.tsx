@@ -79,13 +79,13 @@ export default function Projects() {
           <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
             <Link
               href="/#portfolio"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm font-mono uppercase tracking-wider"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-12 text-label font-mono uppercase"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
             </Link>
 
-            <h1 className="font-display font-black text-[clamp(2.6rem,12vw,4.75rem)] md:text-8xl lg:text-[9vw] leading-[0.92] tracking-tight uppercase [font-stretch:118%]">
+            <h1 className="font-display font-black text-hero uppercase [font-stretch:118%]">
               <motion.span
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -114,7 +114,7 @@ export default function Projects() {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="lg:col-start-7 lg:col-span-6"
               >
-                <p className="text-xl md:text-2xl font-light leading-snug text-muted-foreground">
+                <p className="text-lead text-muted-foreground">
                   A collection of digital systems we've crafted across web, commerce, and brand.{" "}
                   <span className="text-foreground font-medium">
                     Each one built as a foundation, not a feature.
@@ -203,13 +203,13 @@ function ProjectRow({
             style={{ y: isMobile ? mobileTextY : textY }}
             className="lg:col-span-5 flex flex-col gap-6 relative z-10 will-change-transform"
           >
-            <span className="text-xs md:text-sm font-mono uppercase tracking-widest text-muted-foreground">
+            <span className="text-label font-mono uppercase text-muted-foreground">
               {project.category}
             </span>
-            <h3 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-[4.5vw] leading-[0.95] tracking-tight uppercase [font-stretch:118%]">
+            <h3 className="font-display font-black text-display-lg uppercase [font-stretch:118%]">
               {project.title}
             </h3>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-md">
+            <p className="text-body text-muted-foreground max-w-md">
               {project.description}
             </p>
             <Button variant="outline" className="w-fit" asChild>

@@ -4,11 +4,70 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui,
-    sans-serif;
+  /* Three families. font-sans and font-serif both resolve to Newsreader —
+     it carries body copy and the italic accent. */
+  --font-sans: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
   --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument-serif), Georgia, serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* ── Type scale ────────────────────────────────────────────────────
+     Every size on the site is one of these. Each is fluid, so a single
+     class is correct at every width — never pair one with a md: variant.
+
+     Display (Archivo)  hero · display-lg · display-md · display-sm · display-xs
+     Text (Newsreader)  lead · body · body-sm · caption
+     Label (Mono)       label · label-lg                                    */
+
+  --text-hero: clamp(2.5rem, 9vw, 8.25rem);
+  --text-hero--line-height: 0.9;
+  --text-hero--letter-spacing: -0.02em;
+
+  /* Hero on phones only: one word per line, so it is set wider on purpose */
+  --text-hero-stack: clamp(3rem, 16.5vw, 7rem);
+  --text-hero-stack--line-height: 0.92;
+  --text-hero-stack--letter-spacing: -0.02em;
+
+  /* Oversized section heading — set to fill the measure on one line */
+  --text-display-xl: 10.8vw;
+  --text-display-xl--line-height: 0.95;
+  --text-display-xl--letter-spacing: -0.03em;
+
+  --text-display-lg: clamp(2.25rem, 6vw, 4.5rem);
+  --text-display-lg--line-height: 0.95;
+  --text-display-lg--letter-spacing: -0.02em;
+
+  --text-display-md: clamp(1.75rem, 3.4vw, 2.5rem);
+  --text-display-md--line-height: 1;
+  --text-display-md--letter-spacing: -0.015em;
+
+  --text-display-sm: clamp(1.35rem, 2.2vw, 1.75rem);
+  --text-display-sm--line-height: 1.05;
+  --text-display-sm--letter-spacing: -0.01em;
+
+  --text-display-xs: clamp(1.05rem, 1.4vw, 1.25rem);
+  --text-display-xs--line-height: 1.1;
+  --text-display-xs--letter-spacing: -0.005em;
+
+  --text-lead: clamp(1.125rem, 1.5vw, 1.375rem);
+  --text-lead--line-height: 1.5;
+
+  --text-body: clamp(1rem, 1.2vw, 1.0625rem);
+  --text-body--line-height: 1.6;
+
+  --text-body-sm: 0.9375rem;
+  --text-body-sm--line-height: 1.55;
+
+  --text-caption: clamp(0.75rem, 0.9vw, 0.8125rem);
+  --text-caption--line-height: 1.45;
+
+  --text-label: clamp(0.6875rem, 0.8vw, 0.75rem);
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.22em;
+
+  --text-label-lg: clamp(0.75rem, 0.9vw, 0.875rem);
+  --text-label-lg--line-height: 1.4;
+  --text-label-lg--letter-spacing: 0.2em;
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -114,12 +173,21 @@
 
   html {
     scroll-behavior: auto;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     background: hsl(var(--background));
     color: hsl(var(--foreground));
     font-family: var(--font-sans);
+    font-weight: 400;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Serif hairlines halate on pure black — half a weight step fixes it
+     without reading as heavy. */
+  .dark body {
+    font-weight: 450;
   }
 
   input:-webkit-autofill,
@@ -157,10 +225,8 @@
 
   /* Shared eyebrow label: ( services ) */
   .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
+    @apply font-mono text-label uppercase;
+    font-weight: 500;
     color: hsl(var(--primary));
   }
 
@@ -221,6 +287,16 @@
   }
 }
 
+/* Carousel indicator fill, timed to the autoplay interval */
+@keyframes dot-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @keyframes marquee-reverse {
   0% {
     transform: translateX(-50%);
@@ -238,7 +314,16 @@
   }
 }
 
-/* Film grain — static paper texture (no per-frame compositing) */
+/* Outlined type needs more room than filled type — the stroke is drawn
+   outside the glyph, so tight display tracking makes letters collide.
+   Unlayered on purpose: it has to beat the text-* size utilities, which
+   set their own letter-spacing and live in a later cascade layer. */
+.text-outline {
+  letter-spacing: 0.04em;
+  word-spacing: 0.08em;
+}
+
+/* Film grain — static paper texture, own compositor layer */
 .noise-overlay {
   position: fixed;
   inset: 0;
@@ -246,6 +331,15 @@
   z-index: 9999;
   opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout paint style;
+}
+
+@media (max-width: 767px) {
+  .noise-overlay {
+    display: none;
+  }
 }
 
 /* Theme toggle — clean expanding-circle reveal (View Transitions API).

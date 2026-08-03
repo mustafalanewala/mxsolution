@@ -46,15 +46,15 @@ function TestimonialCard({
     // Spacing lives on the card (not flex gap) so each half of the doubled
     // track is exactly 50% wide — otherwise the loop visibly jumps.
     <article className="mr-4 md:mr-6 w-[78vw] max-w-[22rem] sm:max-w-none sm:w-96 md:w-112 shrink-0 border border-border bg-card p-5 sm:p-6 md:p-8 flex flex-col justify-between gap-5 md:gap-6 transition-colors duration-500 hover:bg-foreground hover:text-background group/card">
-      <p className="font-serif italic text-base sm:text-lg md:text-2xl leading-snug">
+      <p className="font-serif italic text-lead">
         &ldquo;{testimonial.quote}&rdquo;
       </p>
       <div className="flex items-center justify-between gap-4">
         <div>
-          <div className="font-display font-bold uppercase tracking-tight text-sm [font-stretch:118%]">
+          <div className="font-display font-bold uppercase text-display-xs [font-stretch:118%]">
             {testimonial.name}
           </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground group-hover/card:text-background/60 transition-colors duration-500 mt-1">
+          <div className="font-mono text-label uppercase text-muted-foreground group-hover/card:text-background/60 transition-colors duration-500 mt-1">
             {testimonial.role}
           </div>
         </div>

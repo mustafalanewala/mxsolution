@@ -27,7 +27,7 @@ function Track({ reverse = false }: { reverse?: boolean }) {
         {sequence.map((item, i) => (
           <span key={i} className="flex items-center">
             <span
-              className={`px-5 md:px-8 font-display font-black uppercase tracking-tight text-[clamp(1.9rem,4.4vw,4rem)] [font-stretch:118%] ${
+              className={`px-5 md:px-8 font-display font-black uppercase tracking-tight text-display-lg [font-stretch:118%] ${
                 i % 2 === 0 ? "text-foreground" : "text-outline"
               }`}
             >

@@ -19,7 +19,7 @@ export function SectionHeading({
   lines,
   className = "",
   align = "left",
-  size = "text-[clamp(2.4rem,6vw,4.9rem)]",
+  size = "text-display-lg",
 }: {
   eyebrow: string;
   /** Each entry is one headline line; wrap accent words in <Accent> */
@@ -46,7 +46,7 @@ export function SectionHeading({
         {eyebrow}
       </motion.p>
       <h2
-        className={`font-display font-black uppercase tracking-tight leading-[0.95] [font-stretch:118%] ${size}`}
+        className={`font-display font-black uppercase [font-stretch:118%] ${size}`}
       >
         {lines.map((line, i) => (
           <span key={i} className="block overflow-hidden pb-[0.12em]">

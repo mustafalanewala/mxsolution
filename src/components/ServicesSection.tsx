@@ -1,207 +1,211 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
+import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
+import { SectionHeading, Accent } from "@/components/SectionHeading";
+import { services } from "@/lib/content";
 
-const services = [
-  {
-    title: "Web Development",
-    description:
-      "Custom websites and platforms built on modern frameworks — fast, responsive, and engineered to turn visitors into customers.",
-    image: "/services/webdevelopment.png",
-    tags: ["Next.js", "Platforms", "SEO"],
-  },
-  {
-    title: "E-commerce",
-    description:
-      "Storefronts that sell — complete with payments, inventory, order tracking, and the analytics to keep revenue growing.",
-    image: "/services/ecommerce.png",
-    tags: ["Payments", "Inventory"],
-  },
-  {
-    title: "Mobile Apps",
-    description:
-      "Native and cross-platform apps users love and businesses rely on — from first concept to app store launch.",
-    image: "/services/appdevelopment.png",
-    tags: ["iOS", "Android"],
-  },
-  {
-    title: "Custom Software",
-    description:
-      "Bespoke systems shaped around your exact workflow — dashboards, automation, and tools with no off-the-shelf compromises.",
-    image: "/services/customsoftware.png",
-    tags: ["Dashboards", "Automation"],
-  },
-  {
-    title: "CRM Systems",
-    description:
-      "Centralise customer data, automate your sales pipelines, and give your team the clarity to grow revenue faster.",
-    image: "/services/crmsystems.png",
-    tags: ["Pipelines", "Sales"],
-  },
-  {
-    title: "ERP Solutions",
-    description:
-      "Unify finance, inventory, HR, and operations in one platform — one source of truth for the whole business.",
-    image: "/services/erpsolutions.png",
-    tags: ["Operations", "Finance"],
-  },
-  {
-    title: "AI Agents",
-    description:
-      "Smart assistants, automated workflows, and integrations woven into your product to scale operations without scaling headcount.",
-    image: "/services/aiautomation.png",
-    tags: ["Automation", "Assistants"],
-  },
-  {
-    title: "UI/UX & Brand",
-    description:
-      "Visual identities, design systems, and interfaces that people remember, trust, and genuinely enjoy using.",
-    image: "/services/design-branding.png",
-    tags: ["Identity", "Interfaces"],
-  },
-];
+const swing = "cubic-bezier(0.16,1,0.3,1)";
+const AUTOPLAY_MS = 5000;
 
 export function ServicesSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [maxShift, setMaxShift] = useState(0);
-  const [current, setCurrent] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    loop: true,
+    watchDrag: false,
+  });
 
-  // How far the track must travel horizontally
+  const [selected, setSelected] = useState(0);
+  const [offscreen, setOffscreen] = useState(false);
+  const [hovering, setHovering] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const paused = offscreen || hovering;
+
+  const onSelect = useCallback(() => {
+    if (emblaApi) setSelected(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
   useEffect(() => {
-    const measure = () => {
-      const track = trackRef.current;
-      if (!track) return;
-      setMaxShift(
-        Math.max(0, track.scrollWidth - document.documentElement.clientWidth),
-      );
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
     };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+  }, [emblaApi, onSelect]);
+
+  // Hold the carousel while it is off screen or under the pointer
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const io = new IntersectionObserver(
+      (entries) => setOffscreen(!entries[entries.length - 1].isIntersecting),
+      { threshold: 0 },
+    );
+    io.observe(section);
+    return () => io.disconnect();
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], [0, -maxShift]);
-  const barScale = scrollYProgress;
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const idx = Math.min(
-      services.length - 1,
-      Math.round(v * (services.length - 1)),
-    );
-    setCurrent(idx);
-  });
+  useEffect(() => {
+    if (!emblaApi || paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => emblaApi.scrollNext(), AUTOPLAY_MS);
+    return () => window.clearInterval(id);
+  }, [emblaApi, paused]);
 
   return (
-    <section id="services" className="bg-background text-foreground border-y border-border">
-      {/* Scroll room: exactly the horizontal distance + one pinned viewport */}
-      <div ref={sectionRef} style={{ height: `calc(100svh + ${maxShift}px)` }}>
-        <div className="sticky top-0 h-svh flex flex-col overflow-hidden">
-          {/* Header */}
-          <div className="shrink-0 container mx-auto px-4 md:px-8 max-w-screen-2xl w-full pt-24 md:pt-28 pb-4 md:pb-10 flex items-end justify-between gap-8">
-            <div>
-              <p className="eyebrow mb-4 md:mb-5">What we build</p>
-              <h2 className="font-display font-black uppercase tracking-tight leading-[0.95] text-[clamp(2.2rem,5vw,4.2rem)] [font-stretch:118%]">
-                Systems, not just{" "}
-                <span className="headline-accent text-[1.05em]">features</span>
-              </h2>
-            </div>
-            <div className="hidden md:flex flex-col items-end gap-3 shrink-0 pb-1">
-              <span className="font-mono text-sm tracking-[0.2em] tabular-nums">
-                <span className="text-foreground">
-                  0{current + 1}
-                </span>
-                <span className="text-muted-foreground/40 mx-1.5">/</span>
-                <span className="text-muted-foreground/60">
-                  0{services.length}
-                </span>
+    <section
+      ref={sectionRef}
+      id="services"
+      className="section bg-background text-foreground border-y border-border overflow-hidden"
+    >
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
+        <div className="mb-8 md:mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-5 md:gap-8">
+          <SectionHeading
+            eyebrow="What we build"
+            lines={[
+              <>Systems, not</>,
+              <>
+                just <Accent>features</Accent>
+              </>,
+            ]}
+          />
+
+          <div className="flex items-center gap-5 shrink-0 md:pb-2">
+            <span className="font-mono text-label-lg tabular-nums">
+              <span className="text-foreground">
+                {String(selected + 1).padStart(2, "0")}
               </span>
-              <div className="w-40 h-px bg-border relative overflow-hidden">
-                <motion.div
-                  style={{ scaleX: barScale }}
-                  className="absolute inset-0 bg-foreground origin-left"
-                />
-              </div>
+              <span className="text-muted-foreground/40 mx-1.5">/</span>
+              <span className="text-muted-foreground/60">
+                {String(services.length).padStart(2, "0")}
+              </span>
+            </span>
+
+            <div className="hidden md:flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => emblaApi?.scrollPrev()}
+                aria-label="Previous service"
+                className="w-11 h-11 border border-border flex items-center justify-center transition-colors duration-300 hover:bg-foreground hover:text-background"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => emblaApi?.scrollNext()}
+                aria-label="Next service"
+                className="w-11 h-11 border border-border flex items-center justify-center transition-colors duration-300 hover:bg-foreground hover:text-background"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Horizontal track driven by vertical scroll */}
-          <div className="flex-1 flex items-center min-h-0 pb-3 md:pb-14">
-            <motion.div
-              ref={trackRef}
-              style={{ x }}
-              className="flex gap-5 md:gap-7 pl-4 md:pl-8 pr-8 will-change-transform w-max items-stretch"
-            >
-              {services.map((service, i) => (
-                <div
-                  key={service.title}
-                  className="group relative shrink-0 flex flex-col w-[84vw] sm:w-[52vw] md:w-[38vw] lg:w-[28vw] xl:w-[23vw] max-w-md border border-border bg-card overflow-hidden"
-                  style={{ height: "clamp(390px, 58svh, 580px)" }}
-                >
-                  {/* Image */}
-                  <div
-                    className="relative shrink-0 overflow-hidden border-b border-border"
-                    style={{ height: "55%" }}
-                  >
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      sizes="(max-width: 768px) 80vw, (max-width: 1280px) 38vw, 23vw"
-                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                    />
-                    <span className="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-[0.25em] text-white bg-black/40 backdrop-blur-sm px-2.5 py-1">
-                      0{i + 1}
-                    </span>
-                  </div>
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
+        <div
+          ref={emblaRef}
+          className="overflow-hidden"
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+        >
+          <div className="flex items-stretch -ml-4 md:-ml-6">
+            {services.map((service) => (
+              <article
+                key={service.title}
+                className="relative min-w-0 shrink-0 grow-0 basis-full md:basis-1/2 lg:basis-1/3 pl-4 md:pl-6"
+              >
+                <div className="group relative h-full">
+                  <div className="relative h-full flex flex-col bg-card border border-border transition-colors duration-500 lg:group-hover:border-foreground/30 overflow-hidden">
+                    {/* Plate */}
+                    <div className="relative aspect-[4/3] shrink-0 overflow-hidden border-b border-border bg-secondary">
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        sizes="(max-width: 768px) 92vw, (max-width: 1024px) 46vw, 31vw"
+                        loading="lazy"
+                        className="object-cover scale-105 transition-transform duration-700 lg:group-hover:scale-100"
+                        style={{ transitionTimingFunction: swing }}
+                      />
+                    </div>
 
-                  {/* Text */}
-                  <div className="flex flex-col flex-1 p-5 md:p-6 min-h-0">
-                    <div className="flex items-start justify-between gap-3 mb-3">
-                      <h3 className="font-display font-black uppercase tracking-tight leading-[0.95] text-[clamp(1.35rem,1.9vw,1.8rem)] [font-stretch:118%]">
+                    {/* Body */}
+                    <div className="flex flex-col flex-1 p-5 md:p-6">
+                      <h3 className="font-display font-black uppercase text-display-sm [font-stretch:118%]">
                         {service.title}
                       </h3>
-                      <span className="text-lg font-light text-muted-foreground/40 group-hover:rotate-90 transition-transform duration-500">
-                        ×
-                      </span>
-                    </div>
-                    <p className="text-[15px] leading-relaxed text-muted-foreground">
-                      {service.description}
-                    </p>
-                    <div className="mt-auto pt-4 flex flex-wrap gap-2">
-                      {service.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="font-mono text-[9px] uppercase tracking-[0.15em] px-2.5 py-1 rounded-full border border-border text-muted-foreground"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+
+                      <p className="mt-3 text-body-sm text-muted-foreground">
+                        {service.description}
+                      </p>
+
+                      <div className="mt-auto pt-6">
+                        <div className="relative h-px w-full bg-border mb-3.5 overflow-hidden">
+                          <span
+                            aria-hidden
+                            className="absolute inset-0 bg-primary origin-left scale-x-0 transition-transform duration-700 lg:group-hover:scale-x-100"
+                            style={{ transitionTimingFunction: swing }}
+                          />
+                        </div>
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="font-mono text-label uppercase text-muted-foreground">
+                            {service.specs.join(" · ")}
+                          </span>
+                          <ArrowUpRight
+                            className="w-4 h-4 shrink-0 text-primary transition-transform duration-500 lg:group-hover:rotate-45"
+                            style={{ transitionTimingFunction: swing }}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </motion.div>
+              </article>
+            ))}
           </div>
+        </div>
+      </div>
 
-          {/* Mobile counter */}
-          <div className="shrink-0 container mx-auto px-4 md:px-8 max-w-screen-2xl w-full pb-4 flex justify-end items-center md:hidden">
-            <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground/50 tabular-nums">
-              0{current + 1} / 0{services.length}
-            </span>
-          </div>
+      {/* Indicators — the active bar fills over the autoplay interval */}
+      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
+        <div className="mt-9 md:mt-12 flex items-center justify-center gap-2">
+          {services.map((service, i) => {
+            const active = selected === i;
+            return (
+              <button
+                key={service.title}
+                type="button"
+                onClick={() => emblaApi?.scrollTo(i)}
+                aria-label={`Show ${service.title}`}
+                aria-current={active}
+                className="group/dot py-3 outline-none"
+              >
+                <span
+                  className={`relative block h-0.5 overflow-hidden bg-border transition-[width] duration-500 ${
+                    active ? "w-10 md:w-14" : "w-5 md:w-7"
+                  }`}
+                  style={{ transitionTimingFunction: swing }}
+                >
+                  {active ? (
+                    <span
+                      key={selected}
+                      className="absolute inset-0 bg-foreground origin-left animate-[dot-fill_5s_linear_forwards]"
+                      style={{ animationPlayState: paused ? "paused" : "running" }}
+                    />
+                  ) : (
+                    <span className="absolute inset-0 bg-foreground origin-left scale-x-0 transition-transform duration-300 group-hover/dot:scale-x-100" />
+                  )}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>

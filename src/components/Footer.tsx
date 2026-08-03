@@ -54,8 +54,13 @@ function useClock() {
   return time;
 }
 
-export function Footer() {
+// Isolated so the 1s tick re-renders one span, not the whole footer
+function Clock() {
   const time = useClock();
+  return <span className="tabular-nums">{time || "--:--:--"} IST</span>;
+}
+
+export function Footer() {
   const year = new Date().getFullYear();
 
   return (
@@ -63,7 +68,7 @@ export function Footer() {
       {/* Top Meta Strip */}
       <div className="border-b border-border">
         <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
-          <div className="flex flex-wrap items-center justify-between gap-4 py-3 text-[10px] font-mono tracking-[0.3em] uppercase text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-between gap-4 py-3 text-label font-mono uppercase text-muted-foreground">
             <div className="flex items-center gap-2">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 animate-ping" />
@@ -73,7 +78,7 @@ export function Footer() {
             </div>
             <div className="flex items-center gap-6">
               <span>Dohad · IND</span>
-              <span className="tabular-nums">{time || "--:--:--"} IST</span>
+              <Clock />
             </div>
           </div>
         </div>
@@ -85,11 +90,11 @@ export function Footer() {
           {/* Brand */}
           <AnimatedSection className="col-span-2 md:col-span-6">
             <div className="mb-6">
-              <span className="font-sans font-semibold text-[17px] tracking-[-0.01em] text-foreground">
-                M<span className="text-primary">x</span> Solution
+              <span className="font-display font-bold text-body tracking-[-0.01em] text-foreground">
+                M<span className="text-primary text-[0.78em]">x</span> Solution
               </span>
             </div>
-            <p className="text-muted-foreground max-w-sm leading-relaxed text-sm md:text-base mb-8">
+            <p className="text-body text-muted-foreground max-w-sm mb-8">
               Technology that multiplies impact. We help brands transform ideas
               into scalable digital systems designed for maximum performance.
             </p>
@@ -105,7 +110,7 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="group relative text-body-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <span className="relative">
                       {social.label}
@@ -119,7 +124,7 @@ export function Footer() {
 
           {/* Sitemap */}
           <AnimatedSection delay={0.1} className="col-span-1 md:col-span-3">
-            <h4 className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary mb-6">
+            <h4 className="font-mono text-label uppercase text-primary mb-6">
               Sitemap
             </h4>
             <ul className="space-y-3">
@@ -127,7 +132,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="group inline-block text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="group inline-block text-body-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <span className="relative">
                       {link.label}
@@ -141,7 +146,7 @@ export function Footer() {
 
           {/* Services */}
           <AnimatedSection delay={0.2} className="col-span-1 md:col-span-3">
-            <h4 className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary mb-6">
+            <h4 className="font-mono text-label uppercase text-primary mb-6">
               Services
             </h4>
             <ul className="space-y-3">
@@ -149,7 +154,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="group inline-block text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="group inline-block text-body-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <span className="relative">
                       {link.label}
@@ -165,7 +170,7 @@ export function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-border">
-        <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl py-4 flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground text-center">
+        <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl py-4 flex items-center justify-center font-mono text-label uppercase text-muted-foreground text-center">
           <p>© {year} Mx Solution — All rights reserved</p>
         </div>
       </div>

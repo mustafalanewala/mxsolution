@@ -28,7 +28,7 @@ export function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -46,15 +46,15 @@ export function Navbar() {
 
   return (
     <>
-      {/* Pill Navbar */}
+      {/* Pill Navbar — blur is desktop-only, it costs mobile frames */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed z-[70] left-0 right-0 mx-auto transition-all duration-500 w-[92%] md:max-w-3xl rounded-full ${
+        className={`fixed z-[70] left-0 right-0 mx-auto transition-all duration-500 w-[92%] md:max-w-3xl rounded-full md:backdrop-blur-md ${
           isScrolled
-            ? "top-4 bg-background/90 backdrop-blur-md border border-border/60 py-2 shadow-[var(--shadow-soft)]"
-            : "top-6 bg-background/70 backdrop-blur-md border border-border/30 py-3"
+            ? "top-4 bg-background/95 md:bg-background/90 border border-border/60 py-2 shadow-[var(--shadow-soft)]"
+            : "top-6 bg-background/90 md:bg-background/70 border border-border/30 py-3"
         }`}
       >
         <div className="flex items-center justify-between px-5">
@@ -62,9 +62,9 @@ export function Navbar() {
           <Link
             href="/"
             onClick={handleLogoClick}
-            className="shrink-0 font-sans font-semibold text-[17px] tracking-[-0.01em] text-foreground"
+            className="shrink-0 whitespace-nowrap font-display font-bold text-body tracking-[-0.01em] text-foreground"
           >
-            M<span className="text-primary">x</span> Solution
+            M<span className="text-primary text-[0.78em]">x</span> Solution
           </Link>
 
           {/* Desktop Navigation — mono label language */}
@@ -73,10 +73,10 @@ export function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="group relative px-3 py-2 font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors duration-300 whitespace-nowrap"
+                className="group relative px-2.5 py-2 font-mono text-label tracking-[0.08em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 whitespace-nowrap"
               >
                 {link.label}
-                <span className="absolute left-3 right-3 -bottom-0.5 h-px bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                <span className="absolute left-2.5 right-2.5 -bottom-0.5 h-px bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]" />
               </Link>
             ))}
           </div>
@@ -118,9 +118,6 @@ export function Navbar() {
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-60 bg-background md:hidden flex flex-col"
           >
-            {/* Noise texture matching home page */}
-            <div className="noise-overlay" />
-
             {/* Subtle gradient accent */}
             <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-foreground/5 via-transparent to-transparent" />
 
@@ -143,10 +140,10 @@ export function Navbar() {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="group flex items-baseline gap-4 py-4 border-b border-border/60 last:border-0"
                   >
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-primary w-6 shrink-0">
+                    <span className="font-mono text-label text-primary w-6 shrink-0">
                       0{i + 1}
                     </span>
-                    <span className="font-display font-black uppercase tracking-tight text-[2.4rem] leading-none [font-stretch:118%] text-foreground group-hover:text-muted-foreground transition-colors duration-300">
+                    <span className="font-display font-black uppercase text-display-md [font-stretch:118%] text-foreground group-hover:text-muted-foreground transition-colors duration-300">
                       {link.label}
                     </span>
                     <span className="ml-auto text-lg font-light text-muted-foreground/40 rotate-45 group-hover:rotate-0 group-hover:text-primary transition-all duration-300">
@@ -181,7 +178,7 @@ export function Navbar() {
                   Let's Talk
                 </Link>
               </Button>
-              <span className="text-xs text-muted-foreground font-mono">
+              <span className="text-label text-muted-foreground font-mono">
                 © {new Date().getFullYear()} Mx Solution
               </span>
             </motion.div>

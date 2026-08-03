@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Archivo,
-  Instrument_Sans,
-  Instrument_Serif,
-  JetBrains_Mono,
-} from "next/font/google";
+import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -12,28 +7,30 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Analytics } from "@vercel/analytics/next";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { faqs, services } from "@/lib/content";
 
+// Derived from the same arrays the page renders, so the two cannot drift.
+const serviceNames = services.map((service) => service.title);
+
+// Three roles, three families: display, text, label.
 const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
   axes: ["wdth"],
+  display: "swap",
 });
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument-sans",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
   style: ["normal", "italic"],
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -44,8 +41,8 @@ export const metadata: Metadata = {
     "content-language": "en-IN",
     "geo.region": "IN-GJ",
     "geo.placename": "Dohad, Gujarat, India",
-    "geo.position": "22.3094;72.1362",
-    ICBM: "22.3094, 72.1362",
+    "geo.position": "22.8347;74.2556",
+    ICBM: "22.8347, 74.2556",
     "al:web:url": "https://www.mxsolution.in",
     "apple-mobile-web-app-title": "Mx Solution",
     "application-name": "Mx Solution",
@@ -235,57 +232,19 @@ const softwareSchema = {
   email: "info@mxsolution.in",
   description:
     "Mx Solution transforms ideas into high-performance digital systems. We blend strategy, design, and full-stack engineering to build scalable web, mobile, e-commerce, and AI solutions that multiply impact, optimize growth, and deliver real business results.",
-  serviceType: [
-    "Web Development",
-    "Website Design",
-    "Mobile App Development",
-    "E-commerce Development",
-    "AI Integration",
-    "UI/UX Design",
-    "Digital Strategy",
-  ],
+  serviceType: serviceNames,
   areaServed: [{ "@type": "Country", name: "India" }, "Worldwide"],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Digital Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Scalable Web Platforms",
-          description:
-            "Custom web applications built with modern frameworks, optimized for performance and scalability",
-        },
+    itemListElement: services.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.title,
+        description: service.description,
       },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Mobile Applications",
-          description:
-            "Native and cross-platform mobile apps designed for maximum user engagement",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "E-commerce Systems",
-          description:
-            "Complete e-commerce solutions with seamless payment integration and inventory management",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "AI-Powered Products",
-          description:
-            "Intelligent systems leveraging machine learning and AI to automate and optimize business processes",
-        },
-      },
-    ],
+    })),
   },
 };
 
@@ -307,8 +266,8 @@ const localBusinessSchema = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: "22.3094",
-    longitude: "72.1362",
+    latitude: "22.8347",
+    longitude: "74.2556",
   },
   openingHoursSpecification: [
     {
@@ -329,26 +288,13 @@ const localBusinessSchema = {
     { "@type": "Country", name: "India" },
     { "@type": "State", name: "Gujarat" },
   ],
-  serviceType: [
-    "Web Development",
-    "Website Design",
-    "Mobile App Development",
-    "E-commerce Development",
-    "AI Integration",
-    "UI/UX Design",
-    "Digital Strategy",
-  ],
+  serviceType: serviceNames,
   sameAs: [
     "https://www.linkedin.com/company/mxsolution53",
     "https://instagram.com/mxsolution.in",
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    ratingCount: "27",
-    bestRating: "5",
-    worstRating: "1",
-  },
+  // No aggregateRating: Google requires it to be backed by reviews actually
+  // shown on the page, and self-serving ratings breach their policy.
 };
 
 const websiteSchema = {
@@ -375,52 +321,17 @@ const websiteSchema = {
   },
 };
 
-// Kept in sync with the on-page FAQ in src/components/FAQSection.tsx
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What services do you offer?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Web development, e-commerce platforms, mobile apps, UI/UX design, branding, and AI integration. Every project is tailored to your business — nothing off the shelf.",
-      },
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
     },
-    {
-      "@type": "Question",
-      name: "How long does a typical project take?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "A business website typically takes 2–4 weeks. Complex e-commerce platforms or apps run 2–3 months. You get a detailed timeline after the discovery call.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is your pricing structure?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Pricing follows scope. After the discovery phase you receive a detailed, fixed quote — no surprises mid-project. The first consultation is free.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you provide ongoing support?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes — support and maintenance packages cover updates, security patches, performance monitoring, and technical assistance around the clock.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Can you work with existing designs or systems?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Absolutely. We work within existing brand guidelines and systems, and we also redesign and improve existing platforms without breaking what works.",
-      },
-    },
-  ],
+  })),
 };
 
 export default function RootLayout({
@@ -473,7 +384,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${archivo.variable} ${instrumentSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${archivo.variable} ${newsreader.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <TooltipProvider>
           {/* Skip to main content link for accessibility */}

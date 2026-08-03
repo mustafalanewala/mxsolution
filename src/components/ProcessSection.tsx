@@ -57,7 +57,7 @@ export function ProcessSection() {
               </>,
             ]}
           />
-          <p className="max-w-sm text-sm md:text-base leading-relaxed text-muted-foreground md:pb-2 md:text-right">
+          <p className="max-w-sm text-body text-muted-foreground md:pb-2 md:text-right">
             Five phases. No surprises — every step is visible, reviewed, and
             shipped with you in the loop.
           </p>
@@ -83,7 +83,7 @@ export function ProcessSection() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <span
-                    className={`font-mono text-sm tracking-[0.2em] transition-colors duration-500 ${
+                    className={`font-mono text-label transition-colors duration-500 ${
                       isActive ? "text-background/60" : "text-muted-foreground"
                     }`}
                   >
@@ -105,7 +105,7 @@ export function ProcessSection() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.4, ease, delay: 0.15 }}
-                      className="text-background/75 max-w-sm leading-relaxed text-base"
+                      className="text-background/75 max-w-sm text-body"
                     >
                       {step.description}
                     </motion.p>
@@ -117,7 +117,7 @@ export function ProcessSection() {
                   <motion.span
                     animate={{ opacity: isActive ? 0 : 1 }}
                     transition={{ duration: 0.25 }}
-                    className="absolute bottom-0 left-1 font-display font-bold uppercase tracking-widest text-2xl text-muted-foreground/70 whitespace-nowrap origin-bottom-left -rotate-90 translate-x-4 pointer-events-none [font-stretch:118%]"
+                    className="absolute bottom-0 left-1 font-display font-bold uppercase tracking-widest text-display-sm text-muted-foreground/70 whitespace-nowrap origin-bottom-left -rotate-90 translate-x-4 pointer-events-none [font-stretch:118%]"
                   >
                     {step.title}
                   </motion.span>
@@ -128,7 +128,7 @@ export function ProcessSection() {
                       x: isActive ? 0 : 24,
                     }}
                     transition={{ duration: 0.45, ease, delay: isActive ? 0.1 : 0 }}
-                    className="absolute bottom-0 left-0 font-display font-black uppercase tracking-tight leading-none text-[clamp(2.2rem,3.4vw,3.6rem)] whitespace-nowrap pointer-events-none [font-stretch:118%]"
+                    className="absolute bottom-0 left-0 font-display font-black uppercase text-display-md whitespace-nowrap pointer-events-none [font-stretch:118%]"
                   >
                     {step.title}
                   </motion.span>
@@ -155,7 +155,7 @@ export function ProcessSection() {
                 <div className="flex items-center justify-between px-5 py-5">
                   <span className="flex items-baseline gap-4">
                     <span
-                      className={`font-mono text-xs tracking-[0.2em] ${
+                      className={`font-mono text-label ${
                         isActive
                           ? "text-background/60"
                           : "text-muted-foreground/60"
@@ -163,7 +163,7 @@ export function ProcessSection() {
                     >
                       {step.number}
                     </span>
-                    <span className="font-display font-black uppercase tracking-tight text-2xl [font-stretch:118%]">
+                    <span className="font-display font-black uppercase text-display-sm [font-stretch:118%]">
                       {step.title}
                     </span>
                   </span>
@@ -184,7 +184,7 @@ export function ProcessSection() {
                       transition={{ duration: 0.35, ease }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 pb-6 text-sm leading-relaxed text-background/75">
+                      <p className="px-5 pb-6 text-body-sm text-background/75">
                         {step.description}
                       </p>
                     </motion.div>

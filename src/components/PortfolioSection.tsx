@@ -125,15 +125,15 @@ export function PortfolioSection() {
 
               <div className="relative flex items-center justify-between gap-6 py-8 lg:py-10 px-2 lg:px-6 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-4">
                 <div className="flex items-baseline gap-6 lg:gap-10 min-w-0">
-                  <span className="font-mono text-xs tracking-[0.25em] text-muted-foreground group-hover:text-background/60 transition-colors duration-500 shrink-0">
+                  <span className="font-mono text-label text-muted-foreground group-hover:text-background/60 transition-colors duration-500 shrink-0">
                     0{i + 1}
                   </span>
-                  <h3 className="font-display font-black uppercase tracking-tight leading-none text-[clamp(2rem,4.5vw,4rem)] [font-stretch:118%] text-outline group-hover:text-background group-hover:[-webkit-text-stroke:0px] transition-colors duration-500 truncate">
+                  <h3 className="font-display font-black uppercase text-display-lg [font-stretch:118%] text-outline group-hover:text-background group-hover:[-webkit-text-stroke:0px] transition-colors duration-500 truncate">
                     {project.title}
                   </h3>
                 </div>
                 <div className="flex items-center gap-8 shrink-0">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground group-hover:text-background/60 transition-colors duration-500">
+                  <span className="font-mono text-label uppercase text-muted-foreground group-hover:text-background/60 transition-colors duration-500">
                     {project.category}
                   </span>
                   <ArrowUpRight className="w-6 h-6 text-muted-foreground group-hover:text-background transition-all duration-500 group-hover:rotate-45" />
@@ -213,10 +213,10 @@ export function PortfolioSection() {
                 </div>
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="font-display font-black uppercase tracking-tight text-2xl [font-stretch:118%]">
+                    <h3 className="font-display font-black uppercase text-display-sm [font-stretch:118%]">
                       {project.title}
                     </h3>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground mt-1">
+                    <p className="font-mono text-label uppercase text-muted-foreground mt-1">
                       {project.category}
                     </p>
                   </div>

@@ -30,8 +30,8 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="min-h-screen flex items-center justify-center bg-background">
           <div className="text-center px-6">
-            <h1 className="text-6xl font-bold mb-4 text-foreground">Oops!</h1>
-            <h2 className="text-2xl font-semibold mb-8 text-muted-foreground">
+            <h1 className="font-display font-black uppercase text-display-lg [font-stretch:118%] mb-4 text-foreground">Oops!</h1>
+            <h2 className="font-display font-bold uppercase text-display-sm [font-stretch:118%] mb-8 text-muted-foreground">
               Something went wrong
             </h2>
             <p className="text-muted-foreground mb-8 max-w-md mx-auto">

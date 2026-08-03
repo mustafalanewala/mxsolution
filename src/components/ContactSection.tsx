@@ -50,7 +50,7 @@ export function ContactSection() {
           {/* Left — channels */}
           <div className="lg:col-span-5 flex flex-col">
             <AnimatedSection>
-              <p className="text-muted-foreground text-lg max-w-md mb-10">
+              <p className="text-lead text-muted-foreground max-w-md mb-10">
                 Have a project in mind? Tell us about it — we reply within a
                 day, usually much faster.
               </p>
@@ -121,7 +121,7 @@ export function ContactSection() {
                   }
                   required
                   rows={4}
-                  className="w-full bg-transparent border-b border-border pb-3 text-lg md:text-xl text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors duration-500 resize-none"
+                  className="w-full bg-transparent border-b border-border pb-3 text-lead text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors duration-500 resize-none"
                 />
               </motion.div>
 
@@ -183,7 +183,7 @@ function FormInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
-        className="w-full bg-transparent border-b border-border pb-3 text-lg md:text-xl text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors duration-500"
+        className="w-full bg-transparent border-b border-border pb-3 text-lead text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-foreground transition-colors duration-500"
       />
     </motion.div>
   );
@@ -209,10 +209,10 @@ function ContactRow({
           {icon}
         </span>
         <div className="min-w-0">
-          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+          <div className="font-mono text-label uppercase text-muted-foreground">
             {label}
           </div>
-          <div className="truncate text-base md:text-lg font-medium text-foreground mt-0.5">
+          <div className="truncate text-body font-medium text-foreground mt-0.5">
             {value}
           </div>
         </div>
