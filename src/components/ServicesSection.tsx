@@ -11,10 +11,22 @@ const swing = "cubic-bezier(0.16,1,0.3,1)";
 const AUTOPLAY_MS = 5000;
 
 export function ServicesSection() {
+  // Swipe on touch, arrows and dots on desktop. Defaults to draggable so a
+  // phone can swipe on the very first paint.
+  const [isTouch, setIsTouch] = useState(true);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(pointer: fine) and (hover: hover)");
+    const sync = () => setIsTouch(!mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: true,
-    watchDrag: false,
+    watchDrag: isTouch,
   });
 
   const [selected, setSelected] = useState(0);
@@ -112,10 +124,12 @@ export function ServicesSection() {
         <div
           ref={emblaRef}
           className="overflow-hidden"
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
+          // Bound only on pointer devices: a tap fires mouseenter and never
+          // leaves, which would stall autoplay on a phone for good.
+          onMouseEnter={isTouch ? undefined : () => setHovering(true)}
+          onMouseLeave={isTouch ? undefined : () => setHovering(false)}
         >
-          <div className="flex items-stretch -ml-4 md:-ml-6">
+          <div className="flex items-stretch touch-pan-y -ml-4 md:-ml-6">
             {services.map((service) => (
               <article
                 key={service.title}

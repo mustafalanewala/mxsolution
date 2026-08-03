@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Wordmark } from "@/components/Wordmark";
 
 const navLinks = [
   { label: "Work", href: "/projects" },
@@ -62,9 +63,9 @@ export function Navbar() {
           <Link
             href="/"
             onClick={handleLogoClick}
-            className="shrink-0 whitespace-nowrap font-display font-bold text-body tracking-[-0.01em] text-foreground"
+            className="shrink-0 whitespace-nowrap text-foreground"
           >
-            M<span className="text-primary text-[0.78em]">x</span> Solution
+            <Wordmark className="text-body" />
           </Link>
 
           {/* Desktop Navigation — mono label language */}

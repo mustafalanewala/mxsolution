@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { Wordmark } from "@/components/Wordmark";
 
 const socialLinks = [
   {
@@ -90,9 +91,7 @@ export function Footer() {
           {/* Brand */}
           <AnimatedSection className="col-span-2 md:col-span-6">
             <div className="mb-6">
-              <span className="font-display font-bold text-body tracking-[-0.01em] text-foreground">
-                M<span className="text-primary text-[0.78em]">x</span> Solution
-              </span>
+              <Wordmark className="text-body text-foreground" />
             </div>
             <p className="text-body text-muted-foreground max-w-sm mb-8">
               Technology that multiplies impact. We help brands transform ideas

@@ -205,17 +205,17 @@ export function HeroSection() {
               transition={{ ...lineTransition, delay: 0.35 }}
               className="block"
             >
-              <span className="headline-accent text-[1.06em]">ideas</span>{" "}
-              <span className="text-muted-foreground text-[0.55em] tracking-normal">
-                into
-              </span>
+              <span className="headline-accent pr-[0.06em] text-[1.05em]">
+                ideas
+              </span>{" "}
+              <span className="text-muted-foreground">into</span>
             </motion.span>
           </span>
           <span className="block overflow-hidden pb-1">
             <motion.span
               {...lineReveal}
               transition={{ ...lineTransition, delay: 0.45 }}
-              className="block text-outline"
+              className="block"
             >
               results
             </motion.span>
