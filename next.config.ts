@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
       {
-        source: "/favicons/:path*",
+        source: "/browserconfig.xml",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
       // Security headers for main pages

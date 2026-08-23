@@ -26,7 +26,6 @@ Disallow: /private/
 Disallow: /llms.txt
 Disallow: /llms-full.txt
 Disallow: /manifest.json
-Disallow: /favicons/
 
 # Sitemap location
 Sitemap: https://www.mxsolution.in/sitemap.xml

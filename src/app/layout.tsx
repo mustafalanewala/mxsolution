@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     "ai:citation": "Mx Solution - Technology That Multiplies Results",
     "llms-txt": "https://www.mxsolution.in/llms.txt",
     "llms-full": "https://www.mxsolution.in/llms-full.txt",
-    "msapplication-config": "/favicons/browserconfig.xml",
+    "msapplication-config": "/browserconfig.xml",
   },
   keywords: [
     "mx",
@@ -119,29 +119,39 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicons/favicon.ico", sizes: "any" },
-      { url: "/favicons/favicon.ico", sizes: "16x16", type: "image/x-icon" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
       {
-        url: "/favicons/android-icon-192x192.png",
+        url: "/icon-192.png",
         sizes: "192x192",
         type: "image/png",
       },
       {
-        url: "/favicons/ms-icon-310x310.png",
+        url: "/android-icon-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: "/ms-icon-310x310.png",
         sizes: "310x310",
         type: "image/png",
       },
     ],
-    shortcut: "/favicons/favicon.ico",
+    shortcut: "/favicon.ico",
     apple: [
       {
-        url: "/favicons/apple-icon-180x180.png",
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+      {
+        url: "/apple-icon-180x180.png",
         sizes: "180x180",
         type: "image/png",
       },
     ],
   },
-  manifest: "/favicons/manifest.json",
+  manifest: "/manifest.json",
   appleWebApp: {
     title: "Mx Solution",
     statusBarStyle: "black-translucent",
@@ -184,7 +194,7 @@ const organizationSchema = {
   url: "https://www.mxsolution.in",
   logo: {
     "@type": "ImageObject",
-    url: "https://www.mxsolution.in/favicons/android-icon-192x192.png",
+    url: "https://www.mxsolution.in/android-icon-192x192.png",
     width: 192,
     height: 192,
   },
