@@ -5,6 +5,7 @@ import { site } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { HeroScreens } from "@/components/site/HeroScreens";
 import { EASE, Heading } from "@/components/site/primitives";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -51,7 +52,7 @@ export function Hero() {
                 </a>
               </Button>
               <Button variant="default" size="lg" asChild>
-                <a href="#work">See our work</a>
+                <Link href="/projects">See our work</Link>
               </Button>
             </motion.div>
           </div>
