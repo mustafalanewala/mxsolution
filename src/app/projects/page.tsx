@@ -1,226 +1,152 @@
-"use client";
-
-import { useRef } from "react";
-import { ArrowUpRight, ArrowLeft } from "lucide-react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/use-mobile";
+import Link from "next/link";
+import { caseStudies, concepts, site } from "@/lib/content";
+import { Nav } from "@/components/site/Nav";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { ClosingCta } from "@/components/site/ClosingCta";
+import { WhatsAppButton } from "@/components/site/WhatsAppButton";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import {
+  Heading,
+  PageHeader,
+  Reveal,
+  Section,
+} from "@/components/site/primitives";
 
-const allProjects = [
-  {
-    title: "Valor Jets",
-    category: "Web Development",
-    image: "/projects/valor.png",
-    description:
-      "Private aviation booking platform with premium luxury design and seamless flight reservations.",
-    link: "https://valor-jets.vercel.app",
-  },
-    {
-    title: "SK Attire Hub",
-    category: "E-commerce",
-    image: "/projects/sk.png",
-    description:
-      "Modern fashion e-commerce platform - step up your style game.",
-    link: "https://skattirehub.in",
-  },
-  {
-    title: "Guidance Tamil Nadu",
-    category: "Web Development",
-    image: "/projects/guidance.png",
-    description: "Official investment portal for Guidance Tamil Nadu.",
-    link: "https://investingintamilnadu.com",
-  },
-  {
-    title: "Mubarak Collection",
-    category: "E-commerce",
-    image: "/projects/mubarak-collection.webp",
-    description:
-      "Premium Dawoodi Bohra Topis crafted with tradition since 2011.",
-    link: "https://www.mubarakcollection.in",
-  },
-  {
-    title: "Gujarat Food Products",
-    category: "Web Development",
-    image: "/projects/gujarat-food.webp",
-    description:
-      "Authentic Makai Poha manufacturer - naturally grown, perfectly processed.",
-    link: "https://www.gujaratfoodproducts.in",
-  },
-  {
-    title: "Aetherial Reality",
-    category: "Web Development",
-    image: "/projects/aether.png",
-    description:
-      "Modern construction company website with 3D visualization and project showcases.",
-    link: "https://aetherial-reality.vercel.app",
-  },
-  {
-    title: "Tropic UK",
-    category: "Web Development",
-    image: "/projects/tropic.png",
-    description:
-      "Tropical fashion and lifestyle brand website with modern design and product showcases.",
-    link: "https://tropic-uk.vercel.app",
-  },
-];
+type Card = {
+  key: string;
+  title: string;
+  client: string;
+  sector: string;
+  image: string;
+  link: string;
+  line: string;
+  tags: readonly string[];
+};
 
-export default function Projects() {
+const clientWork: Card[] = caseStudies.map((study) => ({
+  key: study.slug,
+  title: study.headline,
+  client: study.client,
+  sector: study.sector,
+  image: study.image,
+  link: study.link,
+  line: study.result,
+  tags: study.tags,
+}));
+
+const conceptWork: Card[] = concepts.map((concept) => ({
+  key: concept.title,
+  title: concept.title,
+  client: concept.title,
+  sector: concept.sector,
+  image: concept.image,
+  link: concept.link,
+  line: concept.description,
+  tags: concept.tags,
+}));
+
+/**
+ * Two lists, never one. Client work carries an outcome because there was a
+ * business on the other side of it; the concepts are self-initiated builds
+ * and are labelled as such rather than quietly padding the grid.
+ */
+export default function ProjectsPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Navbar />
+    <SmoothScroll>
+      <Nav />
+      <main id="main-content">
+        <PageHeader
+          lines={["Everything here started", "as a business problem."]}
+          intro="Not a design brief, not a technology choice. Where a result isn't measured, we describe what changed rather than invent a number for it."
+        />
 
-      <main>
-        {/* Hero */}
-        <section className="pt-40 pb-20 md:pt-48 md:pb-32">
-          <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
-            <Link
-              href="/#portfolio"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-12 text-label font-mono uppercase"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Link>
+        <Section>
+          <WorkGrid items={clientWork} priority />
+        </Section>
 
-            <h1 className="font-display font-black text-hero uppercase [font-stretch:118%]">
-              <motion.span
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="block"
-              >
-                Projects
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-                className="block text-muted-foreground"
-              >
-                &amp;{" "}
-                <span className="headline-accent text-[1.05em]">
-                  playgrounds
-                </span>
-              </motion.span>
-            </h1>
-
-            <div className="mt-16 md:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-8">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.3 }}
-                className="lg:col-start-7 lg:col-span-6"
-              >
-                <p className="text-lead text-muted-foreground">
-                  A collection of digital systems we've crafted across web, commerce, and brand.{" "}
-                  <span className="text-foreground font-medium">
-                    Each one built as a foundation, not a feature.
-                  </span>
+        <Section className="pt-0">
+          <div className="border-t border-border pt-14 md:pt-16">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <Heading className="text-headline" lines={["Concepts."]} />
+              <Reveal delay={0.15}>
+                <p className="max-w-lg text-lead text-muted-foreground">
+                  Self-initiated builds — no client, no brief. Here to show how
+                  we design and build.
                 </p>
-              </motion.div>
+              </Reveal>
+            </div>
+
+            <div className="mt-12 md:mt-14">
+              <WorkGrid items={conceptWork} />
             </div>
           </div>
-        </section>
+        </Section>
 
-        {/* Project list */}
-        <section className="pb-14 md:pb-20">
-          {allProjects.map((project, i) => (
-            <ProjectRow key={project.title} project={project} index={i} />
-          ))}
-        </section>
-
+        <ClosingCta
+          heading="Have a problem worth solving?"
+          cta="Book a call"
+          href={site.booking}
+        />
       </main>
-
-      <Footer />
-    </div>
+      <SiteFooter />
+      <WhatsAppButton />
+    </SmoothScroll>
   );
 }
 
-function ProjectRow({
-  project,
-  index,
+function WorkGrid({
+  items,
+  priority = false,
 }: {
-  project: (typeof allProjects)[number];
-  index: number;
+  items: Card[];
+  priority?: boolean;
 }) {
-  const isMobile = useIsMobile();
-  const ref = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const smooth = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    mass: 0.4,
-  });
-
-  const imageY = useTransform(smooth, [0, 1], [90, -90]);
-  const textY = useTransform(smooth, [0, 1], [160, -160]);
-  const opacity = useTransform(smooth, [0, 0.15, 0.85, 1], [0.4, 1, 1, 0.4]);
-  const mobileImageY = useTransform(smooth, [0, 1], [24, -24]);
-  const mobileTextY = useTransform(smooth, [0, 1], [36, -36]);
-  const mobileOpacity = useTransform(smooth, [0, 0.15, 0.85, 1], [0.8, 1, 1, 0.8]);
-
-  const isOdd = index % 2 === 1;
-
   return (
-    <motion.div
-      ref={ref}
-      style={{ opacity: isMobile ? mobileOpacity : opacity }}
-      className="border-t border-border py-10 md:py-16 lg:py-20"
-    >
-      <div className="container mx-auto px-4 md:px-8 max-w-screen-2xl">
-        
-        <div
-          className={`grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-12 items-center ${
-            isOdd ? "lg:[&>*:first-child]:order-2" : ""
-          }`}
-        >
-          {/* 1. IMAGE COLUMN */}
-          <div className="lg:col-span-7 overflow-hidden relative">
-            <motion.div
-              style={{ y: isMobile ? mobileImageY : imageY }}
-              className="will-change-transform"
+    <div className="grid gap-x-10 gap-y-14 md:grid-cols-2 md:gap-y-16">
+      {items.map((item, i) => (
+        <Reveal key={item.key} delay={(i % 2) * 0.08}>
+          <article className="group flex h-full flex-col">
+            <Link
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-full flex-col"
             >
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={1600}
-                height={1000}
-                className="w-full h-auto block"
-              />
-            </motion.div>
-          </div>
-
-          {/* 2. TEXT COLUMN */}
-          <motion.div
-            style={{ y: isMobile ? mobileTextY : textY }}
-            className="lg:col-span-5 flex flex-col gap-6 relative z-10 will-change-transform"
-          >
-            <span className="text-label font-mono uppercase text-muted-foreground">
-              {project.category}
-            </span>
-            <h3 className="font-display font-black text-display-lg uppercase [font-stretch:118%]">
-              {project.title}
-            </h3>
-            <p className="text-body text-muted-foreground max-w-md">
-              {project.description}
-            </p>
-            <Button variant="outline" className="w-fit" asChild>
-              <Link href={project.link} target="_blank">
-                View live
-                <ArrowUpRight className="w-4 h-4" />
-              </Link>
-            </Button>
-          </motion.div>
-        </div>
-      </div>
-    </motion.div>
+              <div className="frame">
+                <Image
+                  src={item.image}
+                  alt={`${item.client} — ${item.sector}`}
+                  width={1600}
+                  height={1000}
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                  priority={priority && i < 2}
+                  className="h-auto w-full"
+                />
+              </div>
+              <p className="label mt-6">{item.sector}</p>
+              <h2 className="mt-3 text-subtitle">
+                <span className="link-underline">{item.title}</span>
+              </h2>
+              <p className="mt-3 text-body text-muted-foreground">
+                {item.line}
+              </p>
+              {item.tags.length > 0 && (
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {item.tags.map((tag) => (
+                    <li
+                      key={tag}
+                      className="label rounded-full bg-surface px-3.5 py-2"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Link>
+          </article>
+        </Reveal>
+      ))}
+    </div>
   );
 }

@@ -1,64 +1,38 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { Navbar } from "@/components/Navbar";
-import { HeroSection } from "@/components/HeroSection";
-import { ScrollProgress } from "@/components/ScrollProgress";
-
-// Dynamically import heavy components for better performance
-const AboutSection = dynamic(() =>
-  import("@/components/AboutSection").then((mod) => mod.AboutSection),
-);
-const ServicesSection = dynamic(() =>
-  import("@/components/ServicesSection").then((mod) => mod.ServicesSection),
-);
-const PortfolioSection = dynamic(() =>
-  import("@/components/PortfolioSection").then((mod) => mod.PortfolioSection),
-);
-const ProcessSection = dynamic(() =>
-  import("@/components/ProcessSection").then((mod) => mod.ProcessSection),
-);
-const TestimonialsSection = dynamic(() =>
-  import("@/components/TestimonialsSection").then(
-    (mod) => mod.TestimonialsSection,
-  ),
-);
-const FAQSection = dynamic(
-  () => import("@/components/FAQSection").then((mod) => mod.FAQSection),
-  { ssr: false },
-);
-const ContactSection = dynamic(() =>
-  import("@/components/ContactSection").then((mod) => mod.ContactSection),
-);
-const Footer = dynamic(() =>
-  import("@/components/Footer").then((mod) => mod.Footer),
-);
+import { Nav } from "@/components/site/Nav";
+import { Hero } from "@/components/site/Hero";
+import { Problem } from "@/components/site/Problem";
+// Hidden until the film exists. Restore this import together with the
+// <VideoBand /> line in the page below.
+// import { VideoBand } from "@/components/site/VideoBand";
+import { Approach } from "@/components/site/Approach";
+import { Work } from "@/components/site/Work";
+import { Difference } from "@/components/site/Difference";
+import { Testimonials } from "@/components/site/Testimonials";
+import { About } from "@/components/site/About";
+import { Faq } from "@/components/site/Faq";
+import { Contact } from "@/components/site/Contact";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 
 export default function Home() {
   return (
     <SmoothScroll>
-      <main
-        id="main-content"
-        className="min-h-screen bg-background text-foreground overflow-x-clip"
-      >
-        {/* Scroll Progress */}
-        <ScrollProgress />
-
-        {/* Animated Noise Overlay */}
-        <div className="noise-overlay" />
-
-        <Navbar />
-        <HeroSection />
-        <PortfolioSection />
-        <ServicesSection />
-        <AboutSection />
-        <ProcessSection />
-        <TestimonialsSection />
-        <FAQSection />
-        <ContactSection />
-        <Footer />
+      <Nav />
+      <main id="main-content">
+        <Hero />
+        <Problem />
+        {/* <VideoBand /> — hidden until we have the film */}
+        <Approach />
+        <Work />
+        <Difference />
+        <Testimonials />
+        <About />
+        <Faq />
+        <Contact />
       </main>
+      <SiteFooter />
+      <WhatsAppButton />
     </SmoothScroll>
   );
 }

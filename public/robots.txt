@@ -1,6 +1,6 @@
 # Mx Solution - Technology That Multiplies Results
 # Contact: +91 91573 02004
-# Website: www.mxsolution.in
+# Website: mxsolution.in
 
 User-agent: *
 Allow: /
@@ -28,10 +28,10 @@ Disallow: /llms-full.txt
 Disallow: /manifest.json
 
 # Sitemap location
-Sitemap: https://www.mxsolution.in/sitemap.xml
+Sitemap: https://mxsolution.in/sitemap.xml
 
 # Host directive (preferred domain)
-Host: https://www.mxsolution.in
+Host: https://mxsolution.in
 
 # ============================================
 # GEO (Generative Engine Optimization) Section

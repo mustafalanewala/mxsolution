@@ -1,177 +1,105 @@
 import type { Metadata } from "next";
-import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
+import { Inter, Inter_Tight } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { Analytics } from "@vercel/analytics/next";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { faqs, services } from "@/lib/content";
+import { faqs, services, site, solutions } from "@/lib/content";
 
-// Derived from the same arrays the page renders, so the two cannot drift.
+// One superfamily, two optical cuts. `opsz` is what makes Inter behave as
+// a display face at headline sizes — without the axis it stays the 14pt
+// text drawing all the way up and large type looks slack.
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  axes: ["opsz"],
+  display: "swap",
+});
+
+// Narrower cut, so body copy holds a comfortable measure.
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+// Derived from the same arrays the pages render, so the two cannot drift.
+// serviceType wants what a buyer would search for — "Custom software",
+// not "Work smarter" — so it reads the concrete list, while the offer
+// catalogue keeps the outcome framing underneath it.
 const serviceNames = services.map((service) => service.title);
 
-// Three roles, three families: display, text, label.
-const archivo = Archivo({
-  variable: "--font-archivo",
-  subsets: ["latin"],
-  axes: ["wdth"],
-  display: "swap",
-});
-
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
+const description =
+  "Mx Solution is a technology partner for businesses with a digital problem that has no off-the-shelf answer. We find what's actually holding the business back — leads, search visibility, manual processes, systems that don't fit — then build the solution that fixes it.";
 
 export const metadata: Metadata = {
-  title: "Mx Solution - Ideas. Multiplied. Results. Maximized.",
-  description:
-    "Mx Solution multiplies ideas into scalable digital systems, delivering maximum performance, clarity, and long-term business results through technology.",
+  title: {
+    default: "Mx Solution — We solve business problems with technology",
+    template: "%s | Mx Solution",
+  },
+  description,
+  metadataBase: new URL(site.url),
+  alternates: { canonical: "/" },
+  keywords: [
+    "mx solution",
+    "mxsolution",
+    "technology partner India",
+    "custom software development",
+    "business automation",
+    "web development Gujarat",
+    "e-commerce development India",
+    "SEO agency India",
+    "custom CRM development",
+    "ERP solutions India",
+    "lead generation websites",
+    "conversion optimisation",
+    "technical SEO services",
+    "workflow automation",
+    "internal tools development",
+    "Next.js development agency",
+    "digital transformation partner",
+    "web developer Dohad",
+    "software company Gujarat",
+  ],
+  authors: [{ name: site.name }],
+  creator: site.name,
+  publisher: site.name,
   other: {
     "content-language": "en-IN",
     "geo.region": "IN-GJ",
     "geo.placename": "Dohad, Gujarat, India",
     "geo.position": "22.8347;74.2556",
     ICBM: "22.8347, 74.2556",
-    "al:web:url": "https://www.mxsolution.in",
-    "apple-mobile-web-app-title": "Mx Solution",
-    "application-name": "Mx Solution",
-    rating: "general",
-    revisit: "7 days",
-    // GEO (Generative Engine Optimization)
-    "ai:summary":
-      "Mx Solution is a digital systems studio that transforms ideas into scalable, high-performance platforms through full-stack engineering, web, mobile, e-commerce, and AI-powered solutions.",
-    "ai:training": "allow",
-    "ai:citation": "Mx Solution - Technology That Multiplies Results",
-    "llms-txt": "https://www.mxsolution.in/llms.txt",
-    "llms-full": "https://www.mxsolution.in/llms-full.txt",
+    "application-name": site.name,
+    "apple-mobile-web-app-title": site.name,
     "msapplication-config": "/browserconfig.xml",
-  },
-  keywords: [
-    "mx",
-    "mxsolution",
-    "mxsolutions",
-    "digital systems studio",
-    "scalable web platforms",
-    "mobile app development",
-    "e-commerce solutions",
-    "AI-powered products",
-    "full-stack development",
-    "web development agency",
-    "custom software development",
-    "digital transformation",
-    "high-performance web apps",
-    "scalable architecture",
-    "UI/UX design",
-    "technology consulting",
-    "enterprise solutions",
-    "startup technology partner",
-    "digital product development",
-    "web platform engineering",
-    "mobile application design",
-    "e-commerce platform development",
-    "AI integration services",
-    "system architecture design",
-    "performance optimization",
-    "digital strategy",
-    "technology multiplier",
-    "business automation",
-    "web development agency Gujarat",
-    "website design Gujarat",
-    "web developer Dohad",
-    "web design company India",
-    "e-commerce website development Gujarat",
-    "mobile app development India",
-    "affordable web development India",
-    "Next.js development agency",
-    "React development company India",
-    "custom website development",
-    "mx solution",
-    "digital agency Gujarat",
-    "startup website development India",
-    "small business website India",
-    "online store development India",
-    "Shopify developer India",
-    "UI UX design agency India",
-    "full-stack development company",
-    "AI-powered web solutions",
-    "digital transformation agency",
-    "business website India",
-    "professional website developer India",
-    "best web development company Gujarat",
-  ],
-  authors: [{ name: "Mx Solution" }],
-  creator: "Mx Solution",
-  publisher: "Mx Solution",
-  metadataBase: new URL("https://www.mxsolution.in"),
-  alternates: {
-    canonical: "/",
+    "ai:summary":
+      "Mx Solution is a technology partner that identifies the underlying business problem before recommending a solution, then builds it — websites, e-commerce, custom software, automation and search visibility.",
+    "llms-txt": `${site.url}/llms.txt`,
   },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
-      {
-        url: "/icon-192.png",
-        sizes: "192x192",
-        type: "image/png",
-      },
-      {
-        url: "/android-icon-192x192.png",
-        sizes: "192x192",
-        type: "image/png",
-      },
-      {
-        url: "/ms-icon-310x310.png",
-        sizes: "310x310",
-        type: "image/png",
-      },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
     shortcut: "/favicon.ico",
-    apple: [
-      {
-        url: "/apple-touch-icon.png",
-        sizes: "180x180",
-        type: "image/png",
-      },
-      {
-        url: "/apple-icon-180x180.png",
-        sizes: "180x180",
-        type: "image/png",
-      },
-    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   manifest: "/manifest.json",
-  appleWebApp: {
-    title: "Mx Solution",
-    statusBarStyle: "black-translucent",
-  },
+  appleWebApp: { title: site.name, statusBarStyle: "default" },
   openGraph: {
-    title: "Mx Solution - Ideas. Multiplied. Results. Maximized.",
-    description:
-      "We build high-performance websites, e-commerce stores & mobile apps for businesses across India. Get a free project consultation — +91 91573 02004.",
-    url: "https://www.mxsolution.in",
-    siteName: "Mx Solution",
+    title: "Mx Solution — We solve business problems with technology",
+    description,
+    url: site.url,
+    siteName: site.name,
     locale: "en_IN",
     type: "website",
     // og image comes from app/opengraph-image.tsx (file convention)
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mx Solution - Ideas. Multiplied. Results. Maximized.",
-    description:
-      "We build high-performance websites, e-commerce stores & mobile apps for businesses across India. Get a free consultation — +91 91573 02004.",
-    creator: "@mxsolution",
+    title: "Mx Solution — We solve business problems with technology",
+    description,
   },
   robots: {
     index: true,
@@ -186,91 +114,78 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD Structured Data
+/* ── Structured data ──────────────────────────────────────────────── */
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Mx Solution",
-  url: "https://www.mxsolution.in",
+  "@id": `${site.url}/#organization`,
+  name: site.name,
+  url: site.url,
+  description,
+  slogan: site.tagline,
+  foundingDate: "2025",
+  telephone: site.phone,
   logo: {
     "@type": "ImageObject",
-    url: "https://www.mxsolution.in/android-icon-192x192.png",
-    width: 192,
-    height: 192,
+    url: `${site.url}/icon-512.png`,
+    width: 512,
+    height: 512,
   },
-  image: "https://www.mxsolution.in/opengraph-image",
-  description:
-    "Mx Solution transforms ideas into high-performance digital systems. We blend strategy, design, and full-stack engineering to build scalable web, mobile, e-commerce, and AI solutions that multiply impact, optimize growth, and deliver real business results.",
-  slogan: "Ideas. Multiplied. Results. Maximized.",
-  foundingDate: "2025",
-  email: "info@mxsolution.in",
-  telephone: "+919157302004",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Dohad",
-    addressRegion: "Gujarat",
+    addressLocality: site.locality,
+    addressRegion: site.region,
     addressCountry: "IN",
   },
-  contactPoint: [
-    {
-      "@type": "ContactPoint",
-      telephone: "+919157302004",
-      contactType: "sales",
-      areaServed: "IN",
-      availableLanguage: ["English", "Hindi", "Gujarati"],
-      contactOption: "TollFree",
-    },
-    {
-      "@type": "ContactPoint",
-      email: "info@mxsolution.in",
-      contactType: "customer support",
-      areaServed: "Worldwide",
-    },
-  ],
-  sameAs: [
-    "https://www.linkedin.com/company/mxsolution53",
-    "https://instagram.com/mxsolution.in",
-  ],
+  sameAs: [site.social.linkedin, site.social.instagram],
 };
 
-const softwareSchema = {
+const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Mx Solution",
-  url: "https://www.mxsolution.in",
-  telephone: "+919157302004",
-  email: "info@mxsolution.in",
-  description:
-    "Mx Solution transforms ideas into high-performance digital systems. We blend strategy, design, and full-stack engineering to build scalable web, mobile, e-commerce, and AI solutions that multiply impact, optimize growth, and deliver real business results.",
+  "@id": `${site.url}/#service`,
+  name: site.name,
+  url: site.url,
+  telephone: site.phone,
+  description,
   serviceType: serviceNames,
   areaServed: [{ "@type": "Country", name: "India" }, "Worldwide"],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Digital Services",
+    name: "Services",
     itemListElement: services.map((service) => ({
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
         name: service.title,
-        description: service.description,
+        description: service.summary,
+        url: `${site.url}/solutions#${service.id}`,
       },
     })),
   },
+  makesOffer: solutions.map((solution) => ({
+    "@type": "Offer",
+    itemOffered: {
+      "@type": "Service",
+      name: solution.title,
+      description: solution.detail,
+    },
+  })),
 };
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://www.mxsolution.in/#business",
-  name: "Mx Solution",
-  url: "https://www.mxsolution.in",
-  image: "https://www.mxsolution.in/opengraph-image",
-  description:
-    "Mx Solution transforms ideas into high-performance digital systems. We blend strategy, design, and full-stack engineering to build scalable web, mobile, e-commerce, and AI solutions that multiply impact, optimize growth, and deliver real business results.",
+  "@id": `${site.url}/#business`,
+  name: site.name,
+  url: site.url,
+  description,
+  telephone: site.phone,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Dohad",
-    addressRegion: "Gujarat",
+    addressLocality: site.locality,
+    addressRegion: site.region,
     postalCode: "389151",
     addressCountry: "IN",
   },
@@ -299,36 +214,20 @@ const localBusinessSchema = {
     { "@type": "State", name: "Gujarat" },
   ],
   serviceType: serviceNames,
-  sameAs: [
-    "https://www.linkedin.com/company/mxsolution53",
-    "https://instagram.com/mxsolution.in",
-  ],
-  // No aggregateRating: Google requires it to be backed by reviews actually
-  // shown on the page, and self-serving ratings breach their policy.
+  sameAs: [site.social.linkedin, site.social.instagram],
+  // No aggregateRating: Google requires it to be backed by reviews shown
+  // on the page, and self-serving ratings breach their policy.
 };
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://www.mxsolution.in/#website",
-  url: "https://www.mxsolution.in",
-  name: "Mx Solution",
-  description:
-    "Mx Solution transforms ideas into high-performance digital systems. We blend strategy, design, and full-stack engineering to build scalable web, mobile, e-commerce, and AI solutions that multiply impact, optimize growth, and deliver real business results.",
-  publisher: {
-    "@type": "Organization",
-    name: "Mx Solution",
-    "@id": "https://www.mxsolution.in/#organization",
-  },
+  "@id": `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  description,
   inLanguage: "en-IN",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: "https://www.mxsolution.in/?s={search_term_string}",
-    },
-    "query-input": "required name=search_term_string",
-  },
+  publisher: { "@id": `${site.url}/#organization` },
 };
 
 const faqSchema = {
@@ -337,80 +236,47 @@ const faqSchema = {
   mainEntity: faqs.map((faq) => ({
     "@type": "Question",
     name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
   })),
 };
 
+const schemas = [
+  organizationSchema,
+  serviceSchema,
+  localBusinessSchema,
+  websiteSchema,
+  faqSchema,
+];
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    // The font variables must land on :root. @theme declares
+    // --font-display/--font-sans there, and a var() that resolves against a
+    // property defined further down the tree computes to invalid — which
+    // silently drops the whole page to the system UI font.
+    <html lang="en" className={`${inter.variable} ${interTight.variable}`}>
       <head>
         <meta
           name="google-site-verification"
           content="cho4mR2gXwMqTai3zKCa0VYleMWURbjrdtWGQ7arvoM"
         />
-        {/* Apply saved / system theme before paint to avoid a flash */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(!t)t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.classList.remove("light","dark");document.documentElement.classList.add(t);}catch(e){}})();`,
-          }}
-        />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(softwareSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqSchema),
-          }}
+          // One graph, one tag — fewer parses for the crawler.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
         />
       </head>
-      <body
-        className={`${archivo.variable} ${newsreader.variable} ${jetbrainsMono.variable} antialiased`}
-      >
-        <TooltipProvider>
-          {/* Skip to main content link for accessibility */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-          >
-            Skip to main content
-          </a>
-
-          <ErrorBoundary>{children}</ErrorBoundary>
-          <WhatsAppButton />
-          <Toaster />
-          <Sonner />
-          <Analytics />
-        </TooltipProvider>
+      <body className="antialiased">
+        <a
+          href="#main-content"
+          className="sr-only rounded-full bg-foreground px-4 py-2 text-background focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100"
+        >
+          Skip to main content
+        </a>
+        <ErrorBoundary>{children}</ErrorBoundary>
+        <Analytics />
       </body>
     </html>
   );

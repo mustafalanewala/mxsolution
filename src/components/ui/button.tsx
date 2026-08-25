@@ -5,60 +5,62 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * Signature button: an ink layer sweeps up from the bottom edge on hover
- * (GPU transform, no repaint), the label/icon color cross-fades with it,
- * icons nudge forward, and the whole pill compresses slightly on press.
+ * The only button on the site.
+ *
+ * Hover fills the pill from the bottom edge: a pseudo-element scales up on
+ * the Y axis behind the label, so the whole effect is one GPU transform —
+ * no repaint, no layout. The label colour crossfades with it.
+ *
+ * Every colour is read from --foreground / --background / --primary rather
+ * than hard-coded, so the same three variants stay legible inside an
+ * .ink-block section, where those tokens are inverted.
  */
 const buttonVariants = cva(
   [
-    "group relative isolate overflow-hidden inline-flex items-center justify-center gap-2",
-    "whitespace-nowrap rounded-full text-sm font-medium cursor-pointer select-none",
-    "transition-[color,border-color,transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-    "active:scale-[0.96]",
+    "group/btn relative isolate overflow-hidden inline-flex items-center justify-center gap-2",
+    "whitespace-nowrap rounded-full font-medium cursor-pointer select-none",
+    "transition-[color,border-color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+    "active:scale-[0.97]",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
     "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
     "[&_svg]:transition-transform [&_svg]:duration-500 [&_svg]:ease-[cubic-bezier(0.16,1,0.3,1)]",
     "hover:[&_svg]:translate-x-1",
-    // The sweep layer
+    // The fill that rises on hover
     "before:content-[''] before:absolute before:inset-0 before:-z-10 before:rounded-full",
-    "before:translate-y-[102%] hover:before:translate-y-0",
+    "before:origin-bottom before:scale-y-0 hover:before:scale-y-100",
     "before:transition-transform before:duration-500 before:ease-[cubic-bezier(0.16,1,0.3,1)]",
   ].join(" "),
   {
     variants: {
       variant: {
-        // Blue pill → ink floods up, text flips to page color
-        default:
+        // Blue pill → ink floods up
+        primary:
           "bg-primary text-primary-foreground before:bg-foreground hover:text-background",
-        // Hairline pill → ink floods up, text inverts
+        // Ink pill → blue floods up. Label stays put; it reads on both.
+        default: "bg-foreground text-background before:bg-primary",
+        // Hairline pill → ink floods up, label inverts
         outline:
-          "border border-foreground/25 bg-transparent text-foreground before:bg-foreground hover:text-background hover:border-foreground",
-        // Quiet pill → soft fill sweeps up
-        ghost:
-          "bg-transparent text-foreground before:bg-secondary hover:text-secondary-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground before:bg-foreground hover:text-background",
+          "border border-border bg-transparent text-foreground before:bg-foreground hover:text-background hover:border-foreground",
+        ghost: "bg-transparent text-foreground before:bg-surface",
+        secondary: "bg-surface text-foreground before:bg-foreground hover:text-background",
         destructive:
           "bg-destructive text-destructive-foreground before:bg-foreground hover:text-background",
-        link: "text-foreground underline-offset-4 hover:underline before:hidden hover:[&_svg]:translate-x-0.5",
-        // Legacy aliases — same treatment as default
-        pill: "bg-primary text-primary-foreground before:bg-foreground hover:text-background",
-        glow: "bg-primary text-primary-foreground before:bg-foreground hover:text-background",
+        link: "text-foreground underline-offset-4 hover:underline px-0 h-auto before:hidden hover:[&_svg]:translate-x-0.5",
       },
       size: {
-        default: "h-11 px-6 py-2",
-        sm: "h-9 px-4 text-xs",
-        lg: "h-12 px-8 text-base",
-        xl: "h-14 px-10 text-base font-semibold",
-        icon: "h-10 w-10",
+        sm: "h-10 px-4 text-body-sm",
+        default: "h-11 px-5 text-body-sm",
+        lg: "h-13 px-7 text-body",
+        xl: "h-14 px-8 text-body",
+        icon: "size-10",
       },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -77,7 +79,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

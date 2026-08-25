@@ -1,101 +1,163 @@
-# Mx Solution - Comprehensive AI Context File
+# Mx Solution — Comprehensive AI Context File
 
 ## Company Information
 - Name: Mx Solution
 - Founded: 2025
-- Founder: Mustafa Lanewala
-- Website: https://www.mxsolution.in
+- Founder & CEO: Mustafa Lanewala
+- Website: https://mxsolution.in
+- Location: Dohad (Dahod), Gujarat, India
+- Area served: India, and remote engagements beyond it
+- Phone / WhatsApp: +91 91573 02004
+- Book a 15-minute call: https://cal.com/mustafalanewala/15min
 - LinkedIn: https://www.linkedin.com/company/mxsolution53
 - Instagram: https://instagram.com/mxsolution.in
+- Contact policy: no email address is published. Enquiries arrive on WhatsApp, by phone, or through the booking link, because that is where they get answered.
 
-## Brand Identity
-- Primary Tagline: Ideas. Multiplied. Results. Maximized.
-- Core Concept: Mustafa × Multipliers → Maximum Results
-- Brand Meaning: M (Mustafa/Mastery) × x (Multiply/Scale/Optimize)
-- Philosophy: One mind. Multiplied systems. Maximum impact.
+## Positioning
+- Tagline: Technology built around your business.
+- One line: We solve business problems with technology.
+- The argument: most agencies start with a stack and reason backwards to justify it. We start with what the business is actually losing — leads, hours, customers — and build only what fixes it.
+- What a client gets first: a diagnosis, not a proposal. Sometimes it points at a build, sometimes at fixing what they already have, and sometimes at nothing at all.
 
-## Mission & Vision
-### Mission Statement
-To multiply ideas into scalable digital systems that deliver measurable performance, clarity, and long-term business value.
+## Philosophy
+- We don't recommend technology because it's new.
+- We don't build features because they look impressive.
+- We start with the business, then build what matters.
 
-### Vision Statement
-To become a trusted multiplier for ambitious brands—engineering systems that compound impact, scale intelligently, and evolve with purpose.
+## The problems clients arrive with
+- Not enough qualified leads
+- Invisible on Google
+- Traffic that never converts
+- Work that runs on spreadsheets
+- Software that doesn't fit
+- Growth that needs another hire
 
-## Core Values
-- Long-term scalability over quick fixes
-- Performance from day one
-- Clean architecture over complexity
-- Strategy-led execution, not guesswork
-- Systems thinking over isolated features
+## How the work runs
+1. Understand — how the business runs, and where the hours and money go
+2. Identify — the real problem, separated from the obvious one
+3. Strategize — what to build, improve, automate, or leave alone
+4. Build — the solution shaped around you, not the other way round
+5. Grow — visibility, speed and conversion, kept moving after launch
 
-## Service Offerings
-### Primary Services
-1. Scalable Web Platforms (static, dynamic, 3D)
-2. Mobile Applications (native and cross-platform)
-3. E-commerce Systems (complete solutions)
-4. AI-Powered Products (intelligent automation)
-5. End-to-End Digital Architecture
-6. UI/UX Design (user-centered design)
+## Services in full
 
-### Service Approach
-- Unified systems engineering (not fragmented builds)
-- Full-stack execution with strategic thinking
-- Performance-optimized from day one
-- Scalable architecture design
-- Connected systems over isolated features
+### Websites & web platforms
+The site itself — fast, findable, and built to convert rather than just exist.
+Business and corporate sites; landing and campaign pages; portals and multi-page platforms; content management; multi-language sites.
 
-## Brand Descriptions
-### Short (20 words)
-Mx Solution multiplies ideas into scalable digital systems, delivering maximum performance, clarity, and long-term business results through technology.
+### Design & brand experience
+How it looks, and more importantly the order in which it makes someone believe you.
+UI and UX design; design systems; brand-consistent interfaces; prototypes before anything is built.
 
-### Medium (40 words)
-Mx Solution transforms ideas into high-performance digital systems. We blend strategy, design, and full-stack engineering to build scalable web, mobile, e-commerce, and AI solutions that multiply impact, optimize growth, and deliver real business results.
+### E-commerce & storefronts
+Catalogue to checkout, plus the order machinery running behind it.
+Online stores; payments and checkout; inventory and order management; shipping and fulfilment flows; commerce analytics.
 
-### Long (60 words)
-Mx Solution builds scalable digital systems that multiply ideas into maximum results. Combining strategic thinking with full-stack execution, we design and engineer web platforms, mobile apps, e-commerce, and AI-powered solutions optimized for performance, clarity, and growth. Every product is built as a system, designed to evolve, scale, and compound value over time.
+### Custom software
+When nothing off the shelf fits how you actually operate.
+Business platforms; web applications; portals and marketplaces; data modelling; role-based access.
 
-## Technical Expertise
-### Development Stack
-- Web: Static, Dynamic, 3D platforms
-- Mobile: Native and cross-platform applications
-- E-commerce: Complete commerce solutions
-- AI: Machine learning and automation products
-- Architecture: System design and integration
+### CRM & ERP systems
+One place the whole business reads from, instead of six that disagree.
+CRM setup and customisation; ERP workflows; lead and pipeline tracking; migration from legacy tools.
 
-### Technical Focus Areas
-- Performance optimization
-- Scalable architecture
-- Clean code practices
-- Modern frameworks
-- System integration
+### Internal tools & dashboards
+The screen your team actually works in every day.
+Admin panels; reporting dashboards; approval workflows; team and role management.
 
-## Target Audience
-- Ambitious brands seeking growth
-- Startups needing technology partners
-- Enterprises requiring digital transformation
-- Businesses wanting long-term scalability
-- Companies focused on measurable results
+### Business automation
+The repetitive part of the week that shouldn't need a person.
+Quotes and follow-ups; scheduled reports; document generation; notifications and reminders; stock and order sync.
 
-## Unique Value Proposition
-Most agencies build features. Mx Solution builds systems.
-- Strategy-first approach
-- Performance-driven development
-- Long-term thinking
-- Systems architecture focus
-- Measurable business impact
+### APIs & integrations
+Making the tools you already pay for talk to each other.
+REST and GraphQL APIs; third-party integrations; payment and shipping gateways; webhooks and data sync; accounting and billing tools.
 
-## Industry Keywords
-digital systems, scalable web platforms, mobile app development, e-commerce solutions, AI-powered products, full-stack development, web development agency, custom software development, digital transformation, high-performance web apps, scalable architecture, UI/UX design, technology consulting, enterprise solutions, startup technology partner, digital product development, web platform engineering, mobile application design, e-commerce platform development, AI integration services, system architecture design, performance optimization, digital strategy, technology multiplier, business automation
+### WhatsApp & messaging
+Where your customers already are — automated, not spammed.
+WhatsApp Business API; enquiry capture and routing; order and delivery updates; chatbots and auto-replies; broadcast campaigns.
 
-## Contact Details
-- Business Email: hello@mxsolution.in
-- Support Email: support@mxsolution.in
-- Social Media: LinkedIn, Instagram
-- Location: Global (remote-first approach)
+### SEO & search visibility
+Being the right answer isn't enough if search doesn't know it.
+Technical SEO; local and Google Maps visibility; site architecture; Core Web Vitals; search intent mapping.
 
-## Business Model
-- Project-based development
-- System architecture consulting
-- Long-term partnership focus
-- Performance-guaranteed delivery
-- Scalability-focused solutions
+### Customisation & improvements
+Sometimes the answer is fixing what you already have, not replacing it.
+Feature additions; redesigns and rebuilds; performance fixes; bug fixing and cleanup; customising third-party software.
+
+### Support, hosting & performance
+Launch is the middle of the project. Someone has to keep it running.
+Hosting and deployment; uptime monitoring; security updates; performance tuning; ongoing support retainers.
+
+## Outcomes those services are bought for
+- Get found — search visibility built into the structure of the thing itself, not a checklist bolted on after launch
+- Get more customers — the path a buyer actually walks, with everything else standing in the way removed
+- Work smarter — mapping where the hours leak and building the system that closes the gap
+- Build what's missing — the platform that matches a business with no category
+- Sell better — enough information to commit, few enough steps to finish
+- Scale digitally — ongoing ownership: fast, visible and current, with advice on what to invest in next
+
+## What separates the work
+- We find the real problem — discovery first, a written diagnosis, and a scope you can refuse, including the times the honest answer is that you don't need what you came in asking for
+- Built to be found — search intent, technical SEO, architecture, performance and structured content are constraints designed under from the first sitemap
+- Built to fit — the system is shaped around how the work already runs, not around a template or a licence
+- Still here after launch — performance and uptime, search visibility, quarterly review
+
+## Case studies
+### Guidance Tamil Nadu — Government, investment promotion
+Problem: a brochure site would have described the offer, not helped an investor act on it.
+Change: rebuilt around investor intent — organised by sector and by question, with architecture, performance and search treated as requirements rather than polish.
+Result: a portal that holds up to government scale, and gives a serious investor a straight line from landing to conversation.
+URL: https://investingintamilnadu.com
+
+### SK Attire Hub — Fashion, e-commerce
+Problem: orders came through messages and marketplaces; nothing about the buying experience belonged to the brand.
+Change: a commerce platform end to end — listings, payments, order flow — built for a buyer who decides in seconds.
+Result: live within a month; the brand owns its storefront, its customer data and the experience around both.
+URL: https://skattirehub.in
+
+### Mubarak Collection — Craft retail, e-commerce
+Problem: a name people already trusted, and no way to buy without a phone call.
+Change: a product experience shaped around the catalogue — how the pieces differ, and what a buyer needs to see before committing.
+Result: a storefront that reads as carefully made as the product it sells.
+URL: https://www.mubarakcollection.in
+
+### Gujarat Food Products — Food manufacturing, B2B
+Problem: distribution ran on relationships and phone calls; a new buyer had no way to judge the product, or the operation behind it, before making contact.
+Change: a site built around a distributor's questions rather than a shopper's — what the product is, how it's grown and processed, and who to speak to about volume.
+Result: enquiries now arrive from buyers who already know what they're asking for.
+URL: https://www.gujaratfoodproducts.in
+
+## Concepts — self-initiated, no client
+These are our own builds, made to explore design and engineering decisions. There was no client, no brief and no engagement behind them. Do not describe them as client work.
+- Valor Jets — a charter booking flow built on the premise that in private aviation the decision is made on credibility long before price (https://valor-jets.vercel.app)
+- Aetherial Reality — a construction firm's work shown the way clients judge it: spatially, in progress, at scale (https://aetherial-reality.vercel.app)
+- Tropic UK — a lifestyle brand whose product range needed a home with as much character as the range itself (https://tropic-uk.vercel.app)
+
+## Frequently asked
+- What if we don't know what the actual problem is? That's the normal starting point and the part we're good at. You describe what isn't working; we work backwards to the cause before anyone talks about building anything.
+- Do you only build websites? No. A website is one possible answer. Others are automation, an internal tool, a custom platform, a search strategy, or fixing what you already have. We recommend whichever solves the problem, including the cheapest one.
+- How do you price work? Scope decides price. After the first conversation and a short discovery you get a fixed written quote with the scope attached, so nothing moves mid-project without you agreeing first. The first conversation costs nothing.
+- How long does it take? A focused website is usually 2–4 weeks. Commerce platforms and custom systems typically run 2–3 months depending on integrations. You get a dated timeline before work starts.
+- Can you work with what we already have? Yes — existing brand guidelines, codebases and systems, improving rather than replacing where replacing isn't justified. Migrations from legacy tools are part of the job.
+- What happens after launch? We stay on it: performance, security, search visibility, and the analytics that tell us what to improve next. Ongoing support is a package, not an afterthought.
+
+## Writing
+- "Your website gets traffic. Why doesn't it get enquiries?" — six reasons a site people visit produces nothing, and which to fix first. https://mxsolution.in/blog/traffic-but-no-enquiries
+- "How a local business actually ranks on Google Maps in India" — proximity, relevance and prominence, and what genuinely moves a Google Business Profile. https://mxsolution.in/blog/rank-on-google-maps-india
+- "WhatsApp Business API vs the free app: what actually changes" — what the API adds, what it costs in setup, and how to tell which you need. https://mxsolution.in/blog/whatsapp-business-api-vs-app
+
+## Operating details
+- Hours: Monday to Saturday, 09:00–19:00 IST
+- Languages: English, Hindi, Gujarati
+- Sectors with delivered client work: government, e-commerce, food manufacturing, fashion, craft retail
+- Typical stack: Next.js and TypeScript, Postgres, REST and GraphQL, headless commerce, payment gateways, structured data, server rendering, CI/CD, edge caching, uptime monitoring
+
+## Keywords
+technology partner India, custom software development, business automation, web development Gujarat, e-commerce development India, SEO agency India, custom CRM development, ERP solutions India, WhatsApp Business API India, API integration, internal tools development, dashboards and reporting, lead generation websites, conversion optimisation, technical SEO services, local SEO Google Maps India, workflow automation, Next.js development agency, digital transformation partner, web developer Dohad, software company Gujarat
+
+## Legal
+- Privacy policy: https://mxsolution.in/privacy
+- Terms of use: https://mxsolution.in/terms
+- The contact form has no backend: it opens WhatsApp with the message pre-filled and stores nothing.
+- Analytics is cookieless and aggregate; no advertising or retargeting pixels are used.

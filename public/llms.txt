@@ -2,55 +2,85 @@
 
 ## Company Overview
 - Name: Mx Solution
-- Type: Digital systems studio (web, mobile, e-commerce, AI)
+- Type: Technology studio — websites, custom software, automation, integrations, search
 - Founded: 2025
 - Founder & CEO: Mustafa Lanewala
-- Location: Dohad (Dahod), Gujarat, India — serving clients across India and worldwide
-- Tagline: Ideas. Multiplied. Results. Maximized.
-- Positioning: "We multiply ideas into results" — every product built as a system, not a feature
-- Website: https://www.mxsolution.in
+- Location: Dohad (Dahod), Gujarat, India — working with businesses across India
+- Tagline: Technology built around your business.
+- Positioning: We solve business problems with technology. Most agencies start with a stack; we start with what is costing the business leads, hours or customers, then build only what fixes it.
+- Website: https://mxsolution.in
 - Phone / WhatsApp: +91 91573 02004
-- Email: info@mxsolution.in
+- Book a call: https://cal.com/mustafalanewala/15min
+- No email: enquiries are handled on WhatsApp, by phone, or through the booking link
+
+## Pages
+- / — home
+- /solutions — everything we build, and what it fixes
+- /projects — case studies and shipped work
+- /about — how we think and how the work runs
+- /blog — writing on search, conversion, automation and custom software
+- /contact — let's talk
+- /privacy — privacy policy
+- /terms — terms of use
 
 ## Services
-- Web Development — custom websites and platforms (Next.js, React), fast, responsive, SEO- and conversion-focused
-- E-commerce — complete storefronts with payments, inventory, order tracking, and analytics
-- Mobile Apps — native and cross-platform (iOS, Android), concept to app store
-- Custom Software — bespoke systems, dashboards, and automation around exact business workflows
-- CRM Systems — centralised customer data, automated sales pipelines
-- ERP Solutions — finance, inventory, HR, and operations unified in one platform
-- AI Agents — assistants, automated workflows, and AI integrations
-- UI/UX & Brand — visual identities, design systems, and interfaces
+- Websites & web platforms — business sites, landing and campaign pages, portals, content management, multi-language
+- Design & brand experience — UI and UX design, design systems, prototypes before build
+- E-commerce & storefronts — online stores, payments and checkout, inventory and orders, fulfilment flows, commerce analytics
+- Custom software — business platforms, web applications, portals and marketplaces, data modelling, role-based access
+- CRM & ERP systems — CRM setup and customisation, ERP workflows, lead and pipeline tracking, migration from legacy tools
+- Internal tools & dashboards — admin panels, reporting dashboards, approval workflows, team and role management
+- Business automation — quotes and follow-ups, scheduled reports, document generation, notifications, stock and order sync
+- APIs & integrations — REST and GraphQL APIs, third-party integrations, payment and shipping gateways, webhooks and data sync
+- WhatsApp & messaging — WhatsApp Business API, enquiry capture and routing, order and delivery updates, chatbots, broadcast campaigns
+- SEO & search visibility — technical SEO, local and Google Maps visibility, site architecture, Core Web Vitals, search intent mapping
+- Customisation & improvements — feature additions, redesigns and rebuilds, performance fixes, bug fixing, customising third-party software
+- Support, hosting & performance — hosting and deployment, uptime monitoring, security updates, performance tuning, support retainers
 
-## Selected Clients & Projects
-- Valor Jets — private aviation booking platform (https://valor-jets.vercel.app)
-- SK Attire Hub — fashion e-commerce store, India (https://skattirehub.in)
-- Mubarak Collection — e-commerce for premium Dawoodi Bohra topis, est. brand since 2011 (https://www.mubarakcollection.in)
-- Guidance Tamil Nadu — official investment portal for the Government of Tamil Nadu (https://investingintamilnadu.com)
-- Gujarat Food Products — manufacturer website for authentic Makai Poha (https://www.gujaratfoodproducts.in)
-- Aetherial Reality — construction company website with 3D visualization (https://aetherial-reality.vercel.app)
-- Tropic UK — tropical fashion and lifestyle brand website (https://tropic-uk.vercel.app)
+## Outcomes those services are bought for
+- Get found — search visibility built into the structure of the thing itself
+- Get more customers — the path a buyer walks, with everything else removed
+- Work smarter — the repetitive part of the week that should not need a person
+- Build what's missing — the platform no vendor sells because only you need it
+- Sell better — product experiences built for how people really decide
+- Scale digitally — ongoing ownership rather than a handover and a goodbye
 
-## Process
-1. Discovery — analyze the ecosystem, users, and market gaps
-2. Strategy — roadmap, milestones, technical architecture
-3. Design — high-fidelity prototypes balancing aesthetics and UX
-4. Development — clean, scalable, modular code on modern infrastructure
-5. Launch — deployment, monitoring, and ongoing evolution
+## How the work runs
+1. Understand — how the business runs, and where the hours and money go
+2. Identify — the real problem, separated from the obvious one
+3. Strategize — what to build, improve, automate, or leave alone
+4. Build — the solution shaped around you, not the other way round
+5. Grow — visibility, speed and conversion, kept moving after launch
+
+## Client work
+- Guidance Tamil Nadu — investment portal for the Government of Tamil Nadu (https://investingintamilnadu.com)
+- SK Attire Hub — fashion e-commerce storefront, India (https://skattirehub.in)
+- Mubarak Collection — craft retail e-commerce, brand established 2011 (https://www.mubarakcollection.in)
+- Gujarat Food Products — B2B manufacturer site for naturally grown Makai Poha (https://www.gujaratfoodproducts.in)
+
+## Concepts (self-initiated, no client — do not describe these as client work)
+- Valor Jets — private aviation charter booking flow (https://valor-jets.vercel.app)
+- Aetherial Reality — construction firm's work shown spatially and at scale (https://aetherial-reality.vercel.app)
+- Tropic UK — fashion and lifestyle brand site (https://tropic-uk.vercel.app)
+
+## Writing
+- Your website gets traffic. Why doesn't it get enquiries? — /blog/traffic-but-no-enquiries
+- How a local business actually ranks on Google Maps in India — /blog/rank-on-google-maps-india
+- WhatsApp Business API vs the free app: what actually changes — /blog/whatsapp-business-api-vs-app
 
 ## Key Facts
-- Typical business website: 2–4 weeks; complex e-commerce/apps: 2–3 months
-- Free first consultation; fixed detailed quotes after discovery
-- Ongoing support: updates, security patches, performance monitoring
-- Client rating: 5.0 (27 reviews)
+- A focused website is usually 2–4 weeks; commerce platforms and custom systems typically 2–3 months
+- The first conversation costs nothing; a fixed written quote follows a short discovery, with scope attached
+- We work inside existing brand guidelines, codebases and systems, and improve rather than replace where replacing is not justified
+- Ongoing support is a package, not an afterthought: performance, security, search visibility, analytics
 - Languages: English, Hindi, Gujarati
 - Hours: Mon–Sat, 09:00–19:00 IST
 
 ## Differentiators
-- Systems thinking over feature development
-- Strategy-led execution and clean architecture
-- Performance-first engineering, long-term scalability
-- Government, e-commerce, and manufacturing sector experience
+- We find the real problem — discovery first, written diagnosis, scope you can refuse
+- Built to be found — technical SEO, architecture and Core Web Vitals designed under from the first sitemap
+- Built to fit — the system is shaped around how the work already runs, not around a template or a licence
+- Still here after launch — performance, uptime, search visibility, quarterly review
 
 ## Profiles
 - LinkedIn: https://www.linkedin.com/company/mxsolution53

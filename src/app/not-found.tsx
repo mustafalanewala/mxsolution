@@ -1,27 +1,26 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-      <div className="text-center px-6 max-w-md mx-auto">
-        <h1 className="font-display font-black text-hero uppercase [font-stretch:118%] text-outline mb-4">
-          404
+    <main className="flex min-h-screen items-center">
+      <div className="wrap">
+        <h1 className="max-w-2xl text-headline">
+          That page doesn&apos;t exist.
         </h1>
-        <h2 className="font-display font-bold uppercase text-display-sm mb-4 [font-stretch:118%]">
-          Page not found
-        </h2>
-        <p className="text-body text-muted-foreground mb-10">
-          The page you're looking for doesn't exist or has been moved.
+        <p className="mt-6 max-w-md text-lead text-muted-foreground">
+          The link is either wrong or the page has moved. The work and the
+          solutions are both still where you left them.
         </p>
-        <Button asChild className="rounded-full px-8">
-          <Link href="/" className="flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to home
-          </Link>
-        </Button>
+        <div className="mt-9 flex flex-wrap gap-3">
+          <Button variant="primary" size="lg" asChild>
+            <Link href="/">Back to home</Link>
+          </Button>
+          <Button variant="outline" size="lg" asChild>
+            <Link href="/projects">See the work</Link>
+          </Button>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

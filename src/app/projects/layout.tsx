@@ -1,27 +1,24 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Projects & Portfolio | Mx Solution",
+  title: "Work — problem, solution, outcome",
   description:
-    "See the websites, e-commerce stores, and mobile apps we've built for clients across India. Explore Mx Solution's full portfolio of real-world projects.",
-  alternates: {
-    canonical: "/projects",
-  },
+    "Case studies and shipped work from Mx Solution: what the business problem was, what we changed, and what it did. Government portals, e-commerce platforms, custom systems and brand sites.",
+  alternates: { canonical: "/projects" },
   openGraph: {
-    title: "Our Projects & Portfolio | Mx Solution",
+    title: "Work — problem, solution, outcome | Mx Solution",
     description:
-      "See the websites, e-commerce stores, and mobile apps we've built for clients across India. Explore Mx Solution's complete portfolio.",
-    url: "https://www.mxsolution.in/projects",
+      "What the business problem was, what we changed, and what it did. Case studies and shipped work from Mx Solution.",
+    url: "https://mxsolution.in/projects",
     siteName: "Mx Solution",
     locale: "en_IN",
     type: "website",
-    // og image inherited from app/opengraph-image.tsx
   },
   twitter: {
     card: "summary_large_image",
-    title: "Our Projects & Portfolio | Mx Solution",
+    title: "Work — problem, solution, outcome | Mx Solution",
     description:
-      "Real websites, e-commerce stores & mobile apps built by Mx Solution for clients across India.",
+      "What the business problem was, what we changed, and what it did.",
   },
 };
 
